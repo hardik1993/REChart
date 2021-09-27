@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class REChart_Data
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class REChart_Data
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.lblStartDateTime = New System.Windows.Forms.Label()
@@ -45,7 +45,6 @@ Partial Class REChart_Data
         Me.grpAddStatePoints = New System.Windows.Forms.GroupBox()
         Me.grpInitialConditions = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
         CType(Me.dgvStatepoints, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpAddStatePoints.SuspendLayout()
         Me.grpInitialConditions.SuspendLayout()
@@ -258,28 +257,18 @@ Partial Class REChart_Data
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(793, 6)
+        Me.Button1.Location = New System.Drawing.Point(769, 32)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(95, 30)
         Me.Button1.TabIndex = 18
-        Me.Button1.Text = "Button1"
+        Me.Button1.Text = "test plot"
         Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(809, 42)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(79, 30)
-        Me.Button2.TabIndex = 19
-        Me.Button2.Text = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
         '
         'REChart_Data
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(900, 516)
-        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.grpInitialConditions)
         Me.Controls.Add(Me.grpAddStatePoints)
@@ -321,5 +310,4 @@ Partial Class REChart_Data
     Friend WithEvents grpAddStatePoints As GroupBox
     Friend WithEvents grpInitialConditions As GroupBox
     Friend WithEvents Button1 As Button
-    Friend WithEvents Button2 As Button
 End Class
