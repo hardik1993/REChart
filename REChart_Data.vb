@@ -4,6 +4,7 @@
     Dim StartDateTimeSet As Boolean
     Public DateTimeArray As Date()
     Public PowerArray As Double()
+    Public DescArray As String()
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' form load event.
@@ -99,10 +100,12 @@
         'for some reason the redim makes the array 1+row count. So i have to -1 in the redim statement. 
         ReDim DateTimeArray(dgvStatepoints.RowCount - 1)
         ReDim PowerArray(dgvStatepoints.RowCount - 1)
+        ReDim DescArray(dgvStatepoints.RowCount - 1)
 
         For i = 0 To dgvStatepoints.RowCount - 1
             PowerArray(i) = dgvStatepoints.Rows(i).Cells(3).Value
             DateTimeArray(i) = dgvStatepoints.Rows(i).Cells(0).Value
+            DescArray(i) = dgvStatepoints.Rows(i).Cells(4).Value
         Next
 
         REChart_Graph.Show()
