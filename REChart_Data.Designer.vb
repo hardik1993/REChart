@@ -44,7 +44,9 @@ Partial Class REChart_Data
         Me.bthRefresh = New System.Windows.Forms.Button()
         Me.grpAddStatePoints = New System.Windows.Forms.GroupBox()
         Me.grpInitialConditions = New System.Windows.Forms.GroupBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnGenerateLP = New System.Windows.Forms.Button()
+        Me.btnSaveData = New System.Windows.Forms.Button()
+        Me.btnLoadData = New System.Windows.Forms.Button()
         CType(Me.dgvStatepoints, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpAddStatePoints.SuspendLayout()
         Me.grpInitialConditions.SuspendLayout()
@@ -201,6 +203,7 @@ Partial Class REChart_Data
         Me.txtDescription.Name = "txtDescription"
         Me.txtDescription.Size = New System.Drawing.Size(223, 20)
         Me.txtDescription.TabIndex = 14
+        Me.txtDescription.Text = " "
         '
         'Label1
         '
@@ -255,21 +258,41 @@ Partial Class REChart_Data
         Me.grpInitialConditions.TabStop = False
         Me.grpInitialConditions.Text = "Initial Conditions"
         '
-        'Button1
+        'btnGenerateLP
         '
-        Me.Button1.Location = New System.Drawing.Point(769, 32)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(95, 30)
-        Me.Button1.TabIndex = 18
-        Me.Button1.Text = "test plot"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnGenerateLP.Location = New System.Drawing.Point(765, 11)
+        Me.btnGenerateLP.Name = "btnGenerateLP"
+        Me.btnGenerateLP.Size = New System.Drawing.Size(95, 39)
+        Me.btnGenerateLP.TabIndex = 18
+        Me.btnGenerateLP.Text = "Generate Load Profile"
+        Me.btnGenerateLP.UseVisualStyleBackColor = True
+        '
+        'btnSaveData
+        '
+        Me.btnSaveData.Location = New System.Drawing.Point(24, 474)
+        Me.btnSaveData.Name = "btnSaveData"
+        Me.btnSaveData.Size = New System.Drawing.Size(66, 30)
+        Me.btnSaveData.TabIndex = 19
+        Me.btnSaveData.Text = "Save Data"
+        Me.btnSaveData.UseVisualStyleBackColor = True
+        '
+        'btnLoadData
+        '
+        Me.btnLoadData.Location = New System.Drawing.Point(96, 474)
+        Me.btnLoadData.Name = "btnLoadData"
+        Me.btnLoadData.Size = New System.Drawing.Size(66, 30)
+        Me.btnLoadData.TabIndex = 20
+        Me.btnLoadData.Text = "Load Data"
+        Me.btnLoadData.UseVisualStyleBackColor = True
         '
         'REChart_Data
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(900, 516)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnLoadData)
+        Me.Controls.Add(Me.btnSaveData)
+        Me.Controls.Add(Me.btnGenerateLP)
         Me.Controls.Add(Me.grpInitialConditions)
         Me.Controls.Add(Me.grpAddStatePoints)
         Me.Controls.Add(Me.bthRefresh)
@@ -309,5 +332,7 @@ Partial Class REChart_Data
     Friend WithEvents bthRefresh As Button
     Friend WithEvents grpAddStatePoints As GroupBox
     Friend WithEvents grpInitialConditions As GroupBox
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnGenerateLP As Button
+    Friend WithEvents btnSaveData As Button
+    Friend WithEvents btnLoadData As Button
 End Class

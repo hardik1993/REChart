@@ -6,11 +6,12 @@ Imports OxyPlot.Annotations
 
 Public Class REChart_Graph
 
-    Public lastPoint As OxyPlot.DataPoint = OxyPlot.DataPoint.Undefined
-    Public moveStartPoint As Boolean = False
-    Public moveEndPoint As Boolean = False
-    Public originalColor As OxyPlot.OxyColor = OxyPlot.OxyColors.White
+    'global point vars for the drag and drop of Chart Text Annotations 
+    Public lastPoint As OxyPlot.DataPoint
+    Public thisPoint As OxyPlot.DataPoint
+    Public newPoint As OxyPlot.DataPoint
 
+    'global objects for the Plotview, Plot Model, and data series
     Public MySeries As New LineSeries
     Public MyModel As New PlotModel
     Public AnnotationsList As New List(Of OxyPlot.Annotations.TextAnnotation)
@@ -18,9 +19,9 @@ Public Class REChart_Graph
     Private Sub REChart_Graph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         PlotView1.Visible = False
         Chart1.Visible = False
-
     End Sub
 
+    'test routine, delete later. 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim LPSeries As New DataVisualization.Charting.Series
 
@@ -64,8 +65,8 @@ Public Class REChart_Graph
         'setup y axis, and set max and mins 
         Dim yAxis As New LinearAxis
         yAxis.Position = AxisPosition.Left
-        yAxis.Maximum = 100
-        yAxis.Minimum = 0
+        yAxis.Maximum = MaxValue(REChart_Data.PowerArray) + 5
+        yAxis.Minimum = MinValue(REChart_Data.PowerArray) - 5
 
         'set up plot model
         MyModel.Title = "TestModel"
@@ -135,12 +136,11 @@ Public Class REChart_Graph
         ' Global list Of text annotations to modify. 
         Dim MyIndex As Integer = MyAnnotation.Tag
 
-        Dim thisPoint As OxyPlot.DataPoint
         thisPoint = AnnotationsList(MyIndex).InverseTransform(e.Position)
         Dim dx As Double = thisPoint.X - lastPoint.X
         Dim dy As Double = thisPoint.Y - lastPoint.Y
 
-        Dim newPoint As OxyPlot.DataPoint = New OxyPlot.DataPoint(AnnotationsList(MyIndex).TextPosition.X + dx, AnnotationsList(MyIndex).TextPosition.Y + dy)
+        newPoint = New OxyPlot.DataPoint(AnnotationsList(MyIndex).TextPosition.X + dx, AnnotationsList(MyIndex).TextPosition.Y + dy)
 
         AnnotationsList(MyIndex).TextPosition = newPoint
 
@@ -158,11 +158,39 @@ Public Class REChart_Graph
         'get the index of the event sending text annotation, to that we know what index in the 
         ' Global list Of text annotations to modify. 
         Dim MyIndex As Integer = MyAnnotation.Tag
-        Beep()
         AnnotationsList(MyIndex).Unselect()
         MyModel.InvalidatePlot(True)
         e.Handled = True
     End Sub
 
+    Private Function MaxValue(InputArray As Double()) As Double
+        'Takes an array of doubles, and returns the maximum value
+
+        'temp var for the max value
+        Dim MaxDouble As Double = 0
+
+        'loop through array to find max value
+        For i = 0 To InputArray.Count - 1
+            If MaxDouble < InputArray(i) Then MaxDouble = InputArray(i)
+        Next
+
+        'return the max value
+        Return MaxDouble
+    End Function
+
+    Private Function MinValue(InputArray As Double()) As Double
+        'Takes an array of doubles, and returns the minimum value
+
+        'temp var for the min value
+        Dim MinDouble As Double = 100
+
+        'loop through array to find max value
+        For i = 0 To InputArray.Count - 1
+            If MinDouble > InputArray(i) Then MinDouble = InputArray(i)
+        Next
+
+        'return the max value
+        Return MinDouble
+    End Function
 
 End Class
