@@ -270,6 +270,9 @@
                 j = j + 1
             End While
 
+            'close the file 
+            file.Close()
+
             're calculate rows to re-adjust the hours and date/time stamps. 
             Call ReCalculateTimes()
 

@@ -77,13 +77,19 @@ Public Class REChart_Graph
                 vbNewLine + REChart_Data.DescArray(i)
         Next
 
+        Dim CurrentPoint As OxyPlot.DataPoint
+        Dim NextPoint As OxyPlot.DataPoint
         'setup annotations. Add annotations to the a list. 
         'set the descriptions from DescArray, and the date/time range for action. 
-        'set the locations using the values from PowerArray, and DateTimeArray
+        'set the locations at the mid point of the line for the action.
         For i = 0 To AnnotationTextArray.Length - 1
             AnnotationsList.Add(New OxyPlot.Annotations.TextAnnotation)
             AnnotationsList(i).Text = AnnotationTextArray(i)
-            AnnotationsList(i).TextPosition = New OxyPlot.DataPoint(REChart_Data.DateTimeArray(i).ToOADate, REChart_Data.PowerArray(i))
+
+            'set previous point and current point, calculate the mid point, and set the location of the annotation as the midpoint.
+            CurrentPoint = New OxyPlot.DataPoint(REChart_Data.DateTimeArray(i).ToOADate, REChart_Data.PowerArray(i))
+            NextPoint = New OxyPlot.DataPoint(REChart_Data.DateTimeArray(i + 1).ToOADate, REChart_Data.PowerArray(i + 1))
+            AnnotationsList(i).TextPosition = CalculateMidPointOfLine(CurrentPoint, NextPoint)
 
             'setting tag value to the index of the annotation in the list. so that it can be 
             ' checked later, to find out which annotation was clicked in the event handler. 
@@ -103,6 +109,23 @@ Public Class REChart_Graph
         For i = 0 To REChart_Data.PowerArray.Length - 1
             MySeries.Points.Add(New OxyPlot.DataPoint(DateTimeAxis.ToDouble(REChart_Data.DateTimeArray(i)), REChart_Data.PowerArray(i)))
         Next
+
+        'don't draw legend since there is only one series. 
+        MySeries.RenderInLegend = False
+
+        'Set the colors mased on Unit. Unit 1 = blue, 
+        If (REChart_Data.rbUnit1.Checked = True) Then
+            MySeries.Color = OxyColors.RoyalBlue
+            MyModel.TitleColor = OxyColors.RoyalBlue
+        End If
+        'Unit 2 = green
+        If (REChart_Data.rbUnit2.Checked = True) Then
+            MySeries.Color = OxyColors.Green
+            MyModel.TitleColor = OxyColors.Green
+        End If
+
+
+
 
         'add series to the data model, and bind the model to the plotview. 
         MyModel.Series.Add(MySeries)
@@ -206,6 +229,26 @@ Public Class REChart_Graph
 
         'return the max value
         Return MinDouble
+    End Function
+
+    Private Function CalculateMidPointOfLine(StartPoint As OxyPlot.DataPoint, EndPoint As OxyPlot.DataPoint) As OxyPlot.DataPoint
+        'This function takes 2 oxyplot datapoints as input, and returns the midpoint of the line in between these 2 points. 
+
+        'create the midpoint, X and Y vars to return.
+        Dim MidPoint As OxyPlot.DataPoint
+        Dim MidPointX As Double
+        Dim MidPointY As Double
+
+        'calculate the mid point X and Y values
+        MidPointX = ((EndPoint.X - StartPoint.X) / 2) + StartPoint.X
+        MidPointY = ((EndPoint.Y - StartPoint.Y) / 2) + StartPoint.Y
+
+        'assign the X and Y values to the datapoint var
+        MidPoint = New OxyPlot.DataPoint(MidPointX, MidPointY)
+
+        'return the datapoint var
+        Return MidPoint
+
     End Function
 
 End Class
