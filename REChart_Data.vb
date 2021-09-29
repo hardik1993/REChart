@@ -96,6 +96,20 @@
 
     Private Sub btnGenerateLP_Click(sender As Object, e As EventArgs) Handles btnGenerateLP.Click
 
+        'Validation Checks 
+        'check to make sure a unit is selected. 
+        If rbUnit1.Checked = False And rbUnit2.Checked = False Then
+            MsgBox("Please Select a Unit", MsgBoxStyle.Exclamation)
+            Exit Sub
+        End If
+
+        'check to make sure a title is intered. 
+        If txtManuverTitle.Text = "" Then
+            MsgBox("Please enter a Title", MsgBoxStyle.Exclamation)
+            Exit Sub
+        End If
+
+
         'for some reason the redim makes the array 1+row count. So i have to -1 in the redim statement. 
         ReDim DateTimeArray(dgvStatepoints.RowCount - 1)
         ReDim PowerArray(dgvStatepoints.RowCount - 1)

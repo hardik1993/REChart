@@ -17,31 +17,16 @@ Public Class REChart_Graph
     Public AnnotationsList As New List(Of OxyPlot.Annotations.TextAnnotation)
 
     Private Sub REChart_Graph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        PlotView1.Visible = False
-        Chart1.Visible = False
-    End Sub
-
-    'test routine, delete later. 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim LPSeries As New DataVisualization.Charting.Series
-
-        Chart1.Visible = True
-        'LPSeries.Name = "aline"
-
-        'Change to a line graph.
-        LPSeries.ChartType = SeriesChartType.Line
-
-        For i = 0 To REChart_Data.PowerArray.Length - 1
-            LPSeries.Points.AddXY(REChart_Data.DateTimeArray(i).ToOADate, REChart_Data.PowerArray(i))
-        Next
-        Chart1.Series.Add(LPSeries)
-        Threading.Thread.Sleep(1000)
 
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
-        PlotView1.Visible = True
+    End Sub
+
+    Private Sub GenerateLoadProfile()
+        ' This sub takes data from the Data Entry form from the global arrays, and generates the Load Profile. 
+        ' Sets up the oxyplot controls, axis, data model, binds the data, generates the annotations, etc. 
 
         'set up x axis as a date/time axis
         Dim MinDateTime As Date
