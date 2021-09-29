@@ -15,6 +15,7 @@ Public Class REChart_Graph
     Public MySeries As New LineSeries
     Public MyModel As New PlotModel
     Public AnnotationsList As New List(Of OxyPlot.Annotations.TextAnnotation)
+    Public AnnotationTextArray As String()
 
     Private Sub REChart_Graph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Call GenerateLoadProfile()
@@ -64,8 +65,14 @@ Public Class REChart_Graph
         MyModel.Axes.Add(yAxis)
 
         'setup annotations. Add annotations to the a list. 
-        'set the descriptions from DescArray.
+        'set the descriptions from DescArray, and the date/time range for action. 
         'set the locations using the values from PowerArray, and DateTimeArray
+
+        'first step is to form array of annotation descriptions. This will be the date/time range for 
+        ' Action appended with the actual description of the step from desc array. 
+
+
+
         For i = 0 To REChart_Data.PowerArray.Length - 1
             AnnotationsList.Add(New OxyPlot.Annotations.TextAnnotation)
             AnnotationsList(i).Text = REChart_Data.DescArray(i)
@@ -75,7 +82,12 @@ Public Class REChart_Graph
             ' checked later, to find out which annotation was clicked in the event handler. 
             AnnotationsList(i).Tag = i
 
-            MyModel.Annotations.Add(AnnotationsList(i))
+            ' Skip the first annotation Label "START". This is the default label on the load profile for the starting point.
+            ' and does not need to be labeled on the load profile.  
+            If i <> 0 Then
+                MyModel.Annotations.Add(AnnotationsList(i))
+            End If
+
             AddHandler AnnotationsList(i).MouseDown, AddressOf AnnotationMouseDown
             AddHandler AnnotationsList(i).MouseMove, AddressOf AnnotationMouseMove
             AddHandler AnnotationsList(i).MouseUp, AddressOf AnnotationMouseUp

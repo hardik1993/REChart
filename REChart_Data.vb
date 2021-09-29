@@ -134,7 +134,7 @@
 
         'set up the save file dialoge
         MyFileDialog.Title = "Select a location to save data (DO NOT include extention in filename)"
-        MyFileDialog.InitialDirectory = "C:\"
+        MyFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
         MyFileDialog.Filter = "REChart Files (*.REChart)|*.REChart|All files (*.*)|*.*"
         MyFileDialog.FilterIndex = 1
         MyFileDialog.RestoreDirectory = True
@@ -144,11 +144,7 @@
             If MyFileDialog.ShowDialog() = DialogResult.OK Then
                 FileNameString = MyFileDialog.FileName
             Else
-                Exit Sub
-            End If
-
-            'if the file name is still blank, some thing went wrong. throw message box, and exit routine
-            If FileNameString = "" Then
+                'if the file name is still blank, some thing went wrong. throw message box, and exit routine
                 MsgBox("Please select a file to save the data.")
                 Exit Sub
             End If
@@ -183,18 +179,20 @@
                 file.WriteLine(dgvStatepoints.Rows(i).Cells(3).Value.ToString)
                 file.WriteLine(dgvStatepoints.Rows(i).Cells(4).Value.ToString)
             Next
+
             'end of file footer
             file.WriteLine("--END OF FILE--")
             file.WriteLine("")
+
             'close the file
             file.Close()
-            MsgBox("File saved successfully.", MsgBoxStyle.Information, "Saved")
+
+            MsgBox("File Saved Successfully!", MsgBoxStyle.Information)
             Exit Try
         Catch ex As Exception
             MsgBox(ex.Message & "occured in Sub btnSaveData_Click in REChart_Data.vb" & vbNewLine & "Ensure directory path is valid and admin rights are not required.", MsgBoxStyle.Critical, "FATALITY")
             Exit Try
         End Try
-
     End Sub
 
     Private Sub btnLoadData_Click(sender As Object, e As EventArgs) Handles btnLoadData.Click
@@ -208,7 +206,7 @@
 
         'set up the open file dialoge
         MyFileDialog.Title = "Please select a file to load the data from"
-        MyFileDialog.InitialDirectory = "C:\"
+        MyFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
         MyFileDialog.Filter = "REChart Files (*.REChart)|*.REChart|All files (*.*)|*.*"
         MyFileDialog.FilterIndex = 1
         MyFileDialog.RestoreDirectory = True
@@ -217,10 +215,8 @@
             'show the open file dialoge
             If MyFileDialog.ShowDialog() = DialogResult.OK Then
                 FileNameString = MyFileDialog.FileName
-            End If
-
-            'if the file name is still blank, some thing went wrong. throw message box, and exit routine
-            If FileNameString = "" Then
+            Else
+                'if the file name is still blank, some thing went wrong. throw message box, and exit routine
                 MsgBox("Please select a file to load the data from")
                 Exit Sub
             End If
@@ -276,12 +272,15 @@
 
             're calculate rows to re-adjust the hours and date/time stamps. 
             Call ReCalculateTimes()
+
+            MsgBox("File Loaded Successfully!", MsgBoxStyle.Information)
+
             Exit Try
+
         Catch ex As Exception
             MsgBox(ex.Message & "occured in Sub btnLoadData_Click in REChart_Data.vb" & vbNewLine & "Ensure file is valid.", MsgBoxStyle.Critical, "FATALITY")
             Exit Try
         End Try
-
     End Sub
 
 End Class
