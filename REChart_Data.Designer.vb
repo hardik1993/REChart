@@ -117,7 +117,7 @@ Partial Class REChart_Data
         'txtInitialPower
         '
         Me.txtInitialPower.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtInitialPower.Location = New System.Drawing.Point(77, 66)
+        Me.txtInitialPower.Location = New System.Drawing.Point(77, 67)
         Me.txtInitialPower.Name = "txtInitialPower"
         Me.txtInitialPower.Size = New System.Drawing.Size(43, 20)
         Me.txtInitialPower.TabIndex = 4
@@ -254,6 +254,7 @@ Partial Class REChart_Data
         'grpInitialConditions
         '
         Me.grpInitialConditions.BackColor = System.Drawing.SystemColors.ScrollBar
+        Me.grpInitialConditions.Controls.Add(Me.rbUnit2)
         Me.grpInitialConditions.Controls.Add(Me.txtCycle)
         Me.grpInitialConditions.Controls.Add(Me.rbUnit1)
         Me.grpInitialConditions.Controls.Add(Me.lblTitleOfManuver)
@@ -264,7 +265,6 @@ Partial Class REChart_Data
         Me.grpInitialConditions.Controls.Add(Me.dtpStartDate)
         Me.grpInitialConditions.Controls.Add(Me.lblStartDateTime)
         Me.grpInitialConditions.Controls.Add(Me.lblCycle)
-        Me.grpInitialConditions.Controls.Add(Me.rbUnit2)
         Me.grpInitialConditions.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, CType(((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic) _
                 Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpInitialConditions.Location = New System.Drawing.Point(9, 41)
@@ -277,7 +277,7 @@ Partial Class REChart_Data
         'txtCycle
         '
         Me.txtCycle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCycle.Location = New System.Drawing.Point(151, 66)
+        Me.txtCycle.Location = New System.Drawing.Point(151, 67)
         Me.txtCycle.MaxLength = 2
         Me.txtCycle.Name = "txtCycle"
         Me.txtCycle.Size = New System.Drawing.Size(27, 20)
@@ -289,7 +289,7 @@ Partial Class REChart_Data
         Me.rbUnit1.AutoSize = True
         Me.rbUnit1.Checked = True
         Me.rbUnit1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbUnit1.Location = New System.Drawing.Point(180, 69)
+        Me.rbUnit1.Location = New System.Drawing.Point(180, 68)
         Me.rbUnit1.Name = "rbUnit1"
         Me.rbUnit1.Size = New System.Drawing.Size(39, 17)
         Me.rbUnit1.TabIndex = 6
@@ -301,7 +301,7 @@ Partial Class REChart_Data
         '
         Me.lblTitleOfManuver.AutoSize = True
         Me.lblTitleOfManuver.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTitleOfManuver.Location = New System.Drawing.Point(2, 45)
+        Me.lblTitleOfManuver.Location = New System.Drawing.Point(2, 46)
         Me.lblTitleOfManuver.Name = "lblTitleOfManuver"
         Me.lblTitleOfManuver.Size = New System.Drawing.Size(75, 13)
         Me.lblTitleOfManuver.TabIndex = 96
@@ -310,7 +310,7 @@ Partial Class REChart_Data
         'txtManuverTitle
         '
         Me.txtManuverTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtManuverTitle.Location = New System.Drawing.Point(77, 42)
+        Me.txtManuverTitle.Location = New System.Drawing.Point(77, 43)
         Me.txtManuverTitle.Name = "txtManuverTitle"
         Me.txtManuverTitle.Size = New System.Drawing.Size(171, 20)
         Me.txtManuverTitle.TabIndex = 3
@@ -320,7 +320,7 @@ Partial Class REChart_Data
         '
         Me.lblInitialPower.AutoSize = True
         Me.lblInitialPower.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblInitialPower.Location = New System.Drawing.Point(14, 70)
+        Me.lblInitialPower.Location = New System.Drawing.Point(14, 71)
         Me.lblInitialPower.Name = "lblInitialPower"
         Me.lblInitialPower.Size = New System.Drawing.Size(65, 13)
         Me.lblInitialPower.TabIndex = 95
@@ -330,7 +330,7 @@ Partial Class REChart_Data
         '
         Me.lblCycle.AutoSize = True
         Me.lblCycle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCycle.Location = New System.Drawing.Point(117, 69)
+        Me.lblCycle.Location = New System.Drawing.Point(117, 70)
         Me.lblCycle.Name = "lblCycle"
         Me.lblCycle.Size = New System.Drawing.Size(36, 13)
         Me.lblCycle.TabIndex = 94
@@ -339,7 +339,7 @@ Partial Class REChart_Data
         'rbUnit2
         '
         Me.rbUnit2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbUnit2.Location = New System.Drawing.Point(216, 68)
+        Me.rbUnit2.Location = New System.Drawing.Point(216, 67)
         Me.rbUnit2.Name = "rbUnit2"
         Me.rbUnit2.Size = New System.Drawing.Size(45, 19)
         Me.rbUnit2.TabIndex = 7

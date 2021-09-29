@@ -46,8 +46,11 @@ Public Class REChart_Graph
         xAxis.Position = AxisPosition.Bottom
         xAxis.Minimum = MinXValue
         xAxis.Maximum = MaxYValue
-        xAxis.StringFormat = "M/d"
+        xAxis.StringFormat = "MM/dd" + vbNewLine + "HH:mm"
         xAxis.MajorGridlineStyle = LineStyle.Dash
+        xAxis.Title = "Date/Time"
+        xAxis.TitleFontWeight = FontWeights.Bold
+
 
         'setup y axis, and set max and mins 
         Dim yAxis As New LinearAxis
@@ -55,6 +58,8 @@ Public Class REChart_Graph
         yAxis.Maximum = MaxValue(REChart_Data.PowerArray) + 4.5
         yAxis.Minimum = MinValue(REChart_Data.PowerArray) - 4.5
         yAxis.MajorGridlineStyle = LineStyle.Solid
+        yAxis.Title = "Power Level (% CTP)"
+        yAxis.TitleFontWeight = FontWeights.Bold
 
         'set up plot model, Create a Title, based on the entry from the data form. 
         Dim strTitle As String = REChart_Data.txtManuverTitle.Text + " " +
@@ -62,6 +67,8 @@ Public Class REChart_Graph
             REChart_Data.DateTimeArray(REChart_Data.DateTimeArray.Length - 1).ToString("MM/dd/yy")
         MyModel.Title = strTitle
         MyModel.TitleFont = "Consolas"
+        MyModel.TitleFontSize = 24
+        MyModel.TitleFontWeight = FontWeights.Bold
 
         'set up line series
         MySeries.Title = "Load Profile"
@@ -123,19 +130,33 @@ Public Class REChart_Graph
         MySeries.RenderInLegend = False
 
         'Do unit specific stuff 
-        'Set the colors mased on Unit. Unit 1 = blue
+        'Set the colors based on Unit. Unit 1 = blue, unit 2 = green.
         ' append "Unit x Cycle xx" + newline in the title based on selection. 
         If (REChart_Data.rbUnit1.Checked = True) Then
             MySeries.Color = OxyColors.RoyalBlue
+            MySeries.StrokeThickness = 4
+            MySeries.MarkerSize = 5
             MyModel.TitleColor = OxyColors.RoyalBlue
             MyModel.Title = Center2Lines("Unit 1 Cycle " + REChart_Data.txtCycle.Text, strTitle)
-
+            For i As Integer = 0 To AnnotationsList.Count - 1
+                AnnotationsList(i).Background = OxyColors.RoyalBlue
+                AnnotationsList(i).TextColor = OxyColors.White
+                AnnotationsList(i).FontWeight = FontWeights.Bold
+            Next
         End If
-        'Unit 2 = green
+
+        'Unit 2 stuff
         If (REChart_Data.rbUnit2.Checked = True) Then
             MySeries.Color = OxyColors.Green
+            MySeries.StrokeThickness = 4
+            MySeries.MarkerSize = 5
             MyModel.TitleColor = OxyColors.Green
             MyModel.Title = Center2Lines("Unit 2 Cycle " + REChart_Data.txtCycle.Text, strTitle)
+            For i As Integer = 0 To AnnotationsList.Count - 1
+                AnnotationsList(i).Background = OxyColors.Green
+                AnnotationsList(i).TextColor = OxyColors.White
+                AnnotationsList(i).FontWeight = FontWeights.Bold
+            Next
         End If
 
         'add series to the data model, and bind the model to the plotview. 
