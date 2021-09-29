@@ -22,6 +22,7 @@ Partial Class REChart_Graph
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(REChart_Graph))
         Me.BtnExport = New System.Windows.Forms.Button()
         Me.PlotView1 = New OxyPlot.WindowsForms.PlotView()
         Me.lblAuthor = New System.Windows.Forms.Label()
@@ -66,6 +67,7 @@ Partial Class REChart_Graph
         Me.Controls.Add(Me.lblAuthor)
         Me.Controls.Add(Me.PlotView1)
         Me.Controls.Add(Me.BtnExport)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "REChart_Graph"
         Me.Text = "RE-Chart Load Profile Form"
         Me.ResumeLayout(False)

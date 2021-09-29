@@ -22,6 +22,7 @@ Partial Class REChart_Data
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(REChart_Data))
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.lblStartDateTime = New System.Windows.Forms.Label()
         Me.dtpStartDate = New System.Windows.Forms.DateTimePicker()
@@ -437,6 +438,7 @@ Partial Class REChart_Data
         Me.Controls.Add(Me.dgvStatepoints)
         Me.Controls.Add(Me.lblTitle)
         Me.Controls.Add(Me.StatusStrip1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "REChart_Data"
         Me.Text = "RE-Chart Data Entry Form"
         CType(Me.dgvStatepoints, System.ComponentModel.ISupportInitialize).EndInit()
