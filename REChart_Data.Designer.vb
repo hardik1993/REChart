@@ -363,7 +363,7 @@ Partial Class REChart_Data
         '
         Me.lblAuthor.AutoSize = True
         Me.lblAuthor.Font = New System.Drawing.Font("Tahoma", 6.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAuthor.Location = New System.Drawing.Point(24, 575)
+        Me.lblAuthor.Location = New System.Drawing.Point(0, 572)
         Me.lblAuthor.Name = "lblAuthor"
         Me.lblAuthor.Size = New System.Drawing.Size(42, 10)
         Me.lblAuthor.TabIndex = 21
