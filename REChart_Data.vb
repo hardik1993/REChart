@@ -139,52 +139,61 @@
         MyFileDialog.FilterIndex = 1
         MyFileDialog.RestoreDirectory = True
 
-        'show the save file dialoge
-        If MyFileDialog.ShowDialog() = DialogResult.OK Then
-            FileNameString = MyFileDialog.FileName
-        End If
+        Try
+            'show the save file dialoge
+            If MyFileDialog.ShowDialog() = DialogResult.OK Then
+                FileNameString = MyFileDialog.FileName
+            Else
+                Exit Sub
+            End If
 
-        'if the file name is still blank, some thing went wrong. throw message box, and exit routine
-        If FileNameString = "" Then
-            MsgBox("Please select a file to save the data.")
-            Exit Sub
-        End If
+            'if the file name is still blank, some thing went wrong. throw message box, and exit routine
+            If FileNameString = "" Then
+                MsgBox("Please select a file to save the data.")
+                Exit Sub
+            End If
 
-        'check if the user is stupid enough to include extention even tho i told them not to... 
-        ' If extention of *.REChart Is included Then move on, if it is not then add it to the file path. 
-        If Strings.Right(FileNameString, 8) <> ".REChart" Then
-            FileNameString = FileNameString + ".REChart"
-        End If
+            'check if the user is stupid enough to include extention even tho i told them not to... 
+            ' If extention of *.REChart Is included Then move on, if it is not then add it to the file path. 
+            If Strings.Right(FileNameString, 8) <> ".REChart" Then
+                FileNameString = FileNameString + ".REChart"
+            End If
 
 
-        'create a file writer object. and start writing to the file 
-        Dim file As System.IO.StreamWriter
-        file = My.Computer.FileSystem.OpenTextFileWriter(FileNameString, False)
-        'file header
-        file.WriteLine("This is a RE-Chart saved data file. Created on: " + Date.Now.ToString)
-        file.WriteLine(" ")
-        'initial conditions
-        file.WriteLine("Initial Conditions (Start Date/Time, Title, Power, and Unit): ")
-        file.WriteLine(dtpStartDate.Value.ToShortDateString + " " + dtpStartTime.Value.ToString("HH:mm"))
-        file.WriteLine(txtManuverTitle.Text)
-        file.WriteLine(txtInitialPower.Text)
-        If rbUnit1.Checked = True Then file.WriteLine("Unit 1")
-        If rbUnit2.Checked = True Then file.WriteLine("Unit 2")
-        file.WriteLine(" ")
-        'data gridview statepoints 
-        file.WriteLine("Statepoints (Date/Time, Hours for action, Hours from Start, Power, and Description): ")
-        For i = 0 To dgvStatepoints.RowCount - 1
-            file.WriteLine(dgvStatepoints.Rows(i).Cells(0).Value.ToString)
-            file.WriteLine(dgvStatepoints.Rows(i).Cells(1).Value.ToString)
-            file.WriteLine(dgvStatepoints.Rows(i).Cells(2).Value.ToString)
-            file.WriteLine(dgvStatepoints.Rows(i).Cells(3).Value.ToString)
-            file.WriteLine(dgvStatepoints.Rows(i).Cells(4).Value.ToString)
-        Next
-        'end of file footer
-        file.WriteLine("--END OF FILE--")
-        file.WriteLine("")
-        'close the file
-        file.Close()
+            'create a file writer object. and start writing to the file 
+            Dim file As System.IO.StreamWriter
+            file = My.Computer.FileSystem.OpenTextFileWriter(FileNameString, False)
+            'file header
+            file.WriteLine("This is a RE-Chart saved data file. Created on: " + Date.Now.ToString)
+            file.WriteLine(" ")
+            'initial conditions
+            file.WriteLine("Initial Conditions (Start Date/Time, Title, Power, and Unit): ")
+            file.WriteLine(dtpStartDate.Value.ToShortDateString + " " + dtpStartTime.Value.ToString("HH:mm"))
+            file.WriteLine(txtManuverTitle.Text)
+            file.WriteLine(txtInitialPower.Text)
+            If rbUnit1.Checked = True Then file.WriteLine("Unit 1")
+            If rbUnit2.Checked = True Then file.WriteLine("Unit 2")
+            file.WriteLine(" ")
+            'data gridview statepoints 
+            file.WriteLine("Statepoints (Date/Time, Hours for action, Hours from Start, Power, and Description): ")
+            For i = 0 To dgvStatepoints.RowCount - 1
+                file.WriteLine(dgvStatepoints.Rows(i).Cells(0).Value.ToString)
+                file.WriteLine(dgvStatepoints.Rows(i).Cells(1).Value.ToString)
+                file.WriteLine(dgvStatepoints.Rows(i).Cells(2).Value.ToString)
+                file.WriteLine(dgvStatepoints.Rows(i).Cells(3).Value.ToString)
+                file.WriteLine(dgvStatepoints.Rows(i).Cells(4).Value.ToString)
+            Next
+            'end of file footer
+            file.WriteLine("--END OF FILE--")
+            file.WriteLine("")
+            'close the file
+            file.Close()
+            MsgBox("File saved successfully.", MsgBoxStyle.Information, "Saved")
+            Exit Try
+        Catch ex As Exception
+            MsgBox(ex.Message & "occured in Sub btnSaveData_Click in REChart_Data.vb" & vbNewLine & "Ensure directory path is valid and admin rights are not required.", MsgBoxStyle.Critical, "FATALITY")
+            Exit Try
+        End Try
 
     End Sub
 
@@ -204,68 +213,74 @@
         MyFileDialog.FilterIndex = 1
         MyFileDialog.RestoreDirectory = True
 
-        'show the open file dialoge
-        If MyFileDialog.ShowDialog() = DialogResult.OK Then
-            FileNameString = MyFileDialog.FileName
-        End If
+        Try
+            'show the open file dialoge
+            If MyFileDialog.ShowDialog() = DialogResult.OK Then
+                FileNameString = MyFileDialog.FileName
+            End If
 
-        'if the file name is still blank, some thing went wrong. throw message box, and exit routine
-        If FileNameString = "" Then
-            MsgBox("Please select a file to load the data from")
-            Exit Sub
-        End If
+            'if the file name is still blank, some thing went wrong. throw message box, and exit routine
+            If FileNameString = "" Then
+                MsgBox("Please select a file to load the data from")
+                Exit Sub
+            End If
 
-        'create a file stream reader object and read file
-        Dim file As System.IO.StreamReader
-        file = My.Computer.FileSystem.OpenTextFileReader(FileNameString)
+            'create a file stream reader object and read file
+            Dim file As System.IO.StreamReader
+            file = My.Computer.FileSystem.OpenTextFileReader(FileNameString)
 
-        'skip the header
-        tempstr = file.ReadLine()
-        tempstr = file.ReadLine()
-        tempstr = file.ReadLine()
-
-        'read initial conditions date/time and power 
-        Dim tempdt As String
-        tempdt = file.ReadLine
-        dtpStartDate.Value = Convert.ToDateTime(tempdt)
-        dtpStartTime.Value = Convert.ToDateTime(tempdt)
-        txtManuverTitle.Text = file.ReadLine
-        txtInitialPower.Text = file.ReadLine
-        If file.ReadLine = "Unit 1" Then
-            rbUnit1.Checked = True
-        Else
-            rbUnit2.Checked = True
-        End If
-
-        'skip more garbage
-        tempstr = file.ReadLine()
-        tempstr = file.ReadLine()
-
-        'Clear the data grid view before populating the new data. 
-        For i As Integer = 0 To dgvStatepoints.Rows.Count - 1
-            dgvStatepoints.Rows.Remove(dgvStatepoints.Rows(0))
-        Next
-
-        'loop through until END OF FILE is reached. Add a data grid view row each time.
-        Dim j As Integer = 0
-        tempstr = file.ReadLine()
-        While tempstr <> "--END OF FILE--"
-            dgvStatepoints.Rows.Add()
-            dgvStatepoints.Rows(j).Cells(0).Value = Convert.ToDateTime(tempstr)
+            'skip the header
             tempstr = file.ReadLine()
-            dgvStatepoints.Rows(j).Cells(1).Value = Convert.ToDouble(tempstr)
             tempstr = file.ReadLine()
-            dgvStatepoints.Rows(j).Cells(2).Value = Convert.ToDouble(tempstr)
             tempstr = file.ReadLine()
-            dgvStatepoints.Rows(j).Cells(3).Value = Convert.ToDouble(tempstr)
-            tempstr = file.ReadLine()
-            dgvStatepoints.Rows(j).Cells(4).Value = Convert.ToString(tempstr)
-            tempstr = file.ReadLine()
-            j = j + 1
-        End While
 
-        're calculate rows to re-adjust the hours and date/time stamps. 
-        Call ReCalculateTimes()
+            'read initial conditions date/time and power 
+            Dim tempdt As String
+            tempdt = file.ReadLine
+            dtpStartDate.Value = Convert.ToDateTime(tempdt)
+            dtpStartTime.Value = Convert.ToDateTime(tempdt)
+            txtManuverTitle.Text = file.ReadLine
+            txtInitialPower.Text = file.ReadLine
+            If file.ReadLine = "Unit 1" Then
+                rbUnit1.Checked = True
+            Else
+                rbUnit2.Checked = True
+            End If
+
+            'skip more garbage
+            tempstr = file.ReadLine()
+            tempstr = file.ReadLine()
+
+            'Clear the data grid view before populating the new data. 
+            For i As Integer = 0 To dgvStatepoints.Rows.Count - 1
+                dgvStatepoints.Rows.Remove(dgvStatepoints.Rows(0))
+            Next
+
+            'loop through until END OF FILE is reached. Add a data grid view row each time.
+            Dim j As Integer = 0
+            tempstr = file.ReadLine()
+            While tempstr <> "--END OF FILE--"
+                dgvStatepoints.Rows.Add()
+                dgvStatepoints.Rows(j).Cells(0).Value = Convert.ToDateTime(tempstr)
+                tempstr = file.ReadLine()
+                dgvStatepoints.Rows(j).Cells(1).Value = Convert.ToDouble(tempstr)
+                tempstr = file.ReadLine()
+                dgvStatepoints.Rows(j).Cells(2).Value = Convert.ToDouble(tempstr)
+                tempstr = file.ReadLine()
+                dgvStatepoints.Rows(j).Cells(3).Value = Convert.ToDouble(tempstr)
+                tempstr = file.ReadLine()
+                dgvStatepoints.Rows(j).Cells(4).Value = Convert.ToString(tempstr)
+                tempstr = file.ReadLine()
+                j = j + 1
+            End While
+
+            're calculate rows to re-adjust the hours and date/time stamps. 
+            Call ReCalculateTimes()
+            Exit Try
+        Catch ex As Exception
+            MsgBox(ex.Message & "occured in Sub btnLoadData_Click in REChart_Data.vb" & vbNewLine & "Ensure file is valid.", MsgBoxStyle.Critical, "FATALITY")
+            Exit Try
+        End Try
 
     End Sub
 End Class
