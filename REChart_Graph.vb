@@ -47,12 +47,14 @@ Public Class REChart_Graph
         xAxis.Minimum = MinXValue
         xAxis.Maximum = MaxYValue
         xAxis.StringFormat = "M/d"
+        xAxis.MajorGridlineStyle = LineStyle.Dash
 
         'setup y axis, and set max and mins 
         Dim yAxis As New LinearAxis
         yAxis.Position = AxisPosition.Left
-        yAxis.Maximum = MaxValue(REChart_Data.PowerArray) + 5
-        yAxis.Minimum = MinValue(REChart_Data.PowerArray) - 5
+        yAxis.Maximum = MaxValue(REChart_Data.PowerArray) + 4.5
+        yAxis.Minimum = MinValue(REChart_Data.PowerArray) - 4.5
+        yAxis.MajorGridlineStyle = LineStyle.Solid
 
         'set up plot model,
         MyModel.Title = REChart_Data.txtManuverTitle.Text
