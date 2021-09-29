@@ -56,8 +56,12 @@ Public Class REChart_Graph
         yAxis.Minimum = MinValue(REChart_Data.PowerArray) - 4.5
         yAxis.MajorGridlineStyle = LineStyle.Solid
 
-        'set up plot model,
-        MyModel.Title = REChart_Data.txtManuverTitle.Text
+        'set up plot model, Create a Title, based on the entry from the data form. 
+        Dim strTitle As String = REChart_Data.txtManuverTitle.Text + " " +
+            REChart_Data.DateTimeArray(0).ToString("MM/dd/yy") + " - " +
+            REChart_Data.DateTimeArray(REChart_Data.DateTimeArray.Length - 1).ToString("MM/dd/yy")
+        MyModel.Title = strTitle
+        MyModel.TitleFont = "Consolas"
 
         'set up line series
         MySeries.Title = "Load Profile"
@@ -120,19 +124,18 @@ Public Class REChart_Graph
 
         'Do unit specific stuff 
         'Set the colors mased on Unit. Unit 1 = blue
-        ' append "Unit x" in the title based on selection. 
+        ' append "Unit x Cycle xx" + newline in the title based on selection. 
         If (REChart_Data.rbUnit1.Checked = True) Then
             MySeries.Color = OxyColors.RoyalBlue
             MyModel.TitleColor = OxyColors.RoyalBlue
+            MyModel.Title = Center2Lines("Unit 1 Cycle " + REChart_Data.txtCycle.Text, strTitle)
 
-            'MyModel.Title = "Unit 1 - " + REChart_Data.txtManuverTitle.Text
         End If
         'Unit 2 = green
         If (REChart_Data.rbUnit2.Checked = True) Then
             MySeries.Color = OxyColors.Green
             MyModel.TitleColor = OxyColors.Green
-
-            'MyModel.Title = "Unit 2 - " + REChart_Data.txtManuverTitle.Text
+            MyModel.Title = Center2Lines("Unit 2 Cycle " + REChart_Data.txtCycle.Text, strTitle)
         End If
 
         'add series to the data model, and bind the model to the plotview. 
