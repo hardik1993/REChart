@@ -21,7 +21,7 @@ Public Class REChart_Graph
         Call GenerateLoadProfile()
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles BtnExport.Click
 
     End Sub
 
@@ -54,7 +54,7 @@ Public Class REChart_Graph
         yAxis.Maximum = MaxValue(REChart_Data.PowerArray) + 5
         yAxis.Minimum = MinValue(REChart_Data.PowerArray) - 5
 
-        'set up plot model
+        'set up plot model,
         MyModel.Title = REChart_Data.txtManuverTitle.Text
 
         'set up line series
@@ -72,9 +72,9 @@ Public Class REChart_Graph
         'first step is to form array of annotation descriptions. This will be the date/time range for 
         ' action appended with the actual description of the step from desc array. 
         For i As Integer = 1 To AnnotationTextArray.Length
-            AnnotationTextArray(i - 1) = REChart_Data.DateTimeArray(i - 1).ToString("MM/dd/yyyy HH:mm") + " - " +
-                REChart_Data.DateTimeArray(i).ToString("MM/dd/yyyy HH:mm") +
-                vbNewLine + REChart_Data.DescArray(i)
+            AnnotationTextArray(i - 1) = Center2Lines(REChart_Data.DescArray(i),
+                                                      REChart_Data.DateTimeArray(i - 1).ToString("MM/dd/yy HH:mm") + " - " +
+                                                      REChart_Data.DateTimeArray(i).ToString("MM/dd/yy HH:mm"))
         Next
 
         Dim CurrentPoint As OxyPlot.DataPoint
@@ -85,6 +85,9 @@ Public Class REChart_Graph
         For i = 0 To AnnotationTextArray.Length - 1
             AnnotationsList.Add(New OxyPlot.Annotations.TextAnnotation)
             AnnotationsList(i).Text = AnnotationTextArray(i)
+
+            'set font to monospaced font. 
+            AnnotationsList(i).Font = "Consolas"
 
             'set previous point and current point, calculate the mid point, and set the location of the annotation as the midpoint.
             CurrentPoint = New OxyPlot.DataPoint(REChart_Data.DateTimeArray(i).ToOADate, REChart_Data.PowerArray(i))
@@ -113,19 +116,22 @@ Public Class REChart_Graph
         'don't draw legend since there is only one series. 
         MySeries.RenderInLegend = False
 
-        'Set the colors mased on Unit. Unit 1 = blue, 
+        'Do unit specific stuff 
+        'Set the colors mased on Unit. Unit 1 = blue
+        ' append "Unit x" in the title based on selection. 
         If (REChart_Data.rbUnit1.Checked = True) Then
             MySeries.Color = OxyColors.RoyalBlue
             MyModel.TitleColor = OxyColors.RoyalBlue
+
+            'MyModel.Title = "Unit 1 - " + REChart_Data.txtManuverTitle.Text
         End If
         'Unit 2 = green
         If (REChart_Data.rbUnit2.Checked = True) Then
             MySeries.Color = OxyColors.Green
             MyModel.TitleColor = OxyColors.Green
+
+            'MyModel.Title = "Unit 2 - " + REChart_Data.txtManuverTitle.Text
         End If
-
-
-
 
         'add series to the data model, and bind the model to the plotview. 
         MyModel.Series.Add(MySeries)
@@ -248,6 +254,39 @@ Public Class REChart_Graph
 
         'return the datapoint var
         Return MidPoint
+
+    End Function
+
+    Private Function Center2Lines(TopString As String, BotString As String) As String
+        'this function accepts 2 string lines. And returns 1 string seperated by a vbnewline, and properly 
+        ' padded with spaces top appear center text center aligned. The reason I had to write this is because the 
+        ' oxy plot text anotations text alignment was not working.
+
+        'create the finalstring var to return
+        Dim FinalString As String
+        Dim LengthDiff As Integer
+
+        'calculate the diff in length of the 2 strings, and pad the shorter string with spaces 
+        ' approriatelly to "CeNtEr AlIgN"
+        If TopString.Length > BotString.Length Then
+            LengthDiff = TopString.Length - BotString.Length
+            For i As Integer = 1 To LengthDiff / 2
+                BotString = " " + BotString
+            Next
+            FinalString = TopString + vbNewLine + BotString
+
+        ElseIf BotString.Length > TopString.Length Then
+            LengthDiff = BotString.Length - TopString.Length
+            For i As Integer = 1 To LengthDiff / 2
+                TopString = " " + TopString
+            Next
+            FinalString = TopString + vbNewLine + BotString
+
+        Else
+            FinalString = TopString + vbNewLine + BotString
+        End If
+
+        Return FinalString
 
     End Function
 

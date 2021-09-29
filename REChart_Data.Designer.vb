@@ -55,6 +55,8 @@ Partial Class REChart_Data
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblMWE = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblLostMWE = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.lblCycle = New System.Windows.Forms.Label()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         CType(Me.dgvStatepoints, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpAddStatePoints.SuspendLayout()
         Me.grpInitialConditions.SuspendLayout()
@@ -250,7 +252,7 @@ Partial Class REChart_Data
         'grpInitialConditions
         '
         Me.grpInitialConditions.BackColor = System.Drawing.SystemColors.ScrollBar
-        Me.grpInitialConditions.Controls.Add(Me.rbUnit2)
+        Me.grpInitialConditions.Controls.Add(Me.TextBox1)
         Me.grpInitialConditions.Controls.Add(Me.rbUnit1)
         Me.grpInitialConditions.Controls.Add(Me.lblTitleOfManuver)
         Me.grpInitialConditions.Controls.Add(Me.txtManuverTitle)
@@ -259,6 +261,8 @@ Partial Class REChart_Data
         Me.grpInitialConditions.Controls.Add(Me.dtpStartTime)
         Me.grpInitialConditions.Controls.Add(Me.dtpStartDate)
         Me.grpInitialConditions.Controls.Add(Me.lblStartDateTime)
+        Me.grpInitialConditions.Controls.Add(Me.lblCycle)
+        Me.grpInitialConditions.Controls.Add(Me.rbUnit2)
         Me.grpInitialConditions.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, CType(((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic) _
                 Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpInitialConditions.Location = New System.Drawing.Point(9, 41)
@@ -271,11 +275,11 @@ Partial Class REChart_Data
         'rbUnit2
         '
         Me.rbUnit2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbUnit2.Location = New System.Drawing.Point(193, 68)
+        Me.rbUnit2.Location = New System.Drawing.Point(216, 68)
         Me.rbUnit2.Name = "rbUnit2"
-        Me.rbUnit2.Size = New System.Drawing.Size(53, 17)
+        Me.rbUnit2.Size = New System.Drawing.Size(45, 19)
         Me.rbUnit2.TabIndex = 12
-        Me.rbUnit2.Text = "Unit 2"
+        Me.rbUnit2.Text = "U2"
         Me.rbUnit2.UseVisualStyleBackColor = True
         '
         'rbUnit1
@@ -283,12 +287,12 @@ Partial Class REChart_Data
         Me.rbUnit1.AutoSize = True
         Me.rbUnit1.Checked = True
         Me.rbUnit1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbUnit1.Location = New System.Drawing.Point(132, 68)
+        Me.rbUnit1.Location = New System.Drawing.Point(180, 69)
         Me.rbUnit1.Name = "rbUnit1"
-        Me.rbUnit1.Size = New System.Drawing.Size(53, 17)
+        Me.rbUnit1.Size = New System.Drawing.Size(39, 17)
         Me.rbUnit1.TabIndex = 11
         Me.rbUnit1.TabStop = True
-        Me.rbUnit1.Text = "Unit 1"
+        Me.rbUnit1.Text = "U1"
         Me.rbUnit1.UseVisualStyleBackColor = True
         '
         'lblTitleOfManuver
@@ -392,6 +396,25 @@ Partial Class REChart_Data
         Me.lblLostMWE.Size = New System.Drawing.Size(76, 17)
         Me.lblLostMWE.Text = "Lost MWHre:"
         '
+        'lblCycle
+        '
+        Me.lblCycle.AutoSize = True
+        Me.lblCycle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCycle.Location = New System.Drawing.Point(117, 69)
+        Me.lblCycle.Name = "lblCycle"
+        Me.lblCycle.Size = New System.Drawing.Size(36, 13)
+        Me.lblCycle.TabIndex = 13
+        Me.lblCycle.Text = "Cycle:"
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(151, 66)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(27, 20)
+        Me.TextBox1.TabIndex = 14
+        Me.TextBox1.Text = "xx"
+        '
         'REChart_Data
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -454,4 +477,6 @@ Partial Class REChart_Data
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents lblLostMWE As ToolStripStatusLabel
     Friend WithEvents lblMWE As ToolStripStatusLabel
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents lblCycle As Label
 End Class
