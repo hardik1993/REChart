@@ -5,6 +5,7 @@
     Public DateTimeArray As Date()
     Public PowerArray As Double()
     Public DescArray As String()
+    Public FullPowerMWE As Double = 1330
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' form load event.
@@ -60,8 +61,33 @@
 
             'dgvStatepoints.Rows(i).SetValues(New String() {newDateTime.ToString("MM/dd/yyyy HH:mm"), curHoursForAction.ToString, newHoursFromStart.ToString, "0", "0"})
             dgvStatepoints.Refresh()
-
         Next
+
+
+        'Next, calculate MWe Lost
+        Dim result As Double = 0
+        Dim dur As Double
+
+        'Loop through array points to calculate MWe lost. Looks ahead to the next point to calculate the area.
+        For x = 0 To dgvStatepoints.RowCount - 2
+            'Calculate duration between points
+            dur = Convert.ToDouble(dgvStatepoints.Rows(x + 1).Cells(1).Value)
+            If dgvStatepoints.Rows(x).Cells(3).Value = 100 Or dgvStatepoints.Rows(x + 1).Cells(3).Value = 100 Then
+                'This is the first or last point to 100%, a triangular area needs to be calculated.
+                'If the current point is 100%, then base of triangle needs to be the difference between 100% and i+1
+                If dgvStatepoints.Rows(x).Cells(3).Value = 100 Then result += 0.5 * Convert.ToDouble(dur) * (((100 - Convert.ToDouble(dgvStatepoints.Rows(x + 1).Cells(3).Value)) / 100) * FullPowerMWE)
+                'If the next point is 100%, then base of triangle needs to be the difference between 100% and i
+                If dgvStatepoints.Rows(x + 1).Cells(3).Value = 100 Then result += 0.5 * Convert.ToDouble(dur) * (((100 - Convert.ToDouble(dgvStatepoints.Rows(x).Cells(3).Value)) / 100) * FullPowerMWE)
+                'If this is just a burn at full power, the result goes to 0 added MWe lost.
+            Else
+                'This is a middle section and a trapazoidal area needs to be calculated.
+                result += ((((((100 - Convert.ToDouble(dgvStatepoints.Rows(x).Cells(3).Value)) / 100) * FullPowerMWE) + (((100 - Convert.ToDouble(dgvStatepoints.Rows(x + 1).Cells(3).Value)) / 100) * FullPowerMWE)) * Convert.ToDouble(dur)) * 0.5)
+            End If
+        Next
+
+
+        lblMWE.Text = result
+
 
     End Sub
 
@@ -283,4 +309,32 @@
         End Try
     End Sub
 
+    'THE BELOW FUNCTION IS ABANDONED AND PLACED IN THE ReCalculateTimes() SUB
+    'Private Function calcMWE(ByVal DTarray() As Date, ByVal POWarray() As Double) As Double
+    '    'Function called to calculated lost MWe based on record set data.
+    '    'DateTime and Power level arrays should be passed into this function call. 
+    '    'Returns double of MWe lost.
+
+    '    Dim result As Double = 0
+    '    Dim dur As TimeSpan
+
+    '    'Loop through array points to calculate MWe lost. Looks ahead to the next point to calculate the area.
+    '    For i = 0 To DTarray.Length - 2
+    '        'Calculate duration between points
+    '        dur = DTarray(i + 1) - DTarray(i)
+    '        If POWarray(i) = 100 Or POWarray(i + 1) = 100 Then
+    '            'This is the first or last point to 100%, a triangular area needs to be calculated.
+    '            'If the current point is 100%, then base of triangle needs to be the difference between 100% and i+1
+    '            If POWarray(i) = 100 Then result += 0.5 * Convert.ToDouble(dur.TotalHours) * ((100 - Convert.ToDouble(POWarray(i + 1))) * FullPowerMWE)
+    '            'If the next point is 100%, then base of triangle needs to be the difference between 100% and i
+    '            If POWarray(i + 1) = 100 Then result += 0.5 * Convert.ToDouble(dur.TotalHours) * ((100 - Convert.ToDouble(POWarray(i))) * FullPowerMWE)
+    '            'If this is just a burn at full power, the result goes to 0 added MWe lost.
+    '        Else
+    '            'This is a middle section and a trapazoidal area needs to be calculated.
+    '            result += (((((100 - Convert.ToDouble(POWarray(i))) * FullPowerMWE) + ((100 - Convert.ToDouble(POWarray(i + 1))) * FullPowerMWE)) * Convert.ToDouble(dur.TotalHours)) * 0.5)
+    '        End If
+    '    Next
+
+    '    Return result
+    'End Function
 End Class
