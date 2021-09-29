@@ -56,7 +56,7 @@ Partial Class REChart_Data
         Me.lblMWE = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblLostMWE = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblCycle = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtCycle = New System.Windows.Forms.TextBox()
         CType(Me.dgvStatepoints, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpAddStatePoints.SuspendLayout()
         Me.grpInitialConditions.SuspendLayout()
@@ -252,7 +252,7 @@ Partial Class REChart_Data
         'grpInitialConditions
         '
         Me.grpInitialConditions.BackColor = System.Drawing.SystemColors.ScrollBar
-        Me.grpInitialConditions.Controls.Add(Me.TextBox1)
+        Me.grpInitialConditions.Controls.Add(Me.txtCycle)
         Me.grpInitialConditions.Controls.Add(Me.rbUnit1)
         Me.grpInitialConditions.Controls.Add(Me.lblTitleOfManuver)
         Me.grpInitialConditions.Controls.Add(Me.txtManuverTitle)
@@ -406,14 +406,14 @@ Partial Class REChart_Data
         Me.lblCycle.TabIndex = 13
         Me.lblCycle.Text = "Cycle:"
         '
-        'TextBox1
+        'txtCycle
         '
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(151, 66)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(27, 20)
-        Me.TextBox1.TabIndex = 14
-        Me.TextBox1.Text = "xx"
+        Me.txtCycle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCycle.Location = New System.Drawing.Point(151, 66)
+        Me.txtCycle.Name = "txtCycle"
+        Me.txtCycle.Size = New System.Drawing.Size(27, 20)
+        Me.txtCycle.TabIndex = 14
+        Me.txtCycle.Text = "xx"
         '
         'REChart_Data
         '
@@ -477,6 +477,6 @@ Partial Class REChart_Data
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents lblLostMWE As ToolStripStatusLabel
     Friend WithEvents lblMWE As ToolStripStatusLabel
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtCycle As TextBox
     Friend WithEvents lblCycle As Label
 End Class
