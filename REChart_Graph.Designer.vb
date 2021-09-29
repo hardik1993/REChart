@@ -30,7 +30,7 @@ Partial Class REChart_Graph
         '
         'BtnExport
         '
-        Me.BtnExport.Location = New System.Drawing.Point(576, 778)
+        Me.BtnExport.Location = New System.Drawing.Point(596, 775)
         Me.BtnExport.Name = "BtnExport"
         Me.BtnExport.Size = New System.Drawing.Size(138, 28)
         Me.BtnExport.TabIndex = 2
@@ -42,7 +42,7 @@ Partial Class REChart_Graph
         Me.PlotView1.Location = New System.Drawing.Point(12, 12)
         Me.PlotView1.Name = "PlotView1"
         Me.PlotView1.PanCursor = System.Windows.Forms.Cursors.Hand
-        Me.PlotView1.Size = New System.Drawing.Size(1265, 760)
+        Me.PlotView1.Size = New System.Drawing.Size(1302, 760)
         Me.PlotView1.TabIndex = 3
         Me.PlotView1.Text = "PlotView1"
         Me.PlotView1.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE
@@ -53,7 +53,7 @@ Partial Class REChart_Graph
         '
         Me.lblAuthor.AutoSize = True
         Me.lblAuthor.Font = New System.Drawing.Font("Tahoma", 6.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAuthor.Location = New System.Drawing.Point(-1, 807)
+        Me.lblAuthor.Location = New System.Drawing.Point(1, 792)
         Me.lblAuthor.Name = "lblAuthor"
         Me.lblAuthor.Size = New System.Drawing.Size(42, 10)
         Me.lblAuthor.TabIndex = 22
@@ -63,7 +63,7 @@ Partial Class REChart_Graph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1289, 818)
+        Me.ClientSize = New System.Drawing.Size(1321, 804)
         Me.Controls.Add(Me.lblAuthor)
         Me.Controls.Add(Me.PlotView1)
         Me.Controls.Add(Me.BtnExport)
