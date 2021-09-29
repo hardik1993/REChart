@@ -53,8 +53,8 @@ Partial Class REChart_Data
         Me.btnLoadData = New System.Windows.Forms.Button()
         Me.lblAuthor = New System.Windows.Forms.Label()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.lblLostMWE = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblMWE = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.lblLostMWE = New System.Windows.Forms.ToolStripStatusLabel()
         CType(Me.dgvStatepoints, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpAddStatePoints.SuspendLayout()
         Me.grpInitialConditions.SuspendLayout()
@@ -363,7 +363,7 @@ Partial Class REChart_Data
         '
         Me.lblAuthor.AutoSize = True
         Me.lblAuthor.Font = New System.Drawing.Font("Tahoma", 6.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAuthor.Location = New System.Drawing.Point(24, 575)
+        Me.lblAuthor.Location = New System.Drawing.Point(0, 572)
         Me.lblAuthor.Name = "lblAuthor"
         Me.lblAuthor.Size = New System.Drawing.Size(42, 10)
         Me.lblAuthor.TabIndex = 21
@@ -379,18 +379,18 @@ Partial Class REChart_Data
         Me.StatusStrip1.TabIndex = 22
         Me.StatusStrip1.Text = "StatusStrip1"
         '
+        'lblMWE
+        '
+        Me.lblMWE.Name = "lblMWE"
+        Me.lblMWE.Size = New System.Drawing.Size(13, 17)
+        Me.lblMWE.Text = "0"
+        '
         'lblLostMWE
         '
         Me.lblLostMWE.Name = "lblLostMWE"
         Me.lblLostMWE.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.lblLostMWE.Size = New System.Drawing.Size(63, 17)
         Me.lblLostMWE.Text = "Lost MWe:"
-        '
-        'lblMWE
-        '
-        Me.lblMWE.Name = "lblMWE"
-        Me.lblMWE.Size = New System.Drawing.Size(13, 17)
-        Me.lblMWE.Text = "0"
         '
         'REChart_Data
         '
