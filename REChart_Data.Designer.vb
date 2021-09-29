@@ -389,8 +389,8 @@ Partial Class REChart_Data
         '
         Me.lblLostMWE.Name = "lblLostMWE"
         Me.lblLostMWE.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.lblLostMWE.Size = New System.Drawing.Size(63, 17)
-        Me.lblLostMWE.Text = "Lost MWe:"
+        Me.lblLostMWE.Size = New System.Drawing.Size(76, 17)
+        Me.lblLostMWE.Text = "Lost MWHre:"
         '
         'REChart_Data
         '
