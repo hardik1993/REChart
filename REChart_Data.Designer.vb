@@ -70,7 +70,7 @@ Partial Class REChart_Data
         Me.lblTitle.Location = New System.Drawing.Point(141, 2)
         Me.lblTitle.Name = "lblTitle"
         Me.lblTitle.Size = New System.Drawing.Size(514, 35)
-        Me.lblTitle.TabIndex = 0
+        Me.lblTitle.TabIndex = 90
         Me.lblTitle.Text = "RE-Chart (Load Profile Generator)"
         '
         'lblStartDateTime
@@ -80,7 +80,7 @@ Partial Class REChart_Data
         Me.lblStartDateTime.Location = New System.Drawing.Point(-2, 21)
         Me.lblStartDateTime.Name = "lblStartDateTime"
         Me.lblStartDateTime.Size = New System.Drawing.Size(81, 13)
-        Me.lblStartDateTime.TabIndex = 1
+        Me.lblStartDateTime.TabIndex = 97
         Me.lblStartDateTime.Text = "Start DateTime:"
         '
         'dtpStartDate
@@ -90,7 +90,7 @@ Partial Class REChart_Data
         Me.dtpStartDate.Location = New System.Drawing.Point(78, 18)
         Me.dtpStartDate.Name = "dtpStartDate"
         Me.dtpStartDate.Size = New System.Drawing.Size(96, 20)
-        Me.dtpStartDate.TabIndex = 2
+        Me.dtpStartDate.TabIndex = 1
         '
         'dtpStartTime
         '
@@ -100,7 +100,7 @@ Partial Class REChart_Data
         Me.dtpStartTime.Location = New System.Drawing.Point(178, 18)
         Me.dtpStartTime.Name = "dtpStartTime"
         Me.dtpStartTime.Size = New System.Drawing.Size(70, 20)
-        Me.dtpStartTime.TabIndex = 3
+        Me.dtpStartTime.TabIndex = 2
         Me.dtpStartTime.Value = New Date(2021, 9, 20, 0, 0, 0, 0)
         '
         'btnAddStatePoint
@@ -110,7 +110,7 @@ Partial Class REChart_Data
         Me.btnAddStatePoint.Location = New System.Drawing.Point(442, 15)
         Me.btnAddStatePoint.Name = "btnAddStatePoint"
         Me.btnAddStatePoint.Size = New System.Drawing.Size(66, 41)
-        Me.btnAddStatePoint.TabIndex = 4
+        Me.btnAddStatePoint.TabIndex = 11
         Me.btnAddStatePoint.Text = "Add State Point"
         Me.btnAddStatePoint.UseVisualStyleBackColor = True
         '
@@ -120,7 +120,7 @@ Partial Class REChart_Data
         Me.txtInitialPower.Location = New System.Drawing.Point(77, 66)
         Me.txtInitialPower.Name = "txtInitialPower"
         Me.txtInitialPower.Size = New System.Drawing.Size(43, 20)
-        Me.txtInitialPower.TabIndex = 7
+        Me.txtInitialPower.TabIndex = 4
         Me.txtInitialPower.Text = "100"
         '
         'lblStatePointPower
@@ -130,7 +130,7 @@ Partial Class REChart_Data
         Me.lblStatePointPower.Location = New System.Drawing.Point(4, 18)
         Me.lblStatePointPower.Name = "lblStatePointPower"
         Me.lblStatePointPower.Size = New System.Drawing.Size(37, 13)
-        Me.lblStatePointPower.TabIndex = 8
+        Me.lblStatePointPower.TabIndex = 93
         Me.lblStatePointPower.Text = "Power"
         '
         'txtStatePointPower
@@ -139,7 +139,7 @@ Partial Class REChart_Data
         Me.txtStatePointPower.Location = New System.Drawing.Point(3, 34)
         Me.txtStatePointPower.Name = "txtStatePointPower"
         Me.txtStatePointPower.Size = New System.Drawing.Size(80, 20)
-        Me.txtStatePointPower.TabIndex = 9
+        Me.txtStatePointPower.TabIndex = 8
         Me.txtStatePointPower.Text = "100"
         '
         'txtHoursForAction
@@ -148,7 +148,7 @@ Partial Class REChart_Data
         Me.txtHoursForAction.Location = New System.Drawing.Point(89, 34)
         Me.txtHoursForAction.Name = "txtHoursForAction"
         Me.txtHoursForAction.Size = New System.Drawing.Size(80, 20)
-        Me.txtHoursForAction.TabIndex = 11
+        Me.txtHoursForAction.TabIndex = 9
         Me.txtHoursForAction.Text = "0"
         '
         'lblHoursforAction
@@ -158,7 +158,7 @@ Partial Class REChart_Data
         Me.lblHoursforAction.Location = New System.Drawing.Point(86, 18)
         Me.lblHoursforAction.Name = "lblHoursforAction"
         Me.lblHoursforAction.Size = New System.Drawing.Size(83, 13)
-        Me.lblHoursforAction.TabIndex = 10
+        Me.lblHoursforAction.TabIndex = 92
         Me.lblHoursforAction.Text = "Hours for Action"
         '
         'dgvStatepoints
@@ -170,7 +170,8 @@ Partial Class REChart_Data
         Me.dgvStatepoints.Location = New System.Drawing.Point(9, 140)
         Me.dgvStatepoints.Name = "dgvStatepoints"
         Me.dgvStatepoints.Size = New System.Drawing.Size(772, 415)
-        Me.dgvStatepoints.TabIndex = 12
+        Me.dgvStatepoints.TabIndex = 20
+        Me.dgvStatepoints.TabStop = False
         '
         'DateTime
         '
@@ -204,7 +205,7 @@ Partial Class REChart_Data
         Me.txtDescription.Location = New System.Drawing.Point(175, 34)
         Me.txtDescription.Name = "txtDescription"
         Me.txtDescription.Size = New System.Drawing.Size(261, 20)
-        Me.txtDescription.TabIndex = 14
+        Me.txtDescription.TabIndex = 10
         Me.txtDescription.Text = " "
         '
         'Label1
@@ -214,7 +215,7 @@ Partial Class REChart_Data
         Me.Label1.Location = New System.Drawing.Point(172, 18)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(60, 13)
-        Me.Label1.TabIndex = 13
+        Me.Label1.TabIndex = 91
         Me.Label1.Text = "Description"
         '
         'bthRefresh
@@ -226,7 +227,8 @@ Partial Class REChart_Data
         Me.bthRefresh.Location = New System.Drawing.Point(269, 104)
         Me.bthRefresh.Name = "bthRefresh"
         Me.bthRefresh.Size = New System.Drawing.Size(121, 31)
-        Me.bthRefresh.TabIndex = 15
+        Me.bthRefresh.TabIndex = 12
+        Me.bthRefresh.TabStop = False
         Me.bthRefresh.Text = "Refresh"
         Me.bthRefresh.UseVisualStyleBackColor = True
         '
@@ -245,7 +247,7 @@ Partial Class REChart_Data
         Me.grpAddStatePoints.Location = New System.Drawing.Point(269, 41)
         Me.grpAddStatePoints.Name = "grpAddStatePoints"
         Me.grpAddStatePoints.Size = New System.Drawing.Size(512, 60)
-        Me.grpAddStatePoints.TabIndex = 16
+        Me.grpAddStatePoints.TabIndex = 98
         Me.grpAddStatePoints.TabStop = False
         Me.grpAddStatePoints.Text = "Add State Points"
         '
@@ -268,7 +270,7 @@ Partial Class REChart_Data
         Me.grpInitialConditions.Location = New System.Drawing.Point(9, 41)
         Me.grpInitialConditions.Name = "grpInitialConditions"
         Me.grpInitialConditions.Size = New System.Drawing.Size(254, 93)
-        Me.grpInitialConditions.TabIndex = 17
+        Me.grpInitialConditions.TabIndex = 99
         Me.grpInitialConditions.TabStop = False
         Me.grpInitialConditions.Text = "Initial Conditions"
         '
@@ -279,7 +281,7 @@ Partial Class REChart_Data
         Me.txtCycle.MaxLength = 2
         Me.txtCycle.Name = "txtCycle"
         Me.txtCycle.Size = New System.Drawing.Size(27, 20)
-        Me.txtCycle.TabIndex = 14
+        Me.txtCycle.TabIndex = 5
         Me.txtCycle.Text = "xx"
         '
         'rbUnit1
@@ -290,7 +292,7 @@ Partial Class REChart_Data
         Me.rbUnit1.Location = New System.Drawing.Point(180, 69)
         Me.rbUnit1.Name = "rbUnit1"
         Me.rbUnit1.Size = New System.Drawing.Size(39, 17)
-        Me.rbUnit1.TabIndex = 11
+        Me.rbUnit1.TabIndex = 6
         Me.rbUnit1.TabStop = True
         Me.rbUnit1.Text = "U1"
         Me.rbUnit1.UseVisualStyleBackColor = True
@@ -302,7 +304,7 @@ Partial Class REChart_Data
         Me.lblTitleOfManuver.Location = New System.Drawing.Point(2, 45)
         Me.lblTitleOfManuver.Name = "lblTitleOfManuver"
         Me.lblTitleOfManuver.Size = New System.Drawing.Size(75, 13)
-        Me.lblTitleOfManuver.TabIndex = 9
+        Me.lblTitleOfManuver.TabIndex = 96
         Me.lblTitleOfManuver.Text = "Manuver Title:"
         '
         'txtManuverTitle
@@ -311,7 +313,7 @@ Partial Class REChart_Data
         Me.txtManuverTitle.Location = New System.Drawing.Point(77, 42)
         Me.txtManuverTitle.Name = "txtManuverTitle"
         Me.txtManuverTitle.Size = New System.Drawing.Size(171, 20)
-        Me.txtManuverTitle.TabIndex = 8
+        Me.txtManuverTitle.TabIndex = 3
         Me.txtManuverTitle.Text = "Example: A1/A2 Sequence Exchange"
         '
         'lblInitialPower
@@ -321,7 +323,7 @@ Partial Class REChart_Data
         Me.lblInitialPower.Location = New System.Drawing.Point(14, 70)
         Me.lblInitialPower.Name = "lblInitialPower"
         Me.lblInitialPower.Size = New System.Drawing.Size(65, 13)
-        Me.lblInitialPower.TabIndex = 6
+        Me.lblInitialPower.TabIndex = 95
         Me.lblInitialPower.Text = "Start Power:"
         '
         'lblCycle
@@ -331,7 +333,7 @@ Partial Class REChart_Data
         Me.lblCycle.Location = New System.Drawing.Point(117, 69)
         Me.lblCycle.Name = "lblCycle"
         Me.lblCycle.Size = New System.Drawing.Size(36, 13)
-        Me.lblCycle.TabIndex = 13
+        Me.lblCycle.TabIndex = 94
         Me.lblCycle.Text = "Cycle:"
         '
         'rbUnit2
@@ -340,7 +342,8 @@ Partial Class REChart_Data
         Me.rbUnit2.Location = New System.Drawing.Point(216, 68)
         Me.rbUnit2.Name = "rbUnit2"
         Me.rbUnit2.Size = New System.Drawing.Size(45, 19)
-        Me.rbUnit2.TabIndex = 12
+        Me.rbUnit2.TabIndex = 7
+        Me.rbUnit2.TabStop = True
         Me.rbUnit2.Text = "U2"
         Me.rbUnit2.UseVisualStyleBackColor = True
         '
@@ -353,7 +356,8 @@ Partial Class REChart_Data
         Me.btnGenerateLP.Location = New System.Drawing.Point(400, 104)
         Me.btnGenerateLP.Name = "btnGenerateLP"
         Me.btnGenerateLP.Size = New System.Drawing.Size(121, 31)
-        Me.btnGenerateLP.TabIndex = 18
+        Me.btnGenerateLP.TabIndex = 13
+        Me.btnGenerateLP.TabStop = False
         Me.btnGenerateLP.Text = "Generate Load Profile"
         Me.btnGenerateLP.UseVisualStyleBackColor = True
         '
@@ -366,7 +370,8 @@ Partial Class REChart_Data
         Me.btnSaveData.Location = New System.Drawing.Point(530, 104)
         Me.btnSaveData.Name = "btnSaveData"
         Me.btnSaveData.Size = New System.Drawing.Size(121, 31)
-        Me.btnSaveData.TabIndex = 19
+        Me.btnSaveData.TabIndex = 14
+        Me.btnSaveData.TabStop = False
         Me.btnSaveData.Text = "Save Data"
         Me.btnSaveData.UseVisualStyleBackColor = True
         '
@@ -379,7 +384,8 @@ Partial Class REChart_Data
         Me.btnLoadData.Location = New System.Drawing.Point(660, 104)
         Me.btnLoadData.Name = "btnLoadData"
         Me.btnLoadData.Size = New System.Drawing.Size(121, 31)
-        Me.btnLoadData.TabIndex = 20
+        Me.btnLoadData.TabIndex = 15
+        Me.btnLoadData.TabStop = False
         Me.btnLoadData.Text = "Load Data"
         Me.btnLoadData.UseVisualStyleBackColor = True
         '
