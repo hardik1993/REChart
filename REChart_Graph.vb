@@ -17,7 +17,7 @@ Public Class REChart_Graph
     Public AnnotationsList As New List(Of OxyPlot.Annotations.TextAnnotation)
 
     Private Sub REChart_Graph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        Call GenerateLoadProfile()
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
