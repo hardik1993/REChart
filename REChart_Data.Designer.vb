@@ -43,11 +43,13 @@ Partial Class REChart_Data
         Me.bthRefresh = New System.Windows.Forms.Button()
         Me.grpAddStatePoints = New System.Windows.Forms.GroupBox()
         Me.grpInitialConditions = New System.Windows.Forms.GroupBox()
-        Me.rbUnit2 = New System.Windows.Forms.RadioButton()
+        Me.txtCycle = New System.Windows.Forms.TextBox()
         Me.rbUnit1 = New System.Windows.Forms.RadioButton()
         Me.lblTitleOfManuver = New System.Windows.Forms.Label()
         Me.txtManuverTitle = New System.Windows.Forms.TextBox()
         Me.lblInitialPower = New System.Windows.Forms.Label()
+        Me.lblCycle = New System.Windows.Forms.Label()
+        Me.rbUnit2 = New System.Windows.Forms.RadioButton()
         Me.btnGenerateLP = New System.Windows.Forms.Button()
         Me.btnSaveData = New System.Windows.Forms.Button()
         Me.btnLoadData = New System.Windows.Forms.Button()
@@ -55,8 +57,6 @@ Partial Class REChart_Data
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblMWE = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblLostMWE = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.lblCycle = New System.Windows.Forms.Label()
-        Me.txtCycle = New System.Windows.Forms.TextBox()
         CType(Me.dgvStatepoints, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpAddStatePoints.SuspendLayout()
         Me.grpInitialConditions.SuspendLayout()
@@ -272,15 +272,15 @@ Partial Class REChart_Data
         Me.grpInitialConditions.TabStop = False
         Me.grpInitialConditions.Text = "Initial Conditions"
         '
-        'rbUnit2
+        'txtCycle
         '
-        Me.rbUnit2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbUnit2.Location = New System.Drawing.Point(216, 68)
-        Me.rbUnit2.Name = "rbUnit2"
-        Me.rbUnit2.Size = New System.Drawing.Size(45, 19)
-        Me.rbUnit2.TabIndex = 12
-        Me.rbUnit2.Text = "U2"
-        Me.rbUnit2.UseVisualStyleBackColor = True
+        Me.txtCycle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCycle.Location = New System.Drawing.Point(151, 66)
+        Me.txtCycle.MaxLength = 2
+        Me.txtCycle.Name = "txtCycle"
+        Me.txtCycle.Size = New System.Drawing.Size(27, 20)
+        Me.txtCycle.TabIndex = 14
+        Me.txtCycle.Text = "xx"
         '
         'rbUnit1
         '
@@ -323,6 +323,26 @@ Partial Class REChart_Data
         Me.lblInitialPower.Size = New System.Drawing.Size(65, 13)
         Me.lblInitialPower.TabIndex = 6
         Me.lblInitialPower.Text = "Start Power:"
+        '
+        'lblCycle
+        '
+        Me.lblCycle.AutoSize = True
+        Me.lblCycle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCycle.Location = New System.Drawing.Point(117, 69)
+        Me.lblCycle.Name = "lblCycle"
+        Me.lblCycle.Size = New System.Drawing.Size(36, 13)
+        Me.lblCycle.TabIndex = 13
+        Me.lblCycle.Text = "Cycle:"
+        '
+        'rbUnit2
+        '
+        Me.rbUnit2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbUnit2.Location = New System.Drawing.Point(216, 68)
+        Me.rbUnit2.Name = "rbUnit2"
+        Me.rbUnit2.Size = New System.Drawing.Size(45, 19)
+        Me.rbUnit2.TabIndex = 12
+        Me.rbUnit2.Text = "U2"
+        Me.rbUnit2.UseVisualStyleBackColor = True
         '
         'btnGenerateLP
         '
@@ -395,25 +415,6 @@ Partial Class REChart_Data
         Me.lblLostMWE.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.lblLostMWE.Size = New System.Drawing.Size(76, 17)
         Me.lblLostMWE.Text = "Lost MWHre:"
-        '
-        'lblCycle
-        '
-        Me.lblCycle.AutoSize = True
-        Me.lblCycle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCycle.Location = New System.Drawing.Point(117, 69)
-        Me.lblCycle.Name = "lblCycle"
-        Me.lblCycle.Size = New System.Drawing.Size(36, 13)
-        Me.lblCycle.TabIndex = 13
-        Me.lblCycle.Text = "Cycle:"
-        '
-        'txtCycle
-        '
-        Me.txtCycle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCycle.Location = New System.Drawing.Point(151, 66)
-        Me.txtCycle.Name = "txtCycle"
-        Me.txtCycle.Size = New System.Drawing.Size(27, 20)
-        Me.txtCycle.TabIndex = 14
-        Me.txtCycle.Text = "xx"
         '
         'REChart_Data
         '
