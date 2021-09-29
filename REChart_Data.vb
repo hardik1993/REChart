@@ -193,6 +193,7 @@
             file.WriteLine(dtpStartDate.Value.ToShortDateString + " " + dtpStartTime.Value.ToString("HH:mm"))
             file.WriteLine(txtManuverTitle.Text)
             file.WriteLine(txtInitialPower.Text)
+            file.WriteLine(txtCycle.Text)
             If rbUnit1.Checked = True Then file.WriteLine("Unit 1")
             If rbUnit2.Checked = True Then file.WriteLine("Unit 2")
             file.WriteLine(" ")
@@ -263,6 +264,7 @@
             dtpStartTime.Value = Convert.ToDateTime(tempdt)
             txtManuverTitle.Text = file.ReadLine
             txtInitialPower.Text = file.ReadLine
+            txtCycle.Text = file.ReadLine
             If file.ReadLine = "Unit 1" Then
                 rbUnit1.Checked = True
             Else
