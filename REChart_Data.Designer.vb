@@ -52,9 +52,13 @@ Partial Class REChart_Data
         Me.btnSaveData = New System.Windows.Forms.Button()
         Me.btnLoadData = New System.Windows.Forms.Button()
         Me.lblAuthor = New System.Windows.Forms.Label()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.lblLostMWE = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.lblMWE = New System.Windows.Forms.ToolStripStatusLabel()
         CType(Me.dgvStatepoints, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpAddStatePoints.SuspendLayout()
         Me.grpInitialConditions.SuspendLayout()
+        Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblTitle
@@ -163,7 +167,7 @@ Partial Class REChart_Data
         Me.dgvStatepoints.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgvStatepoints.Location = New System.Drawing.Point(9, 140)
         Me.dgvStatepoints.Name = "dgvStatepoints"
-        Me.dgvStatepoints.Size = New System.Drawing.Size(772, 434)
+        Me.dgvStatepoints.Size = New System.Drawing.Size(772, 415)
         Me.dgvStatepoints.TabIndex = 12
         '
         'DateTime
@@ -359,11 +363,34 @@ Partial Class REChart_Data
         '
         Me.lblAuthor.AutoSize = True
         Me.lblAuthor.Font = New System.Drawing.Font("Tahoma", 6.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAuthor.Location = New System.Drawing.Point(-1, 574)
+        Me.lblAuthor.Location = New System.Drawing.Point(24, 575)
         Me.lblAuthor.Name = "lblAuthor"
         Me.lblAuthor.Size = New System.Drawing.Size(42, 10)
         Me.lblAuthor.TabIndex = 21
         Me.lblAuthor.Text = "HDP/LTP"
+        '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblMWE, Me.lblLostMWE})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 563)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.StatusStrip1.Size = New System.Drawing.Size(788, 22)
+        Me.StatusStrip1.TabIndex = 22
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'lblLostMWE
+        '
+        Me.lblLostMWE.Name = "lblLostMWE"
+        Me.lblLostMWE.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.lblLostMWE.Size = New System.Drawing.Size(63, 17)
+        Me.lblLostMWE.Text = "Lost MWe:"
+        '
+        'lblMWE
+        '
+        Me.lblMWE.Name = "lblMWE"
+        Me.lblMWE.Size = New System.Drawing.Size(13, 17)
+        Me.lblMWE.Text = "0"
         '
         'REChart_Data
         '
@@ -379,6 +406,7 @@ Partial Class REChart_Data
         Me.Controls.Add(Me.bthRefresh)
         Me.Controls.Add(Me.dgvStatepoints)
         Me.Controls.Add(Me.lblTitle)
+        Me.Controls.Add(Me.StatusStrip1)
         Me.Name = "REChart_Data"
         Me.Text = "RE-Chart Data Entry Form"
         CType(Me.dgvStatepoints, System.ComponentModel.ISupportInitialize).EndInit()
@@ -386,6 +414,8 @@ Partial Class REChart_Data
         Me.grpAddStatePoints.PerformLayout()
         Me.grpInitialConditions.ResumeLayout(False)
         Me.grpInitialConditions.PerformLayout()
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -421,4 +451,7 @@ Partial Class REChart_Data
     Friend WithEvents lblTitleOfManuver As Label
     Friend WithEvents txtManuverTitle As TextBox
     Friend WithEvents lblInitialPower As Label
+    Friend WithEvents StatusStrip1 As StatusStrip
+    Friend WithEvents lblLostMWE As ToolStripStatusLabel
+    Friend WithEvents lblMWE As ToolStripStatusLabel
 End Class
