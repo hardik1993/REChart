@@ -11,6 +11,9 @@
         ' form load event.
         dgvStatepoints.Rows.Add(New String() {dtpStartDate.Value.ToShortDateString + " " + "00:00", "0", "0", txtInitialPower.Text, "START"})
 
+        'Focus on first input field
+        dtpStartDate.Focus()
+        dtpStartDate.Select()
     End Sub
 
     Private Sub txtInitialPower_TextChanged(sender As Object, e As EventArgs) Handles txtInitialPower.TextChanged
@@ -114,6 +117,9 @@
         'add new row based on form inputs. add the hours for action to cur date/time to get new date/time and 
         dgvStatepoints.Rows.Add(New String() {newDateTime.ToString("MM/dd/yyyy HH:mm"), txtHoursForAction.Text, newHoursFromStart.ToString, txtStatePointPower.Text, txtDescription.Text})
         Call ReCalculateTimes()
+
+        'Set focus back to reoccuring input
+        txtStatePointPower.Focus()
     End Sub
 
     Private Sub bthRefresh_Click(sender As Object, e As EventArgs) Handles bthRefresh.Click
@@ -312,6 +318,17 @@
             MsgBox(ex.Message & "occured in Sub btnLoadData_Click in REChart_Data.vb" & vbNewLine & "Ensure file is valid.", MsgBoxStyle.Critical, "FATALITY")
             Exit Try
         End Try
+    End Sub
+
+    'The following subs are to highlight all text in the reoccuring input fields to allow for easier tabbing.
+    Private Sub txtStatePointPower_GotFocus(sender As Object, e As EventArgs) Handles txtStatePointPower.GotFocus
+        txtStatePointPower.SelectAll()
+    End Sub
+    Private Sub txtHoursForAction_GotFocus(sender As Object, e As EventArgs) Handles txtHoursForAction.GotFocus
+        txtHoursForAction.SelectAll()
+    End Sub
+    Private Sub txtDescription_GotFocus(sender As Object, e As EventArgs) Handles txtDescription.GotFocus
+        txtDescription.SelectAll()
     End Sub
 
     'THE BELOW FUNCTION IS ABANDONED AND PLACED IN THE ReCalculateTimes() SUB
