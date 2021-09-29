@@ -33,25 +33,25 @@ Partial Class REChart_Data
         Me.txtHoursForAction = New System.Windows.Forms.TextBox()
         Me.lblHoursforAction = New System.Windows.Forms.Label()
         Me.dgvStatepoints = New System.Windows.Forms.DataGridView()
-        Me.txtDescription = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.bthRefresh = New System.Windows.Forms.Button()
-        Me.grpAddStatePoints = New System.Windows.Forms.GroupBox()
-        Me.grpInitialConditions = New System.Windows.Forms.GroupBox()
-        Me.btnGenerateLP = New System.Windows.Forms.Button()
-        Me.btnSaveData = New System.Windows.Forms.Button()
-        Me.btnLoadData = New System.Windows.Forms.Button()
-        Me.lblAuthor = New System.Windows.Forms.Label()
-        Me.txtManuverTitle = New System.Windows.Forms.TextBox()
-        Me.lblInitialPower = New System.Windows.Forms.Label()
-        Me.lblTitleOfManuver = New System.Windows.Forms.Label()
         Me.DateTime = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.HoursForAction = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.HoursFromStart = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Power = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Description = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.rbUnit1 = New System.Windows.Forms.RadioButton()
+        Me.txtDescription = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.bthRefresh = New System.Windows.Forms.Button()
+        Me.grpAddStatePoints = New System.Windows.Forms.GroupBox()
+        Me.grpInitialConditions = New System.Windows.Forms.GroupBox()
         Me.rbUnit2 = New System.Windows.Forms.RadioButton()
+        Me.rbUnit1 = New System.Windows.Forms.RadioButton()
+        Me.lblTitleOfManuver = New System.Windows.Forms.Label()
+        Me.txtManuverTitle = New System.Windows.Forms.TextBox()
+        Me.lblInitialPower = New System.Windows.Forms.Label()
+        Me.btnGenerateLP = New System.Windows.Forms.Button()
+        Me.btnSaveData = New System.Windows.Forms.Button()
+        Me.btnLoadData = New System.Windows.Forms.Button()
+        Me.lblAuthor = New System.Windows.Forms.Label()
         CType(Me.dgvStatepoints, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpAddStatePoints.SuspendLayout()
         Me.grpInitialConditions.SuspendLayout()
@@ -166,6 +166,32 @@ Partial Class REChart_Data
         Me.dgvStatepoints.Size = New System.Drawing.Size(772, 434)
         Me.dgvStatepoints.TabIndex = 12
         '
+        'DateTime
+        '
+        Me.DateTime.HeaderText = "Date/Time"
+        Me.DateTime.Name = "DateTime"
+        '
+        'HoursForAction
+        '
+        Me.HoursForAction.HeaderText = "Hours For Action"
+        Me.HoursForAction.Name = "HoursForAction"
+        '
+        'HoursFromStart
+        '
+        Me.HoursFromStart.HeaderText = "Hours From Start"
+        Me.HoursFromStart.Name = "HoursFromStart"
+        '
+        'Power
+        '
+        Me.Power.HeaderText = "Power"
+        Me.Power.Name = "Power"
+        '
+        'Description
+        '
+        Me.Description.HeaderText = "Description"
+        Me.Description.Name = "Description"
+        Me.Description.Width = 325
+        '
         'txtDescription
         '
         Me.txtDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -238,6 +264,58 @@ Partial Class REChart_Data
         Me.grpInitialConditions.TabStop = False
         Me.grpInitialConditions.Text = "Initial Conditions"
         '
+        'rbUnit2
+        '
+        Me.rbUnit2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbUnit2.Location = New System.Drawing.Point(193, 68)
+        Me.rbUnit2.Name = "rbUnit2"
+        Me.rbUnit2.Size = New System.Drawing.Size(53, 17)
+        Me.rbUnit2.TabIndex = 12
+        Me.rbUnit2.Text = "Unit 2"
+        Me.rbUnit2.UseVisualStyleBackColor = True
+        '
+        'rbUnit1
+        '
+        Me.rbUnit1.AutoSize = True
+        Me.rbUnit1.Checked = True
+        Me.rbUnit1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbUnit1.Location = New System.Drawing.Point(132, 68)
+        Me.rbUnit1.Name = "rbUnit1"
+        Me.rbUnit1.Size = New System.Drawing.Size(53, 17)
+        Me.rbUnit1.TabIndex = 11
+        Me.rbUnit1.TabStop = True
+        Me.rbUnit1.Text = "Unit 1"
+        Me.rbUnit1.UseVisualStyleBackColor = True
+        '
+        'lblTitleOfManuver
+        '
+        Me.lblTitleOfManuver.AutoSize = True
+        Me.lblTitleOfManuver.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTitleOfManuver.Location = New System.Drawing.Point(2, 45)
+        Me.lblTitleOfManuver.Name = "lblTitleOfManuver"
+        Me.lblTitleOfManuver.Size = New System.Drawing.Size(75, 13)
+        Me.lblTitleOfManuver.TabIndex = 9
+        Me.lblTitleOfManuver.Text = "Manuver Title:"
+        '
+        'txtManuverTitle
+        '
+        Me.txtManuverTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtManuverTitle.Location = New System.Drawing.Point(77, 42)
+        Me.txtManuverTitle.Name = "txtManuverTitle"
+        Me.txtManuverTitle.Size = New System.Drawing.Size(171, 20)
+        Me.txtManuverTitle.TabIndex = 8
+        Me.txtManuverTitle.Text = "Example: A1/A2 Sequence Exchange"
+        '
+        'lblInitialPower
+        '
+        Me.lblInitialPower.AutoSize = True
+        Me.lblInitialPower.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblInitialPower.Location = New System.Drawing.Point(14, 70)
+        Me.lblInitialPower.Name = "lblInitialPower"
+        Me.lblInitialPower.Size = New System.Drawing.Size(65, 13)
+        Me.lblInitialPower.TabIndex = 6
+        Me.lblInitialPower.Text = "Start Power:"
+        '
         'btnGenerateLP
         '
         Me.btnGenerateLP.FlatAppearance.BorderColor = System.Drawing.Color.Black
@@ -286,84 +364,6 @@ Partial Class REChart_Data
         Me.lblAuthor.Size = New System.Drawing.Size(42, 10)
         Me.lblAuthor.TabIndex = 21
         Me.lblAuthor.Text = "HDP/LTP"
-        '
-        'txtManuverTitle
-        '
-        Me.txtManuverTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtManuverTitle.Location = New System.Drawing.Point(77, 42)
-        Me.txtManuverTitle.Name = "txtManuverTitle"
-        Me.txtManuverTitle.Size = New System.Drawing.Size(171, 20)
-        Me.txtManuverTitle.TabIndex = 8
-        Me.txtManuverTitle.Text = "Example: A1/A2 Sequence Exchange"
-        '
-        'lblInitialPower
-        '
-        Me.lblInitialPower.AutoSize = True
-        Me.lblInitialPower.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblInitialPower.Location = New System.Drawing.Point(14, 70)
-        Me.lblInitialPower.Name = "lblInitialPower"
-        Me.lblInitialPower.Size = New System.Drawing.Size(65, 13)
-        Me.lblInitialPower.TabIndex = 6
-        Me.lblInitialPower.Text = "Start Power:"
-        '
-        'lblTitleOfManuver
-        '
-        Me.lblTitleOfManuver.AutoSize = True
-        Me.lblTitleOfManuver.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTitleOfManuver.Location = New System.Drawing.Point(2, 45)
-        Me.lblTitleOfManuver.Name = "lblTitleOfManuver"
-        Me.lblTitleOfManuver.Size = New System.Drawing.Size(75, 13)
-        Me.lblTitleOfManuver.TabIndex = 9
-        Me.lblTitleOfManuver.Text = "Manuver Title:"
-        '
-        'DateTime
-        '
-        Me.DateTime.HeaderText = "Date/Time"
-        Me.DateTime.Name = "DateTime"
-        '
-        'HoursForAction
-        '
-        Me.HoursForAction.HeaderText = "Hours For Action"
-        Me.HoursForAction.Name = "HoursForAction"
-        '
-        'HoursFromStart
-        '
-        Me.HoursFromStart.HeaderText = "Hours From Start"
-        Me.HoursFromStart.Name = "HoursFromStart"
-        '
-        'Power
-        '
-        Me.Power.HeaderText = "Power"
-        Me.Power.Name = "Power"
-        '
-        'Description
-        '
-        Me.Description.HeaderText = "Description"
-        Me.Description.Name = "Description"
-        Me.Description.Width = 325
-        '
-        'rbUnit1
-        '
-        Me.rbUnit1.AutoSize = True
-        Me.rbUnit1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbUnit1.Location = New System.Drawing.Point(132, 68)
-        Me.rbUnit1.Name = "rbUnit1"
-        Me.rbUnit1.Size = New System.Drawing.Size(53, 17)
-        Me.rbUnit1.TabIndex = 11
-        Me.rbUnit1.TabStop = True
-        Me.rbUnit1.Text = "Unit 1"
-        Me.rbUnit1.UseVisualStyleBackColor = True
-        '
-        'rbUnit2
-        '
-        Me.rbUnit2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbUnit2.Location = New System.Drawing.Point(193, 68)
-        Me.rbUnit2.Name = "rbUnit2"
-        Me.rbUnit2.Size = New System.Drawing.Size(53, 17)
-        Me.rbUnit2.TabIndex = 12
-        Me.rbUnit2.TabStop = True
-        Me.rbUnit2.Text = "Unit 2"
-        Me.rbUnit2.UseVisualStyleBackColor = True
         '
         'REChart_Data
         '

@@ -164,9 +164,12 @@
         file.WriteLine("This is a RE-Chart saved data file. Created on: " + Date.Now.ToString)
         file.WriteLine(" ")
         'initial conditions
-        file.WriteLine("Initial Conditions (Start Date/Time and Power): ")
+        file.WriteLine("Initial Conditions (Start Date/Time, Title, Power, and Unit): ")
         file.WriteLine(dtpStartDate.Value.ToShortDateString + " " + dtpStartTime.Value.ToString("HH:mm"))
+        file.WriteLine(txtManuverTitle.Text)
         file.WriteLine(txtInitialPower.Text)
+        If rbUnit1.Checked = True Then file.WriteLine("Unit 1")
+        If rbUnit2.Checked = True Then file.WriteLine("Unit 2")
         file.WriteLine(" ")
         'data gridview statepoints 
         file.WriteLine("Statepoints (Date/Time, Hours for action, Hours from Start, Power, and Description): ")
@@ -226,7 +229,13 @@
         tempdt = file.ReadLine
         dtpStartDate.Value = Convert.ToDateTime(tempdt)
         dtpStartTime.Value = Convert.ToDateTime(tempdt)
+        txtManuverTitle.Text = file.ReadLine
         txtInitialPower.Text = file.ReadLine
+        If file.ReadLine = "Unit 1" Then
+            rbUnit1.Checked = True
+        Else
+            rbUnit2.Checked = True
+        End If
 
         'skip more garbage
         tempstr = file.ReadLine()
