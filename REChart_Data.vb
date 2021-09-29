@@ -134,7 +134,7 @@
 
         'set up the save file dialoge
         MyFileDialog.Title = "Select a location to save data (DO NOT include extention in filename)"
-        MyFileDialog.InitialDirectory = "C:\"
+        MyFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
         MyFileDialog.Filter = "REChart Files (*.REChart)|*.REChart|All files (*.*)|*.*"
         MyFileDialog.FilterIndex = 1
         MyFileDialog.RestoreDirectory = True
@@ -145,7 +145,7 @@
         End If
 
         'if the file name is still blank, some thing went wrong. throw message box, and exit routine
-        If FileNameString = "" Then
+        If FileNameString = " " Then
             MsgBox("Please select a file to save the data.")
             Exit Sub
         End If
@@ -186,6 +186,8 @@
         'close the file
         file.Close()
 
+        MsgBox("File Saved Successfully!", MsgBoxStyle.Information)
+
     End Sub
 
     Private Sub btnLoadData_Click(sender As Object, e As EventArgs) Handles btnLoadData.Click
@@ -199,7 +201,7 @@
 
         'set up the open file dialoge
         MyFileDialog.Title = "Please select a file to load the data from"
-        MyFileDialog.InitialDirectory = "C:\"
+        MyFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
         MyFileDialog.Filter = "REChart Files (*.REChart)|*.REChart|All files (*.*)|*.*"
         MyFileDialog.FilterIndex = 1
         MyFileDialog.RestoreDirectory = True
@@ -210,7 +212,7 @@
         End If
 
         'if the file name is still blank, some thing went wrong. throw message box, and exit routine
-        If FileNameString = "" Then
+        If FileNameString = " " Then
             MsgBox("Please select a file to load the data from")
             Exit Sub
         End If
@@ -264,8 +266,13 @@
             j = j + 1
         End While
 
+        'close the file object
+        file.Close()
+
         're calculate rows to re-adjust the hours and date/time stamps. 
         Call ReCalculateTimes()
+
+        MsgBox("File Loaded Successfully!", MsgBoxStyle.Information)
 
     End Sub
 End Class

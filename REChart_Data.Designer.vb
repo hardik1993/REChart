@@ -163,7 +163,7 @@ Partial Class REChart_Data
         Me.dgvStatepoints.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgvStatepoints.Location = New System.Drawing.Point(9, 140)
         Me.dgvStatepoints.Name = "dgvStatepoints"
-        Me.dgvStatepoints.Size = New System.Drawing.Size(772, 434)
+        Me.dgvStatepoints.Size = New System.Drawing.Size(772, 410)
         Me.dgvStatepoints.TabIndex = 12
         '
         'DateTime
