@@ -4,11 +4,7 @@ Imports OxyPlot.Series
 Imports OxyPlot.Axes
 Imports OxyPlot.Annotations
 Imports OxyPlot.PdfExporter
-Imports System.Drawing
-Imports System.Drawing.Printing
 Imports System
-Imports System.Drawing.Graphics
-Imports Microsoft.Office.Interop
 Imports System.IO
 
 Public Class REChart_Graph
@@ -31,65 +27,6 @@ Public Class REChart_Graph
     Private Sub ButtonExport_Click(sender As Object, e As EventArgs) Handles BtnExport.Click
         'Sub screencaptures the load profile objeect and pastes it into a word doc, saved as a pdf lol.
 
-        ''Vars for word doc
-        'Dim WdApp As Word.Application
-        'WdApp = CreateObject("Word.Application")
-        'WdApp.Visible = False
-        'Dim wdDoc As Word.Document
-        'Dim wPara As Word.Paragraph
-        'Dim wRng As Word.Range
-        'Dim wSel As Word.Selection
-        'wdDoc = WdApp.Documents.Add()
-        'wdDoc.PageSetup.TopMargin = WdApp.InchesToPoints(0.5)
-        'wdDoc.PageSetup.BottomMargin = WdApp.InchesToPoints(0.5)
-        'wdDoc.PageSetup.LeftMargin = WdApp.InchesToPoints(0.5)
-        'wdDoc.PageSetup.RightMargin = WdApp.InchesToPoints(0.5)
-
-        'wSel = WdApp.Selection
-
-        'wSel.Font.Size = 10
-        'wSel.Font.Name = "r_ansi"
-        'wPara = wdDoc.Content.Paragraphs.Add
-        'wRng = wPara.Range
-        'wRng.ParagraphFormat.LineSpacingRule = Word.WdLineSpacing.wdLineSpaceSingle
-        'wRng.Paragraphs.Style = "No Spacing"
-
-        'wRng.Font.Size = 10
-        'wRng.Font.Name = "r_ansi"
-
-        'wSel.Collapse(Word.WdCollapseDirection.wdCollapseEnd)
-        'wSel.TypeParagraph()
-
-        ''Captures the load profile image and pastes it to the end of the word document
-        'Dim memoryImg As Bitmap
-        '' Dim g As Graphics
-
-        ''Hide the export button so it isn't in the shot.
-        'BtnExport.Visible = False
-
-        ''Make a new bitmap and graphic object
-        'memoryImg = New Bitmap(PlotView1.Width, PlotView1.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb)
-        'PlotView1.DrawToBitmap(memoryImg, PlotView1.DisplayRectangle)
-        'PlotView1
-        '' g = Graphics.FromImage(memoryImg)
-        'Me.Activate()
-
-        ''Screen capture
-        ''g.CopyFromScreen(PlotView1.Location.X, PlotView1.Location.Y, 0, 0, PlotView1.Size, CopyPixelOperation.SourceCopy)
-
-        ''Copy/paste into word doc
-        'memoryImg.RotateFlip(RotateFlipType.Rotate90FlipNone)
-        'Clipboard.Clear()
-        'Clipboard.SetImage(memoryImg)
-
-        'wSel.Paste()
-
-        ''Clear clipboard
-        'Clipboard.Clear()
-
-        ''Make the export button visible again
-        'BtnExport.Visible = True
-
         'create a save file dialoge
         Dim MyFileDialog As SaveFileDialog = New SaveFileDialog()
         Dim FileNameString As String = " "
@@ -97,7 +34,7 @@ Public Class REChart_Graph
         'set up the save file dialoge
         MyFileDialog.Title = "Select a location to save load profile pdf (DO NOT include extention in filename)"
         MyFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
-        MyFileDialog.Filter = "PDF Files (*.PDF)|*.PDF|All files (*.*)|*.*"
+        MyFileDialog.Filter = "PNG Files (*.PNG)|*.PDF|All files (*.*)|*.*"
         MyFileDialog.FilterIndex = 1
         MyFileDialog.RestoreDirectory = True
 
@@ -112,27 +49,15 @@ Public Class REChart_Graph
                 Exit Sub
             End If
 
+            'Export PDF
             Dim fs As FileStream = File.Create(FileNameString)
-            Dim pdfExp = New PdfExporter With {.Width = PlotView1.Width, .Height = PlotView1.Height}
+            'Dim pdfExp = New PdfExporter With {.Width = PlotView1.Width, .Height = PlotView1.Height}
+            'Dim svgExp = New SvgExporter With {.Width = PlotView1.Width, .Height = PlotView1.Height}
+            Dim pngExp = New OxyPlot.WindowsForms.PngExporter With {.Width = PlotView1.Width, .Height = PlotView1.Height, .Background = OxyColors.White}
             Dim modPlot As Model = PlotView1.Model
-            pdfExp.Export(modPlot, fs)
-
-
-            '' wdDoc.SaveAs2(wFile, Word.WdSaveFormat.wdFormatDocument)
-            ''Save word doc as PDF
-            'wdDoc.SaveAs2(FileNameString, Word.WdSaveFormat.wdFormatPDF)
-
-            ''Clean shit up
-            'wdDoc.Close(False)
-            'WdApp.Quit()
-
-            ''Inform user of successes
-            'MsgBox("File Saved Successfully!", MsgBoxStyle.Information)
-
-            ''Garbage collection
-            'wdDoc = Nothing
-            'WdApp = Nothing
-            'wSel = Nothing
+            pngExp.Export(modPlot, fs)
+            'svgExp.Export(modPlot, fs)
+            'pdfExp.Export(modPlot, fs)
 
             'Open the PDF
             System.Diagnostics.Process.Start(FileNameString & ".PDF")
