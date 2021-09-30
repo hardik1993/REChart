@@ -127,11 +127,21 @@ Public Class REChart_Graph
         ReDim AnnotationTextArray(REChart_Data.DescArray.Length - 2)
 
         'first step is to form array of annotation descriptions. This will be the date/time range for 
-        ' action appended with the actual description of the step from desc array. 
+        ' action appended with the actual description of the step from desc array. Also some logic 
+        ' in there to Not include the mm/dd twice if the date has not changed. 
+        Dim tempstr As String
         For i As Integer = 1 To AnnotationTextArray.Length
-            AnnotationTextArray(i - 1) = Center2Lines(REChart_Data.DescArray(i),
-                                                      REChart_Data.DateTimeArray(i - 1).ToString("MM/dd/yy HH:mm") + " - " +
-                                                      REChart_Data.DateTimeArray(i).ToString("MM/dd/yy HH:mm"))
+            'if the date has not changed then scrap the second MM/dd
+            If REChart_Data.DateTimeArray(i - 1).ToString("MM/dd") = REChart_Data.DateTimeArray(i).ToString("MM/dd") Then
+                tempstr = REChart_Data.DateTimeArray(i - 1).ToString("MM/dd HH:mm") + " - " +
+                    REChart_Data.DateTimeArray(i).ToString("HH:mm")
+                'else keep the second MM/dd
+            Else
+                tempstr = REChart_Data.DateTimeArray(i - 1).ToString("MM/dd HH:mm") + " - " +
+                    REChart_Data.DateTimeArray(i).ToString("MM/dd HH:mm")
+            End If
+
+            AnnotationTextArray(i - 1) = Center2Lines(REChart_Data.DescArray(i), tempstr)
         Next
 
         Dim CurrentPoint As OxyPlot.DataPoint
