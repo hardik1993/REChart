@@ -85,9 +85,16 @@ Public Class REChart_Graph
 
             'Change the A column width so it doesn't show up at ###################################### gross
             ws.Range("A1").ColumnWidth = 15
+            ws.Range("A1").WrapText = False
+
+
+            'add headers to the columns
+            ws.Cells(1, 1).value = MyModel.Title
+            ws.Cells(2, 1).value = "Date/Time"
+            ws.Cells(2, 2).value = "Power(%)"
 
             'Loop through all valid entries in hourly arrays and write to appropriate excel cells
-            For x = 0 To HourlyDateTime.Length - 1
+            For x = 2 To HourlyDateTime.Length - 1
                 ws.Cells(x + 1, 1).Value = HourlyDateTime(x)
                 ws.Cells(x + 1, 2).Value = HourlyPowerArray(x)
             Next
