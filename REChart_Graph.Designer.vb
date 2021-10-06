@@ -26,15 +26,17 @@ Partial Class REChart_Graph
         Me.BtnExport = New System.Windows.Forms.Button()
         Me.PlotView1 = New OxyPlot.WindowsForms.PlotView()
         Me.lblAuthor = New System.Windows.Forms.Label()
+        Me.btnFontSizeUp = New System.Windows.Forms.Button()
+        Me.btnFontSizeDown = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'BtnExport
         '
-        Me.BtnExport.Location = New System.Drawing.Point(3, 3)
+        Me.BtnExport.Location = New System.Drawing.Point(1059, 4)
         Me.BtnExport.Name = "BtnExport"
-        Me.BtnExport.Size = New System.Drawing.Size(138, 28)
+        Me.BtnExport.Size = New System.Drawing.Size(56, 28)
         Me.BtnExport.TabIndex = 2
-        Me.BtnExport.Text = "Export (Needs Work)"
+        Me.BtnExport.Text = "Export"
         Me.BtnExport.UseVisualStyleBackColor = True
         '
         'PlotView1
@@ -53,17 +55,37 @@ Partial Class REChart_Graph
         '
         Me.lblAuthor.AutoSize = True
         Me.lblAuthor.Font = New System.Drawing.Font("Tahoma", 6.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAuthor.Location = New System.Drawing.Point(1, 792)
+        Me.lblAuthor.Location = New System.Drawing.Point(1, 786)
         Me.lblAuthor.Name = "lblAuthor"
         Me.lblAuthor.Size = New System.Drawing.Size(42, 10)
         Me.lblAuthor.TabIndex = 22
         Me.lblAuthor.Text = "HDP/LTP"
         '
+        'btnFontSizeUp
+        '
+        Me.btnFontSizeUp.Location = New System.Drawing.Point(1059, 75)
+        Me.btnFontSizeUp.Name = "btnFontSizeUp"
+        Me.btnFontSizeUp.Size = New System.Drawing.Size(56, 45)
+        Me.btnFontSizeUp.TabIndex = 23
+        Me.btnFontSizeUp.Text = "Font Size +"
+        Me.btnFontSizeUp.UseVisualStyleBackColor = True
+        '
+        'btnFontSizeDown
+        '
+        Me.btnFontSizeDown.Location = New System.Drawing.Point(1059, 126)
+        Me.btnFontSizeDown.Name = "btnFontSizeDown"
+        Me.btnFontSizeDown.Size = New System.Drawing.Size(56, 45)
+        Me.btnFontSizeDown.TabIndex = 24
+        Me.btnFontSizeDown.Text = "Font Size -"
+        Me.btnFontSizeDown.UseVisualStyleBackColor = True
+        '
         'REChart_Graph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1056, 806)
+        Me.ClientSize = New System.Drawing.Size(1119, 796)
+        Me.Controls.Add(Me.btnFontSizeDown)
+        Me.Controls.Add(Me.btnFontSizeUp)
         Me.Controls.Add(Me.BtnExport)
         Me.Controls.Add(Me.lblAuthor)
         Me.Controls.Add(Me.PlotView1)
@@ -77,4 +99,6 @@ Partial Class REChart_Graph
     Friend WithEvents BtnExport As Button
     Friend WithEvents PlotView1 As OxyPlot.WindowsForms.PlotView
     Friend WithEvents lblAuthor As Label
+    Friend WithEvents btnFontSizeUp As Button
+    Friend WithEvents btnFontSizeDown As Button
 End Class

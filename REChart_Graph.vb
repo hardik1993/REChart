@@ -20,12 +20,16 @@ Public Class REChart_Graph
     Public AnnotationsList As New List(Of OxyPlot.Annotations.TextAnnotation)
     Public AnnotationTextArray As String()
 
+    'global vars for the hourly data
+    Dim HourlyDateTime As Date()
+    Dim HourlyPowerArray As Double()
+
     Private Sub REChart_Graph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Call GenerateLoadProfile()
     End Sub
 
     Private Sub ButtonExport_Click(sender As Object, e As EventArgs) Handles BtnExport.Click
-        'Sub screencaptures the load profile objeect and pastes it into a word doc, saved as a pdf lol.
+        'Exports the graph as a PNG file. 
 
         'create a save file dialoge
         Dim MyFileDialog As SaveFileDialog = New SaveFileDialog()
@@ -34,7 +38,7 @@ Public Class REChart_Graph
         'set up the save file dialoge
         MyFileDialog.Title = "Select a location to save load profile pdf (DO NOT include extention in filename)"
         MyFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
-        MyFileDialog.Filter = "PNG Files (*.PNG)|*.PDF|All files (*.*)|*.*"
+        MyFileDialog.Filter = "PNG Files (*.PNG)|*.PNG|All files (*.*)|*.*"
         MyFileDialog.FilterIndex = 1
         MyFileDialog.RestoreDirectory = True
 
@@ -49,18 +53,24 @@ Public Class REChart_Graph
                 Exit Sub
             End If
 
-            'Export PDF
+            'Export
             Dim fs As FileStream = File.Create(FileNameString)
             'Dim pdfExp = New PdfExporter With {.Width = PlotView1.Width, .Height = PlotView1.Height}
             'Dim svgExp = New SvgExporter With {.Width = PlotView1.Width, .Height = PlotView1.Height}
             Dim pngExp = New OxyPlot.WindowsForms.PngExporter With {.Width = PlotView1.Width, .Height = PlotView1.Height, .Background = OxyColors.White}
             Dim modPlot As Model = PlotView1.Model
             pngExp.Export(modPlot, fs)
-            'svgExp.Export(modPlot, fs)
-            'pdfExp.Export(modPlot, fs)
+            'close the file stream, and dispose the object
+            fs.Close()
+            fs.Dispose()
 
-            'Open the PDF
-            System.Diagnostics.Process.Start(FileNameString & ".PDF")
+            'calculate hourly daya and place in HourlyDateTime, HourlyPowerArray arrays
+            Call CalculateHourlyData(REChart_Data.DateTimeArray, REChart_Data.PowerArray, HourlyDateTime, HourlyPowerArray)
+
+            'do some stuff to export to excel somehow.......
+
+            System.Diagnostics.Process.Start(FileNameString)
+
             Exit Try
         Catch ex As Exception
             MsgBox(ex.Message & " occured in Sub ButtonExport_Click in REChart_Graph.vb " & vbNewLine & "Ensure directory path is valid and admin rights are not required.", MsgBoxStyle.Critical, "FATALITY")
@@ -141,7 +151,35 @@ Public Class REChart_Graph
                     REChart_Data.DateTimeArray(i).ToString("MM/dd HH:mm")
             End If
 
-            AnnotationTextArray(i - 1) = Center2Lines(REChart_Data.DescArray(i), tempstr)
+            'Handle condition If there is an empty desc block and the previous block was NOT empty
+            ' then need from/to date time from begening And end of consecutive empty blocks. 
+            ' This Is handling the condition when a combined desc block Is used. Or REChart_Data.DescArray(i) = ""
+            If i < AnnotationTextArray.Length Then ' this covers the boundry condition of i + 1 
+                If REChart_Data.DescArray(i + 1) = "" And REChart_Data.DescArray(i - 1) <> "" And REChart_Data.DescArray(i) <> "" Then
+                    ' this is the "From" Date/Time for this annotation
+                    Dim FromDateTime As String = REChart_Data.DateTimeArray(i - 1).ToString("MM/dd HH:mm")
+                    'now need to find "TO" date time for this annotation. This is found by finding the last consecutive enpty desc block. 
+                    Dim counter As Integer = i + 1
+                    While REChart_Data.DescArray(counter) = ""
+                        counter = counter + 1
+                    End While
+                    'found the TO date, set a var to it.
+                    Dim ToDateTime As String = REChart_Data.DateTimeArray(counter - 1).ToString("MM/dd HH:mm")
+                    AnnotationTextArray(i - 1) = Center2Lines(REChart_Data.DescArray(i), FromDateTime + " - " + ToDateTime)
+
+                    'the condition where empty place holder is needed. 
+                ElseIf REChart_Data.DescArray(i) = "" Then
+                    AnnotationTextArray(i - 1) = ""
+
+                    ' the normal condition
+                Else
+                    AnnotationTextArray(i - 1) = Center2Lines(REChart_Data.DescArray(i), tempstr)
+                End If
+
+            ElseIf i = AnnotationTextArray.Length Then ' handles the last desc block 
+                AnnotationTextArray(i - 1) = Center2Lines(REChart_Data.DescArray(i), tempstr)
+            End If
+
         Next
 
         Dim CurrentPoint As OxyPlot.DataPoint
@@ -153,7 +191,8 @@ Public Class REChart_Graph
             AnnotationsList.Add(New OxyPlot.Annotations.TextAnnotation)
             AnnotationsList(i).Text = AnnotationTextArray(i)
 
-            'set font to monospaced font. 
+            'set font to monospaced font and default size 12
+            AnnotationsList(i).FontSize = 12
             AnnotationsList(i).Font = "Consolas"
 
             'set previous point and current point, calculate the mid point, and set the location of the annotation as the midpoint.
@@ -196,6 +235,13 @@ Public Class REChart_Graph
                 AnnotationsList(i).Background = OxyColors.RoyalBlue
                 AnnotationsList(i).TextColor = OxyColors.White
                 AnnotationsList(i).FontWeight = FontWeights.Bold
+                'if annotation text is empty or "" then hode the annotation
+                If AnnotationsList(i).Text = "" Or AnnotationsList(i).Text = " " Then
+                    AnnotationsList(i).Layer = AnnotationLayer.BelowSeries
+                    AnnotationsList(i).Layer = AnnotationLayer.BelowAxes
+                    AnnotationsList(i).Background = OxyColors.White
+                    AnnotationsList(i).Stroke = OxyColors.White
+                End If
             Next
         End If
 
@@ -210,6 +256,13 @@ Public Class REChart_Graph
                 AnnotationsList(i).Background = OxyColors.Green
                 AnnotationsList(i).TextColor = OxyColors.White
                 AnnotationsList(i).FontWeight = FontWeights.Bold
+                'if annotation text is empty or "" then hode the annotation
+                If AnnotationsList(i).Text = "" Or AnnotationsList(i).Text = " " Then
+                    AnnotationsList(i).Layer = AnnotationLayer.BelowSeries
+                    AnnotationsList(i).Layer = AnnotationLayer.BelowAxes
+                    AnnotationsList(i).Background = OxyColors.White
+                    AnnotationsList(i).Stroke = OxyColors.White
+                End If
             Next
         End If
 
@@ -230,13 +283,28 @@ Public Class REChart_Graph
         ' Global list Of text annotations to modify. 
         Dim MyIndex As Integer = MyAnnotation.Tag
 
-        'select the annotation. 
-        AnnotationsList(MyIndex).Select()
+        'if left click, then go into drag/drop functionality 
+        If e.ChangedButton = OxyMouseButton.Left Then
+            'select the annotation. 
+            AnnotationsList(MyIndex).Select()
 
-        'update the current position variable and flag the event as complete. 
-        lastPoint = AnnotationsList(MyIndex).InverseTransform(e.Position)
-        MyModel.InvalidatePlot(False)
-        e.Handled = True
+            'update the current position variable and flag the event as complete. 
+            lastPoint = AnnotationsList(MyIndex).InverseTransform(e.Position)
+            MyModel.InvalidatePlot(False)
+            e.Handled = True
+
+        ElseIf e.ChangedButton = OxyMouseButton.right Then
+
+            'if not already selected, then select annotation.
+            If AnnotationsList(MyIndex).IsSelected = False Then
+                AnnotationsList(MyIndex).Select()
+            Else
+                AnnotationsList(MyIndex).Unselect()
+            End If
+
+            MyModel.InvalidatePlot(True)
+            e.Handled = True
+        End If
 
     End Sub
 
@@ -368,6 +436,182 @@ Public Class REChart_Graph
 
         Return FinalString
 
+    End Function
+
+    Private Sub btnFontSizeUp_Click(sender As Object, e As EventArgs) Handles btnFontSizeUp.Click
+        ' increases the font size of all text annotations by 1
+
+        'loop through the array of Text annotations, and increase the font size by 1
+        For i As Integer = 0 To AnnotationsList.Count - 1
+            AnnotationsList(i).FontSize = AnnotationsList(i).FontSize + 1
+        Next
+
+        MyModel.InvalidatePlot(True)
+
+    End Sub
+
+    Private Sub btnFontSizeDown_Click(sender As Object, e As EventArgs) Handles btnFontSizeDown.Click
+        ' decreases the font size of all text annotations by 1
+
+        'loop through the array of Text annotations, and decrease the font size by 1
+        For i As Integer = 0 To AnnotationsList.Count - 1
+            AnnotationsList(i).FontSize = AnnotationsList(i).FontSize - 1
+        Next
+
+        MyModel.InvalidatePlot(True)
+
+    End Sub
+
+    Private Sub CalculateHourlyData(ByVal DTArray As Date(), ByVal PowArray As Double(), ByRef HourlyTime As Date(), ByRef HourlyPower As Double())
+        'This sub will accept an array of date times and power levels as inputs, and will return byref, 
+        ' an hourly array Of Date times And power levels, interpolated as nessicary. This is primairly for 
+        ' providing the horuly power data for marketing And work week management. 
+
+        ' first step is to confirm that DTArray and PowArray are the same size. 
+        If DTArray.Length <> PowArray.Length Then
+            MsgBox("Error in Sub CalculateHourlyData, the DTarray, and PowerArray are not the same size", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        'check if the arrays are of length 1 if so then exit, need more data. 
+        If DTArray.Length = 1 Then
+            MsgBox("Error in Sub CalculateHourlyData, Only one statepoint entered. Please enter more data.", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        'next step is round up the first date/time to the nearesr hour. And Round down the last Date/time to the nearest hour
+        Dim StartingDateTime As Date
+        Dim EndingDateTime As Date
+
+        'round up the first date/time
+        If DTArray(0).Minute <> 0 Then
+            StartingDateTime = DTArray(0)
+            StartingDateTime = DateTime.Parse(DTArray(0).ToString("MM/dd/yyyy HH:00"))
+            StartingDateTime = StartingDateTime.AddHours(1)
+        Else
+            StartingDateTime = DTArray(0)
+        End If
+
+        'round down the last date/time
+        If DTArray(DTArray.Length - 1).Minute <> 0 Then
+            EndingDateTime = DTArray(DTArray.Length - 1)
+            EndingDateTime = DateTime.Parse(DTArray(DTArray.Length - 1)).ToString("MM/dd/yyyy HH:00")
+        Else
+            EndingDateTime = DTArray(DTArray.Length - 1)
+        End If
+
+        'calculate the difference between starting and ending date/time to figure out how many elements are needed in the hourly data arrays. 
+        Dim diff As Long = DateAndTime.DateDiff(DateInterval.Hour, StartingDateTime, EndingDateTime)
+
+        'MsgBox(StartingDateTime.ToString + " " + EndingDateTime.ToString + " " + diff.ToString)
+
+        're dim the hourly arrays to appriorate dimension, based on the delta in hours between starting and ending time
+        ReDim HourlyTime(diff - 1)
+        ReDim HourlyPower(diff - 1)
+
+        'Loop through and populate the hourly data arrays. 
+        Dim CurrentDateTime As Date = StartingDateTime
+        Dim i As Integer = 0
+        Dim j As Integer = 0
+        While CurrentDateTime < EndingDateTime
+            HourlyTime(i) = CurrentDateTime ' fill out the hourly date/time array.
+
+            'need to interpolate here to fill out hourlypower(i)... this is going to get real gross. 
+            j = 0
+            'need the upper and lower values for the supplied date/time in the overall DTarray
+            While CurrentDateTime >= DTArray(j)
+                j = j + 1
+            End While
+
+            'Now that i have the lower and upper bounds, call the interpolate routine 
+            ' to get the in-between power level. 
+            HourlyPower(i) = Interpolate(DTArray(j - 1).ToOADate, PowArray(j - 1), DTArray(j).ToOADate, PowArray(j), CurrentDateTime.ToOADate)
+            'round to nearest 2 decimals.
+            HourlyPower(i) = Math.Round(HourlyPower(i), 2)
+
+            'MsgBox(HourlyTime(i).ToString + " , " + HourlyPower(i).ToString)
+
+            i = i + 1 'increment the counter 
+            CurrentDateTime = CurrentDateTime.AddHours(1) ' add 1 hour to current date time. 
+
+        End While
+
+    End Sub
+
+    Private Function Interpolate(ByVal dblIndex1 As Double,
+  ByVal dblValue1 As Double, ByVal dblIndex2 As Double,
+  ByVal dblValue2 As Double, ByVal dblFindIndex As Double,
+  Optional boolExtrapolate As Boolean = True) As Double
+        '********************************************************
+        'This function will return the linear interpolated value for dblFindIndex
+        '
+        '  *------------+-----*
+        '  a               c      b
+        '  1               3     5
+        '  10             x      50
+        '
+        ' To find x at c the correct syntax would be:
+        ' x = Interpolate(1,10,5,50,3)
+        ' and the answer would be 30
+        '********************************************************
+        ' Passing a value of true for boolExtrapolate will switch on
+        ' extropolation if find index falls outside the bounds of index1 
+        ' and index2.
+        '********************************************************
+
+        'Trap Errors
+        On Error GoTo Interpolate_Error
+
+        Dim dblUpperLimitIndex As Double
+        Dim dblUpperLimitValue As Double
+        Dim dblLowerLimitIndex As Double
+        Dim dblLowerLimitValue As Double
+
+        'Main Function
+        If Not boolExtrapolate Then
+            'We are not extrapolating so cap the returned values
+
+            If dblIndex2 > dblIndex1 Then
+                dblLowerLimitIndex = dblIndex1
+                dblUpperLimitIndex = dblIndex2
+                dblLowerLimitValue = dblValue1
+                dblUpperLimitValue = dblValue2
+            Else
+                dblLowerLimitIndex = dblIndex2
+                dblUpperLimitIndex = dblIndex1
+                dblLowerLimitValue = dblValue2
+                dblUpperLimitValue = dblValue1
+            End If
+
+            If dblFindIndex <= dblLowerLimitIndex Then
+                'If FindIndex is less than or equal to index1, 
+                'return value will allways be Value1
+                Interpolate = dblLowerLimitValue
+                GoTo Interpolate_Exit
+            ElseIf dblFindIndex >= dblUpperLimitIndex Then
+                'If FindIndex is greater than or equal to index2, 
+                'return value will allways be Value2
+                Interpolate = dblUpperLimitValue
+                GoTo Interpolate_Exit
+            End If
+
+        End If
+
+        'Perform the interpolation
+        Interpolate = dblValue1 + (dblValue2 - dblValue1) *
+         (dblFindIndex - dblIndex1) / (dblIndex2 - dblIndex1)
+
+        'Exit
+Interpolate_Exit:
+        Exit Function
+
+        'Error Handling
+Interpolate_Error:
+        Dim Error_Location As String
+        Error_Location = "Interpolate"
+        MsgBox(Err.Description, vbExclamation, Error_Location & ":" & Err.Number)
+        Interpolate = 0
+        GoTo Interpolate_Exit
     End Function
 
 End Class
