@@ -44,13 +44,13 @@ Partial Class REChart_Data
         Me.bthRefresh = New System.Windows.Forms.Button()
         Me.grpAddStatePoints = New System.Windows.Forms.GroupBox()
         Me.grpInitialConditions = New System.Windows.Forms.GroupBox()
+        Me.rbUnit2 = New System.Windows.Forms.RadioButton()
         Me.txtCycle = New System.Windows.Forms.TextBox()
         Me.rbUnit1 = New System.Windows.Forms.RadioButton()
         Me.lblTitleOfManuver = New System.Windows.Forms.Label()
         Me.txtManuverTitle = New System.Windows.Forms.TextBox()
         Me.lblInitialPower = New System.Windows.Forms.Label()
         Me.lblCycle = New System.Windows.Forms.Label()
-        Me.rbUnit2 = New System.Windows.Forms.RadioButton()
         Me.btnGenerateLP = New System.Windows.Forms.Button()
         Me.btnSaveData = New System.Windows.Forms.Button()
         Me.btnLoadData = New System.Windows.Forms.Button()
@@ -275,6 +275,17 @@ Partial Class REChart_Data
         Me.grpInitialConditions.TabStop = False
         Me.grpInitialConditions.Text = "Initial Conditions"
         '
+        'rbUnit2
+        '
+        Me.rbUnit2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbUnit2.Location = New System.Drawing.Point(216, 67)
+        Me.rbUnit2.Name = "rbUnit2"
+        Me.rbUnit2.Size = New System.Drawing.Size(45, 19)
+        Me.rbUnit2.TabIndex = 7
+        Me.rbUnit2.TabStop = True
+        Me.rbUnit2.Text = "U2"
+        Me.rbUnit2.UseVisualStyleBackColor = True
+        '
         'txtCycle
         '
         Me.txtCycle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -336,17 +347,6 @@ Partial Class REChart_Data
         Me.lblCycle.Size = New System.Drawing.Size(36, 13)
         Me.lblCycle.TabIndex = 94
         Me.lblCycle.Text = "Cycle:"
-        '
-        'rbUnit2
-        '
-        Me.rbUnit2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbUnit2.Location = New System.Drawing.Point(216, 67)
-        Me.rbUnit2.Name = "rbUnit2"
-        Me.rbUnit2.Size = New System.Drawing.Size(45, 19)
-        Me.rbUnit2.TabIndex = 7
-        Me.rbUnit2.TabStop = True
-        Me.rbUnit2.Text = "U2"
-        Me.rbUnit2.UseVisualStyleBackColor = True
         '
         'btnGenerateLP
         '
