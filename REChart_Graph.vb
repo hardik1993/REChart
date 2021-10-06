@@ -6,6 +6,7 @@ Imports OxyPlot.Annotations
 Imports OxyPlot.PdfExporter
 Imports System
 Imports System.IO
+Imports Excel = Microsoft.Office.Interop.Excel
 
 Public Class REChart_Graph
 
@@ -58,7 +59,7 @@ Public Class REChart_Graph
             'Dim pdfExp = New PdfExporter With {.Width = PlotView1.Width, .Height = PlotView1.Height}
             'Dim svgExp = New SvgExporter With {.Width = PlotView1.Width, .Height = PlotView1.Height}
             Dim pngExp = New OxyPlot.WindowsForms.PngExporter With {.Width = PlotView1.Width, .Height = PlotView1.Height, .Background = OxyColors.White}
-            Dim modPlot As Model = PlotView1.Model
+            Dim modPlot As OxyPlot.Model = PlotView1.Model
             pngExp.Export(modPlot, fs)
             'close the file stream, and dispose the object
             fs.Close()
@@ -68,8 +69,45 @@ Public Class REChart_Graph
             Call CalculateHourlyData(REChart_Data.DateTimeArray, REChart_Data.PowerArray, HourlyDateTime, HourlyPowerArray)
 
             'do some stuff to export to excel somehow.......
+            'Create new excel application
+            Dim ex As New Excel.Application
+            ex = CreateObject("Excel.Application")
+            'Dont make it visible, we dont need to see it until later
+            ex.Visible = False
 
+            'Create new workbook and add it to the excel app
+            Dim wb As Excel.Workbook
+            wb = ex.Workbooks.Add
+
+            'Create a new worksheet and add it to the workbook
+            Dim ws As New Excel.Worksheet
+            ws = wb.Worksheets(1)
+
+            'Change the A column width so it doesn't show up at ###################################### gross
+            ws.Range("A1").ColumnWidth = 15
+
+            'Loop through all valid entries in hourly arrays and write to appropriate excel cells
+            For x = 0 To HourlyDateTime.Length - 1
+                ws.Cells(x + 1, 1).Value = HourlyDateTime(x)
+                ws.Cells(x + 1, 2).Value = HourlyPowerArray(x)
+            Next
+
+            'Parse a new filename for the .xlsx based on the filename for the .png
+            Dim wbFileName As String
+            wbFileName = Strings.Left(FileNameString, FileNameString.Length - 4) & ".xlsx"
+
+            'Save the workbook
+            wb.SaveAs(wbFileName)
+
+            'Garbage collection
+            ws = Nothing
+            wb = Nothing
+            ex.Quit()
+            ex = Nothing
+
+            'Open .png and .xlsx for user to view
             System.Diagnostics.Process.Start(FileNameString)
+            System.Diagnostics.Process.Start(wbFileName)
 
             Exit Try
         Catch ex As Exception
