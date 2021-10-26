@@ -28,13 +28,16 @@ Partial Class REChart_Graph
         Me.lblAuthor = New System.Windows.Forms.Label()
         Me.btnFontSizeUp = New System.Windows.Forms.Button()
         Me.btnFontSizeDown = New System.Windows.Forms.Button()
+        Me.btnOverlay = New System.Windows.Forms.Button()
+        Me.btnHideLabels = New System.Windows.Forms.Button()
+        Me.btnShowLabels = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'BtnExport
         '
-        Me.BtnExport.Location = New System.Drawing.Point(1059, 4)
+        Me.BtnExport.Location = New System.Drawing.Point(1056, 4)
         Me.BtnExport.Name = "BtnExport"
-        Me.BtnExport.Size = New System.Drawing.Size(56, 28)
+        Me.BtnExport.Size = New System.Drawing.Size(63, 28)
         Me.BtnExport.TabIndex = 2
         Me.BtnExport.Text = "Export"
         Me.BtnExport.UseVisualStyleBackColor = True
@@ -63,27 +66,57 @@ Partial Class REChart_Graph
         '
         'btnFontSizeUp
         '
-        Me.btnFontSizeUp.Location = New System.Drawing.Point(1059, 75)
+        Me.btnFontSizeUp.Location = New System.Drawing.Point(1056, 95)
         Me.btnFontSizeUp.Name = "btnFontSizeUp"
-        Me.btnFontSizeUp.Size = New System.Drawing.Size(56, 45)
+        Me.btnFontSizeUp.Size = New System.Drawing.Size(63, 45)
         Me.btnFontSizeUp.TabIndex = 23
         Me.btnFontSizeUp.Text = "Font Size +"
         Me.btnFontSizeUp.UseVisualStyleBackColor = True
         '
         'btnFontSizeDown
         '
-        Me.btnFontSizeDown.Location = New System.Drawing.Point(1059, 126)
+        Me.btnFontSizeDown.Location = New System.Drawing.Point(1056, 144)
         Me.btnFontSizeDown.Name = "btnFontSizeDown"
-        Me.btnFontSizeDown.Size = New System.Drawing.Size(56, 45)
+        Me.btnFontSizeDown.Size = New System.Drawing.Size(63, 45)
         Me.btnFontSizeDown.TabIndex = 24
         Me.btnFontSizeDown.Text = "Font Size -"
         Me.btnFontSizeDown.UseVisualStyleBackColor = True
+        '
+        'btnOverlay
+        '
+        Me.btnOverlay.Location = New System.Drawing.Point(1056, 38)
+        Me.btnOverlay.Name = "btnOverlay"
+        Me.btnOverlay.Size = New System.Drawing.Size(63, 28)
+        Me.btnOverlay.TabIndex = 25
+        Me.btnOverlay.Text = "Overlay"
+        Me.btnOverlay.UseVisualStyleBackColor = True
+        '
+        'btnHideLabels
+        '
+        Me.btnHideLabels.Location = New System.Drawing.Point(1056, 216)
+        Me.btnHideLabels.Name = "btnHideLabels"
+        Me.btnHideLabels.Size = New System.Drawing.Size(63, 45)
+        Me.btnHideLabels.TabIndex = 26
+        Me.btnHideLabels.Text = "Hide Labels"
+        Me.btnHideLabels.UseVisualStyleBackColor = True
+        '
+        'btnShowLabels
+        '
+        Me.btnShowLabels.Location = New System.Drawing.Point(1056, 267)
+        Me.btnShowLabels.Name = "btnShowLabels"
+        Me.btnShowLabels.Size = New System.Drawing.Size(63, 45)
+        Me.btnShowLabels.TabIndex = 27
+        Me.btnShowLabels.Text = "Show Labels"
+        Me.btnShowLabels.UseVisualStyleBackColor = True
         '
         'REChart_Graph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1119, 796)
+        Me.ClientSize = New System.Drawing.Size(1121, 796)
+        Me.Controls.Add(Me.btnShowLabels)
+        Me.Controls.Add(Me.btnHideLabels)
+        Me.Controls.Add(Me.btnOverlay)
         Me.Controls.Add(Me.btnFontSizeDown)
         Me.Controls.Add(Me.btnFontSizeUp)
         Me.Controls.Add(Me.BtnExport)
@@ -101,4 +134,7 @@ Partial Class REChart_Graph
     Friend WithEvents lblAuthor As Label
     Friend WithEvents btnFontSizeUp As Button
     Friend WithEvents btnFontSizeDown As Button
+    Friend WithEvents btnOverlay As Button
+    Friend WithEvents btnHideLabels As Button
+    Friend WithEvents btnShowLabels As Button
 End Class

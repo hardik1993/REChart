@@ -14,9 +14,11 @@ Public Class REChart_Graph
     Public lastPoint As OxyPlot.DataPoint
     Public thisPoint As OxyPlot.DataPoint
     Public newPoint As OxyPlot.DataPoint
+    Public LabelsHidden As Boolean
 
     'global objects for the Plotview, Plot Model, and data series
     Public MySeries As New LineSeries
+    Public MyActualPowerSeries As New LineSeries
     Public MyModel As New PlotModel
     Public AnnotationsList As New List(Of OxyPlot.Annotations.TextAnnotation)
     Public AnnotationTextArray As String()
@@ -25,12 +27,34 @@ Public Class REChart_Graph
     Dim HourlyDateTime As Date()
     Dim HourlyPowerArray As Double()
 
+    'PI Object global vars
+    Dim PIServerName As String = "DL2550T"
+    Dim MyPISDK As PISDK.PISDK
+    Dim MyApplicationObject As PISDKDlg.ApplicationObject
+    Dim MyServer As PISDK.Server
+    Dim MyPoints As PISDK.PIPoints
+    Dim MyPoint As PISDK.PIPoint
+    Dim MyValues As PISDK.PIValues
+    Dim MyTimeStampArray As Object()
+
     Private Sub REChart_Graph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Call GenerateLoadProfile()
     End Sub
 
     Private Sub ButtonExport_Click(sender As Object, e As EventArgs) Handles BtnExport.Click
         'Exports the graph as a PNG file. 
+
+        ' if labels were hidden, then the background color needs to be tweaked to ensure white boxes dont appear on the PNG file.
+        If LabelsHidden = True Then
+            ' Hide all of the annotation labels by changiung the color and background to match the background grey/white color. 
+            For i = 0 To AnnotationsList.Count - 1
+                AnnotationsList(i).Background = OxyColor.FromRgb(255, 255, 255)
+                AnnotationsList(i).Stroke = OxyColor.FromRgb(255, 255, 255)
+                AnnotationsList(i).TextColor = OxyColor.FromRgb(255, 255, 255)
+                AnnotationsList(i).Layer = AnnotationLayer.BelowAxes
+            Next
+            MyModel.InvalidatePlot(True)
+        End If
 
         'create a save file dialoge
         Dim MyFileDialog As SaveFileDialog = New SaveFileDialog()
@@ -259,7 +283,7 @@ Public Class REChart_Graph
         Next
 
         'loop through array, and add points to data series
-        MySeries.MarkerType = MarkerType.Circle
+        MySeries.MarkerType = MarkerType.Square
         For i = 0 To REChart_Data.PowerArray.Length - 1
             MySeries.Points.Add(New OxyPlot.DataPoint(DateTimeAxis.ToDouble(REChart_Data.DateTimeArray(i)), REChart_Data.PowerArray(i)))
         Next
@@ -273,7 +297,7 @@ Public Class REChart_Graph
         If (REChart_Data.rbUnit1.Checked = True) Then
             MySeries.Color = OxyColors.RoyalBlue
             MySeries.StrokeThickness = 4
-            MySeries.MarkerSize = 5
+            MySeries.MarkerSize = 4
             MyModel.TitleColor = OxyColors.RoyalBlue
             MyModel.Title = Center2Lines("Unit 1 Cycle " + REChart_Data.txtCycle.Text, strTitle)
             For i As Integer = 0 To AnnotationsList.Count - 1
@@ -310,6 +334,9 @@ Public Class REChart_Graph
                 End If
             Next
         End If
+
+        'set eh flag to labels not hidden
+        LabelsHidden = False
 
         'add series to the data model, and bind the model to the plotview. 
         MyModel.Series.Add(MySeries)
@@ -659,4 +686,130 @@ Interpolate_Error:
         GoTo Interpolate_Exit
     End Function
 
+    Private Sub btnOverlay_Click(sender As Object, e As EventArgs) Handles btnOverlay.Click
+        ' This Sub will take the ploted load profile, and retrieve minutelly actual power data from PI server. 
+        Try
+
+            'check to make sure the time/dates are in the past, to get historical data.
+            If REChart_Data.DateTimeArray(REChart_Data.DateTimeArray.Length - 1) > Now Then
+                MsgBox("I can't PREDICT the future dawg! The times in the Load Profile are in the future. ")
+                Exit Sub
+            End If
+
+            ' Change the Button to indicate data is being retrieved. 
+            btnOverlay.Text = "(Working)"
+            btnOverlay.Refresh()
+
+            'generate array of minutes that spans from the begening to end of the datetime array. 
+            Dim NumberOfMinutes As Integer
+            Dim diffTimeSpan As TimeSpan
+
+            ' calculate the difference time span between the begening and end of the plots. And calculate the number of minutes. 
+            diffTimeSpan = REChart_Data.DateTimeArray(REChart_Data.DateTimeArray.Length - 1).Subtract(REChart_Data.DateTimeArray(0))
+            NumberOfMinutes = diffTimeSpan.TotalMinutes.ToString()
+
+            ' redim the array to the number of minutes.
+            ReDim MyTimeStampArray(NumberOfMinutes - 1)
+
+            'temp date working variable 
+            Dim tempdate As Date
+
+            'initialize the first element in the array, the the first time stamp 
+            MyTimeStampArray(0) = REChart_Data.DateTimeArray(0).ToString("MM/dd/yyyy HH:mm:ss")
+            For i = 1 To MyTimeStampArray.Length - 1
+                'increment the time stamp by 1 minute until the end of the time stamps is reached. 
+                tempdate = MyTimeStampArray(i - 1)
+                tempdate = tempdate.AddMinutes(1)
+                MyTimeStampArray(i) = tempdate.ToString("MM/dd/yyyy HH:mm:ss")
+            Next
+
+            'initialize the PI SDK object.
+            MyPISDK = New PISDK.PISDKClass()
+
+            'initialize the PI server Properties. 
+            MyServer = MyPISDK.Servers(PIServerName)
+            MyPoints = MyServer.PIPoints
+            'select the correct tag based on Unit
+            If (REChart_Data.rbUnit1.Checked = True) Then MyPoint = MyPoints("U01.NBA08")
+            If (REChart_Data.rbUnit2.Checked = True) Then MyPoint = MyPoints("U02.NBA08")
+
+            'get the timed values from the pi server. This method will return an array of values corresponding to the array of timestamps sent. 
+            MyValues = MyPoint.Data.TimedValues(MyTimeStampArray)
+
+            'set the Title of the new series. 
+            MyActualPowerSeries.Title = "Actual Power"
+
+            'add the power and timestamp values to the lineseries. 
+            For i = 0 To MyTimeStampArray.Length - 1
+                tempdate = MyTimeStampArray(i)
+                MyActualPowerSeries.Points.Add(New OxyPlot.DataPoint(DateTimeAxis.ToDouble(tempdate), MyValues(i + 1).Value))
+            Next
+
+            'Show the Legends and setup color
+            MyActualPowerSeries.Color = OxyColors.Red
+            MyActualPowerSeries.RenderInLegend = True
+            MySeries.RenderInLegend = True
+
+            'add the series to the plotmodel, and refresh the model. 
+            MyModel.Series.Add(MyActualPowerSeries)
+            MyModel.InvalidatePlot(True)
+
+            ' Change the Button to indicate data is being retrieved. 
+            btnOverlay.Text = "Overlay"
+            btnOverlay.Refresh()
+
+            'dispose of objects
+            MyPoints = Nothing
+            MyServer = Nothing
+            MyPISDK = Nothing
+
+        Catch ex As Exception
+            MsgBox(ex.Message + " - Occured in Private Sub btnOverlay_Click")
+        End Try
+    End Sub
+
+    Private Sub btnHideLabels_Click(sender As Object, e As EventArgs) Handles btnHideLabels.Click
+        ' Hide all of the annotation labels by changiung the color and background to match the background grey color. 
+        For i = 0 To AnnotationsList.Count - 1
+            AnnotationsList(i).Background = OxyColor.FromRgb(240, 240, 240)
+            AnnotationsList(i).Stroke = OxyColor.FromRgb(240, 240, 240)
+            AnnotationsList(i).TextColor = OxyColor.FromRgb(240, 240, 240)
+            AnnotationsList(i).Layer = AnnotationLayer.BelowAxes
+        Next
+        MyModel.InvalidatePlot(True)
+
+        'set the flag that labels are hidden
+        LabelsHidden = True
+
+    End Sub
+
+    Private Sub btnShowLabels_Click(sender As Object, e As EventArgs) Handles btnShowLabels.Click
+        ' Show all the annotation labels by changing the text color to black, and background color to green/yellow. 
+        For i = 0 To AnnotationsList.Count - 1
+            If (REChart_Data.rbUnit1.Checked = True) Then
+                AnnotationsList(i).Background = OxyColors.RoyalBlue
+            End If
+            If (REChart_Data.rbUnit2.Checked = True) Then
+                AnnotationsList(i).Background = OxyColors.Green
+            End If
+
+            'if its an empty annotation, then let it remain hidden
+            If AnnotationsList(i).Text = "" Then
+                AnnotationsList(i).Background = OxyColor.FromRgb(240, 240, 240)
+                AnnotationsList(i).Stroke = OxyColor.FromRgb(240, 240, 240)
+                AnnotationsList(i).TextColor = OxyColor.FromRgb(240, 240, 240)
+                AnnotationsList(i).Layer = AnnotationLayer.BelowAxes
+            Else
+                'else unhide it.
+                AnnotationsList(i).Stroke = OxyColors.Black
+                AnnotationsList(i).TextColor = OxyColors.White
+                AnnotationsList(i).Layer = AnnotationLayer.AboveSeries
+            End If
+        Next
+        MyModel.InvalidatePlot(True)
+
+        'set the flag that labels are not hidden
+        LabelsHidden = False
+
+    End Sub
 End Class

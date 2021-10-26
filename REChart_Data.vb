@@ -1,4 +1,6 @@
-﻿Public Class REChart_Data
+﻿Imports PISDK
+
+Public Class REChart_Data
 
     'global vars
     Dim StartDateTimeSet As Boolean
@@ -14,6 +16,7 @@
         'Focus on first input field
         dtpStartDate.Focus()
         dtpStartDate.Select()
+
     End Sub
 
     Private Sub txtInitialPower_TextChanged(sender As Object, e As EventArgs) Handles txtInitialPower.TextChanged
