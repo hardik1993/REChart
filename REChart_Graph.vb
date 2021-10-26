@@ -283,7 +283,7 @@ Public Class REChart_Graph
         Next
 
         'loop through array, and add points to data series
-        MySeries.MarkerType = MarkerType.Square
+        MySeries.MarkerType = MarkerType.Circle
         For i = 0 To REChart_Data.PowerArray.Length - 1
             MySeries.Points.Add(New OxyPlot.DataPoint(DateTimeAxis.ToDouble(REChart_Data.DateTimeArray(i)), REChart_Data.PowerArray(i)))
         Next
@@ -769,7 +769,7 @@ Interpolate_Error:
     End Sub
 
     Private Sub btnHideLabels_Click(sender As Object, e As EventArgs) Handles btnHideLabels.Click
-        ' Hide all of the annotation labels by changiung the color and background to match the background grey color. 
+        ' Hide all of the annotation labels by changing the color and background to match the background grey color. 
         For i = 0 To AnnotationsList.Count - 1
             AnnotationsList(i).Background = OxyColor.FromRgb(240, 240, 240)
             AnnotationsList(i).Stroke = OxyColor.FromRgb(240, 240, 240)
