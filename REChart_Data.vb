@@ -48,81 +48,86 @@ Public Class REChart_Data
 
     Private Sub ReCalculateTimes()
         'This Sub will re-calculate times based on the starting times, and hours for action. 
+        Try
+            Dim newDateTime As Date
+            Dim curDateTime As Date
+            Dim newHoursFromStart As Double
+            Dim curHoursForAction As Double
 
-        Dim newDateTime As Date
-        Dim curDateTime As Date
-        Dim newHoursFromStart As Double
-        Dim curHoursForAction As Double
+            dgvStatepoints.EditMode = DataGridViewEditMode.EditProgrammatically
 
-        dgvStatepoints.EditMode = DataGridViewEditMode.EditProgrammatically
+            For i = 1 To dgvStatepoints.RowCount - 1
+                curDateTime = Convert.ToDateTime(dgvStatepoints.Rows(i - 1).Cells(0).Value)
+                newDateTime = curDateTime.AddHours(Convert.ToDouble(dgvStatepoints.Rows(i).Cells(1).Value))
 
-        For i = 1 To dgvStatepoints.RowCount - 1
-            curDateTime = Convert.ToDateTime(dgvStatepoints.Rows(i - 1).Cells(0).Value)
-            newDateTime = curDateTime.AddHours(Convert.ToDouble(dgvStatepoints.Rows(i).Cells(1).Value))
+                curHoursForAction = Convert.ToDouble(dgvStatepoints.Rows(i).Cells(1).Value)
+                newHoursFromStart = Convert.ToDouble(dgvStatepoints.Rows(i - 1).Cells(2).Value) + curHoursForAction
 
-            curHoursForAction = Convert.ToDouble(dgvStatepoints.Rows(i).Cells(1).Value)
-            newHoursFromStart = Convert.ToDouble(dgvStatepoints.Rows(i - 1).Cells(2).Value) + curHoursForAction
+                dgvStatepoints.Rows(i).Cells(0).Value = newDateTime.ToString("MM/dd/yyyy HH:mm")
+                dgvStatepoints.Rows(i).Cells(2).Value = Convert.ToString(Math.Round(newHoursFromStart, 2))
 
-            dgvStatepoints.Rows(i).Cells(0).Value = newDateTime.ToString("MM/dd/yyyy HH:mm")
-            dgvStatepoints.Rows(i).Cells(2).Value = Convert.ToString(Math.Round(newHoursFromStart, 2))
-
-            'dgvStatepoints.Rows(i).SetValues(New String() {newDateTime.ToString("MM/dd/yyyy HH:mm"), curHoursForAction.ToString, newHoursFromStart.ToString, "0", "0"})
-            dgvStatepoints.Refresh()
-        Next
+                'dgvStatepoints.Rows(i).SetValues(New String() {newDateTime.ToString("MM/dd/yyyy HH:mm"), curHoursForAction.ToString, newHoursFromStart.ToString, "0", "0"})
+                dgvStatepoints.Refresh()
+            Next
 
 
-        'Next, calculate MWe Lost
-        Dim result As Double = 0
-        Dim dur As Double
+            'Next, calculate MWe Lost
+            Dim result As Double = 0
+            Dim dur As Double
 
-        'Loop through array points to calculate MWe lost. Looks ahead to the next point to calculate the area.
-        For x = 0 To dgvStatepoints.RowCount - 2
-            'Calculate duration between points
-            dur = Convert.ToDouble(dgvStatepoints.Rows(x + 1).Cells(1).Value)
-            If dgvStatepoints.Rows(x).Cells(3).Value = 100 Or dgvStatepoints.Rows(x + 1).Cells(3).Value = 100 Then
-                'This is the first or last point to 100%, a triangular area needs to be calculated.
-                'If the current point is 100%, then base of triangle needs to be the difference between 100% and i+1
-                If dgvStatepoints.Rows(x).Cells(3).Value = 100 Then result += 0.5 * Convert.ToDouble(dur) * (((100 - Convert.ToDouble(dgvStatepoints.Rows(x + 1).Cells(3).Value)) / 100) * FullPowerMWE)
-                'If the next point is 100%, then base of triangle needs to be the difference between 100% and i
-                If dgvStatepoints.Rows(x + 1).Cells(3).Value = 100 Then result += 0.5 * Convert.ToDouble(dur) * (((100 - Convert.ToDouble(dgvStatepoints.Rows(x).Cells(3).Value)) / 100) * FullPowerMWE)
-                'If this is just a burn at full power, the result goes to 0 added MWe lost.
-            Else
-                'This is a middle section and a trapazoidal area needs to be calculated.
-                result += ((((((100 - Convert.ToDouble(dgvStatepoints.Rows(x).Cells(3).Value)) / 100) * FullPowerMWE) + (((100 - Convert.ToDouble(dgvStatepoints.Rows(x + 1).Cells(3).Value)) / 100) * FullPowerMWE)) * Convert.ToDouble(dur)) * 0.5)
-            End If
-        Next
+            'Loop through array points to calculate MWe lost. Looks ahead to the next point to calculate the area.
+            For x = 0 To dgvStatepoints.RowCount - 2
+                'Calculate duration between points
+                dur = Convert.ToDouble(dgvStatepoints.Rows(x + 1).Cells(1).Value)
+                If dgvStatepoints.Rows(x).Cells(3).Value = 100 Or dgvStatepoints.Rows(x + 1).Cells(3).Value = 100 Then
+                    'This is the first or last point to 100%, a triangular area needs to be calculated.
+                    'If the current point is 100%, then base of triangle needs to be the difference between 100% and i+1
+                    If dgvStatepoints.Rows(x).Cells(3).Value = 100 Then result += 0.5 * Convert.ToDouble(dur) * (((100 - Convert.ToDouble(dgvStatepoints.Rows(x + 1).Cells(3).Value)) / 100) * FullPowerMWE)
+                    'If the next point is 100%, then base of triangle needs to be the difference between 100% and i
+                    If dgvStatepoints.Rows(x + 1).Cells(3).Value = 100 Then result += 0.5 * Convert.ToDouble(dur) * (((100 - Convert.ToDouble(dgvStatepoints.Rows(x).Cells(3).Value)) / 100) * FullPowerMWE)
+                    'If this is just a burn at full power, the result goes to 0 added MWe lost.
+                Else
+                    'This is a middle section and a trapazoidal area needs to be calculated.
+                    result += ((((((100 - Convert.ToDouble(dgvStatepoints.Rows(x).Cells(3).Value)) / 100) * FullPowerMWE) + (((100 - Convert.ToDouble(dgvStatepoints.Rows(x + 1).Cells(3).Value)) / 100) * FullPowerMWE)) * Convert.ToDouble(dur)) * 0.5)
+                End If
+            Next
 
-        LostMWHE = Math.Round(result, 1)
-        lblMWE.Text = Math.Round(result, 1)
-
+            LostMWHE = Math.Round(result, 1)
+            lblMWE.Text = Math.Round(result, 1)
+        Catch ex As Exception
+            MsgBox(ex.Message & " occured in Private Sub ReCalculateTimes in REChart_Data.vb", MsgBoxStyle.Critical, "FATALITY")
+        End Try
     End Sub
 
     Private Sub btnAddStatePoint_Click(sender As Object, e As EventArgs) Handles btnAddStatePoint.Click
+        Try
+            'populate parameters from previous row.
+            Dim lastDateTime As Date
+            Dim curHoursForAction As Double
+            Dim lastHoursFromStart As Double
+            Dim i As Integer
 
-        'populate parameters from previous row.
-        Dim lastDateTime As Date
-        Dim curHoursForAction As Double
-        Dim lastHoursFromStart As Double
-        Dim i As Integer
+            Dim newDateTime As Date
+            Dim newHoursFromStart As Double
 
-        Dim newDateTime As Date
-        Dim newHoursFromStart As Double
+            'populate parameters from previous row.
+            i = dgvStatepoints.RowCount - 1
+            lastDateTime = dgvStatepoints.Rows(i).Cells(0).Value
+            curHoursForAction = dgvStatepoints.Rows(i).Cells(1).Value
+            lastHoursFromStart = dgvStatepoints.Rows(i).Cells(2).Value
 
-        'populate parameters from previous row.
-        i = dgvStatepoints.RowCount - 1
-        lastDateTime = dgvStatepoints.Rows(i).Cells(0).Value
-        curHoursForAction = dgvStatepoints.Rows(i).Cells(1).Value
-        lastHoursFromStart = dgvStatepoints.Rows(i).Cells(2).Value
+            newDateTime = lastDateTime.AddHours(Convert.ToDouble(txtHoursForAction.Text))
+            newHoursFromStart = lastHoursFromStart + Convert.ToDouble(txtHoursForAction.Text)
 
-        newDateTime = lastDateTime.AddHours(Convert.ToDouble(txtHoursForAction.Text))
-        newHoursFromStart = lastHoursFromStart + Convert.ToDouble(txtHoursForAction.Text)
+            'add new row based on form inputs. add the hours for action to cur date/time to get new date/time and 
+            dgvStatepoints.Rows.Add(New String() {newDateTime.ToString("MM/dd/yyyy HH:mm"), txtHoursForAction.Text, newHoursFromStart.ToString, txtStatePointPower.Text, txtDescription.Text})
+            Call ReCalculateTimes()
 
-        'add new row based on form inputs. add the hours for action to cur date/time to get new date/time and 
-        dgvStatepoints.Rows.Add(New String() {newDateTime.ToString("MM/dd/yyyy HH:mm"), txtHoursForAction.Text, newHoursFromStart.ToString, txtStatePointPower.Text, txtDescription.Text})
-        Call ReCalculateTimes()
-
-        'Set focus back to reoccuring input
-        txtStatePointPower.Focus()
+            'Set focus back to reoccuring input
+            txtStatePointPower.Focus()
+        Catch ex As Exception
+            MsgBox(ex.Message & " occured in Private Sub btnAddStatePoint_Click in REChart_Data.vb", MsgBoxStyle.Critical, "FATALITY")
+        End Try
     End Sub
 
     Private Sub bthRefresh_Click(sender As Object, e As EventArgs) Handles bthRefresh.Click
@@ -130,33 +135,36 @@ Public Class REChart_Data
     End Sub
 
     Private Sub btnGenerateLP_Click(sender As Object, e As EventArgs) Handles btnGenerateLP.Click
+        Try
+            'Validation Checks 
+            'check to make sure a unit is selected. 
+            If rbUnit1.Checked = False And rbUnit2.Checked = False Then
+                MsgBox("Please Select a Unit", MsgBoxStyle.Exclamation)
+                Exit Sub
+            End If
 
-        'Validation Checks 
-        'check to make sure a unit is selected. 
-        If rbUnit1.Checked = False And rbUnit2.Checked = False Then
-            MsgBox("Please Select a Unit", MsgBoxStyle.Exclamation)
-            Exit Sub
-        End If
-
-        'check to make sure a title is intered. 
-        If txtManuverTitle.Text = "" Then
-            MsgBox("Please enter a Title", MsgBoxStyle.Exclamation)
-            Exit Sub
-        End If
+            'check to make sure a title is intered. 
+            If txtManuverTitle.Text = "" Then
+                MsgBox("Please enter a Title", MsgBoxStyle.Exclamation)
+                Exit Sub
+            End If
 
 
-        'for some reason the redim makes the array 1+row count. So i have to -1 in the redim statement. 
-        ReDim DateTimeArray(dgvStatepoints.RowCount - 1)
-        ReDim PowerArray(dgvStatepoints.RowCount - 1)
-        ReDim DescArray(dgvStatepoints.RowCount - 1)
+            'for some reason the redim makes the array 1+row count. So i have to -1 in the redim statement. 
+            ReDim DateTimeArray(dgvStatepoints.RowCount - 1)
+            ReDim PowerArray(dgvStatepoints.RowCount - 1)
+            ReDim DescArray(dgvStatepoints.RowCount - 1)
 
-        For i = 0 To dgvStatepoints.RowCount - 1
-            PowerArray(i) = dgvStatepoints.Rows(i).Cells(3).Value
-            DateTimeArray(i) = dgvStatepoints.Rows(i).Cells(0).Value
-            DescArray(i) = dgvStatepoints.Rows(i).Cells(4).Value
-        Next
+            For i = 0 To dgvStatepoints.RowCount - 1
+                PowerArray(i) = dgvStatepoints.Rows(i).Cells(3).Value
+                DateTimeArray(i) = dgvStatepoints.Rows(i).Cells(0).Value
+                DescArray(i) = dgvStatepoints.Rows(i).Cells(4).Value
+            Next
 
-        REChart_Graph.Show()
+            REChart_Graph.Show()
+        Catch ex As Exception
+            MsgBox(ex.Message & " occured in Private Sub btnGenerateLP_Click in REChart_Data.vb", MsgBoxStyle.Critical, "FATALITY")
+        End Try
     End Sub
 
     Private Sub btnSaveData_Click(sender As Object, e As EventArgs) Handles btnSaveData.Click
@@ -226,8 +234,7 @@ Public Class REChart_Data
             MsgBox("File Saved Successfully!", MsgBoxStyle.Information)
             Exit Try
         Catch ex As Exception
-            MsgBox(ex.Message & "occured in Sub btnSaveData_Click in REChart_Data.vb" & vbNewLine & "Ensure directory path is valid and admin rights are not required.", MsgBoxStyle.Critical, "FATALITY")
-            Exit Try
+            MsgBox(ex.Message & " occured in Sub btnSaveData_Click in REChart_Data.vb" & vbNewLine & "Ensure directory path is valid and admin rights are not required.", MsgBoxStyle.Critical, "FATALITY")
         End Try
     End Sub
 
@@ -318,8 +325,7 @@ Public Class REChart_Data
             Exit Try
 
         Catch ex As Exception
-            MsgBox(ex.Message & "occured in Sub btnLoadData_Click in REChart_Data.vb" & vbNewLine & "Ensure file is valid.", MsgBoxStyle.Critical, "FATALITY")
-            Exit Try
+            MsgBox(ex.Message & " occured in Sub btnLoadData_Click in REChart_Data.vb" & vbNewLine & "Ensure file is valid.", MsgBoxStyle.Critical, "FATALITY")
         End Try
     End Sub
 
@@ -334,4 +340,10 @@ Public Class REChart_Data
         txtDescription.SelectAll()
     End Sub
 
+    Private Sub txtDescription_KeyDown(sender As Object, e As KeyEventArgs) Handles txtDescription.KeyDown
+        ' if enter is pressed in the desc box, click the add statepoint button. 
+        If e.KeyCode = Keys.Enter Then
+            btnAddStatePoint.PerformClick()
+        End If
+    End Sub
 End Class
