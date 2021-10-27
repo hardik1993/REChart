@@ -431,19 +431,36 @@ Partial Class REChart_Data
         Me.lblLostMWE.Size = New System.Drawing.Size(89, 17)
         Me.lblLostMWE.Text = "Lost MWHrE:"
         '
-        'btnHelp
+        'DateTime
         '
-        Me.btnHelp.FlatAppearance.BorderColor = System.Drawing.Color.Black
-        Me.btnHelp.FlatAppearance.BorderSize = 4
-        Me.btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.btnHelp.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnHelp.Location = New System.Drawing.Point(743, 4)
-        Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(39, 31)
-        Me.btnHelp.TabIndex = 100
-        Me.btnHelp.TabStop = False
-        Me.btnHelp.Text = "Help"
-        Me.btnHelp.UseVisualStyleBackColor = True
+        Me.DateTime.HeaderText = "Date/Time"
+        Me.DateTime.Name = "DateTime"
+        Me.DateTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'HoursForAction
+        '
+        Me.HoursForAction.HeaderText = "Hours For Action"
+        Me.HoursForAction.Name = "HoursForAction"
+        Me.HoursForAction.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'HoursFromStart
+        '
+        Me.HoursFromStart.HeaderText = "Hours From Start"
+        Me.HoursFromStart.Name = "HoursFromStart"
+        Me.HoursFromStart.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Power
+        '
+        Me.Power.HeaderText = "Power"
+        Me.Power.Name = "Power"
+        Me.Power.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Description
+        '
+        Me.Description.HeaderText = "Description"
+        Me.Description.Name = "Description"
+        Me.Description.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Description.Width = 325
         '
         'REChart_Data
         '
