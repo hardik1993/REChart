@@ -427,7 +427,7 @@ Public Class REChart_Graph
             lblPredictedLostMWs.Text = REChart_Data.LostMWHE.ToString
 
         Catch ex As Exception
-            MsgBox(ex.Message + " Occured in Private Sub GenerateLoadProfile()")
+            MsgBox(ex.Message + " Occured in Private Sub GenerateLoadProfile() in REChart_Graph.vb")
         End Try
 
     End Sub
@@ -466,7 +466,7 @@ Public Class REChart_Graph
                 e.Handled = True
             End If
         Catch ex As Exception
-            MsgBox(ex.Message + " Occured in Private Sub AnnotationMouseDown")
+            MsgBox(ex.Message + " Occured in Private Sub AnnotationMouseDown in REChart_Graph.vb")
         End Try
     End Sub
 
@@ -497,7 +497,7 @@ Public Class REChart_Graph
             MyModel.InvalidatePlot(True)
             e.Handled = True
         Catch ex As Exception
-            MsgBox(ex.Message + " Occured in Private Sub AnnotationMouseMove")
+            MsgBox(ex.Message + " Occured in Private Sub AnnotationMouseMove in REChart_Graph.vb")
         End Try
     End Sub
 
@@ -519,7 +519,7 @@ Public Class REChart_Graph
             MyModel.InvalidatePlot(True)
             e.Handled = True
         Catch ex As Exception
-            MsgBox(ex.Message + " Occured in Private Sub AnnotationMouseUp")
+            MsgBox(ex.Message + " Occured in Private Sub AnnotationMouseUp in REChart_Graph.vb")
         End Try
     End Sub
 
@@ -557,7 +557,7 @@ Public Class REChart_Graph
                 e.Handled = True
             End If
         Catch ex As Exception
-            MsgBox(ex.Message + " Occured in Private Sub NoteAnnotationMouseDown")
+            MsgBox(ex.Message + " Occured in Private Sub NoteAnnotationMouseDown in REChart_Graph.vb")
         End Try
     End Sub
 
@@ -588,7 +588,7 @@ Public Class REChart_Graph
             MyModel.InvalidatePlot(True)
             e.Handled = True
         Catch ex As Exception
-            MsgBox(ex.Message + " Occured in Private Sub NoteAnnotationMouseMove")
+            MsgBox(ex.Message + " Occured in Private Sub NoteAnnotationMouseMove in REChart_Graph.vb")
         End Try
     End Sub
 
@@ -610,7 +610,7 @@ Public Class REChart_Graph
             MyModel.InvalidatePlot(True)
             e.Handled = True
         Catch ex As Exception
-            MsgBox(ex.Message + " Occured in Private Sub NoteAnnotationMouseUp")
+            MsgBox(ex.Message + " Occured in Private Sub NoteAnnotationMouseUp in REChart_Graph.vb")
         End Try
     End Sub
 
@@ -628,7 +628,7 @@ Public Class REChart_Graph
             'return the max value
             Return MaxDouble
         Catch ex As Exception
-            MsgBox(ex.Message + " Occured in Private Function MaxValue")
+            MsgBox(ex.Message + " Occured in Private Function MaxValue in REChart_Graph.vb")
         End Try
     End Function
 
@@ -646,7 +646,7 @@ Public Class REChart_Graph
             'return the max value
             Return MinDouble
         Catch ex As Exception
-            MsgBox(ex.Message + " Occured in Private Function MinValue")
+            MsgBox(ex.Message + " Occured in Private Function MinValue in REChart_Graph.vb")
         End Try
     End Function
 
@@ -668,7 +668,7 @@ Public Class REChart_Graph
             'return the datapoint var
             Return MidPoint
         Catch ex As Exception
-            MsgBox(ex.Message + " Occured in Private Function CalculateMidPointOfLine")
+            MsgBox(ex.Message + " Occured in Private Function CalculateMidPointOfLine in REChart_Graph.vb")
         End Try
     End Function
 
@@ -703,7 +703,7 @@ Public Class REChart_Graph
 
             Return FinalString
         Catch ex As Exception
-            MsgBox(ex.Message + " Occured in Private Function Center2Lines")
+            MsgBox(ex.Message + " Occured in Private Function Center2Lines in REChart_Graph.vb")
         End Try
     End Function
 
@@ -717,7 +717,7 @@ Public Class REChart_Graph
 
             MyModel.InvalidatePlot(True)
         Catch ex As Exception
-            MsgBox(ex.Message + " Occured in Private Sub btnFontSizeUp_Click")
+            MsgBox(ex.Message + " Occured in Private Sub btnFontSizeUp_Click in REChart_Graph.vb")
         End Try
     End Sub
 
@@ -731,7 +731,7 @@ Public Class REChart_Graph
 
             MyModel.InvalidatePlot(True)
         Catch ex As Exception
-            MsgBox(ex.Message + " Occured in Private Sub btnFontSizeDown_Click")
+            MsgBox(ex.Message + " Occured in Private Sub btnFontSizeDown_Click in REChart_Graph.vb")
         End Try
     End Sub
 
@@ -809,7 +809,7 @@ Public Class REChart_Graph
 
             End While
         Catch ex As Exception
-            MsgBox(ex.Message + " Occured in Private Sub CalculateHourlyData")
+            MsgBox(ex.Message + " Occured in Private Sub CalculateHourlyData in REChart_Graph.vb")
         End Try
     End Sub
 
@@ -1002,7 +1002,7 @@ Interpolate_Error:
 
 
         Catch ex As Exception
-            MsgBox(ex.Message + " - Occured in Private Sub btnOverlay_Click")
+            MsgBox(ex.Message + " - Occured in Private Sub btnOverlay_Click in REChart_Graph.vb")
         End Try
     End Sub
 
@@ -1039,7 +1039,7 @@ Interpolate_Error:
 
             MyModel.InvalidatePlot(True)
         Catch ex As Exception
-            MsgBox(ex.Message + " - Occured in Private Sub cbApprovalBlock_Click")
+            MsgBox(ex.Message + " - Occured in Private Sub cbApprovalBlock_Click in REChart_Graph.vb")
         End Try
     End Sub
 
@@ -1083,7 +1083,7 @@ Interpolate_Error:
 
             MyModel.InvalidatePlot(True)
         Catch ex As Exception
-            MsgBox(ex.Message + " - Occured in Private Sub cbLabels_Click")
+            MsgBox(ex.Message + " - Occured in Private Sub cbLabels_Click in REChart_Graph.vb")
         End Try
     End Sub
 
@@ -1109,7 +1109,7 @@ Interpolate_Error:
             End If
             MyModel.InvalidatePlot(True)
         Catch ex As Exception
-            MsgBox(ex.Message + " - Occured in Private Sub cbDraft_Click")
+            MsgBox(ex.Message + " - Occured in Private Sub cbDraft_Click in REChart_Graph.vb")
         End Try
     End Sub
 
@@ -1135,7 +1135,7 @@ Interpolate_Error:
             End If
             MyModel.InvalidatePlot(True)
         Catch ex As Exception
-            MsgBox(ex.Message + " - Occured in Private Sub cbReducedPower_Click")
+            MsgBox(ex.Message + " - Occured in Private Sub cbReducedPower_Click in REChart_Graph.vb")
         End Try
     End Sub
 
@@ -1165,7 +1165,7 @@ Interpolate_Error:
             End If
             MyModel.InvalidatePlot(True)
         Catch ex As Exception
-            MsgBox(ex.Message + " - Occured in Private Sub cbMoreRPAs_Click")
+            MsgBox(ex.Message + " - Occured in Private Sub cbMoreRPAs_Click in REChart_Graph.vb")
         End Try
     End Sub
 End Class
