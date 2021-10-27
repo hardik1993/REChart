@@ -346,4 +346,8 @@ Public Class REChart_Data
             btnAddStatePoint.PerformClick()
         End If
     End Sub
+
+    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+        REChart_Help.Show()
+    End Sub
 End Class
