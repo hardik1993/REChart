@@ -30,6 +30,9 @@ Public Class REChart_Graph
     Dim HourlyDateTime As Date()
     Dim HourlyPowerArray As Double()
 
+    'Global var for actual lost mwe
+    Public ActLostMW As Double = 0
+
 
     'PI Object global vars 
     ' Pi Server host name
@@ -46,6 +49,7 @@ Public Class REChart_Graph
 
     Private Sub REChart_Graph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Call GenerateLoadProfile()
+        Me.lblPredictedLostMWs.Text = REChart_Data.LostMWHE
     End Sub
 
     Private Sub ButtonExport_Click(sender As Object, e As EventArgs) Handles BtnExport.Click
@@ -961,6 +965,41 @@ Interpolate_Error:
             MyPoints = Nothing
             MyServer = Nothing
             MyPISDK = Nothing
+
+            'Next, calculate MWe Lost
+            Dim result As Double = 0
+            Dim dur As Double = (1 / 60) 'Calculate duration in hrs between points, this is just 1min
+            Dim fpMWE As Double = 1300 'Full power MWe
+            'Loop through array points to calculate MWe lost. Looks ahead to the next point to calculate the area.
+            For x = 1 To MyValues.Count - 1
+
+                If MyValues(x).Value = 100 Or MyValues(x + 1).Value = 100 Then
+                    'This is the first or last point to 100%, a triangular area needs to be calculated.
+                    'If the current point is 100%, then base of triangle needs to be the difference between 100% and i+1
+                    If MyValues(x).Value = 100 Then result += 0.5 * dur * (((100 - Convert.ToDouble(MyValues(x + 1).Value) / 100) * fpMWE))
+                    'If the next point is 100%, then base of triangle needs to be the difference between 100% and i
+                    If MyValues(x + 1).Value = 100 Then result += 0.5 * dur * (((100 - Convert.ToDouble(MyValues(x).Value)) / 100) * fpMWE)
+                    'If this is just a burn at full power, the result goes to 0 added MWe lost.
+                Else
+                    'This is a middle section and a trapazoidal area needs to be calculated.
+                    result += ((((100 - MyValues(x).Value) / 100) * fpMWE) + (((100 - MyValues(x + 1).Value) / 100) * fpMWE)) * dur * 0.5
+                End If
+            Next
+
+            'Change labels
+            ActLostMW = Math.Round(result, 1)
+            lblActualLostMWs.Text = Math.Round(result, 1)
+
+            'Calculate difference and update labels. If result is positive, we beat the profile.
+            lblMWdiff.Text = REChart_Data.LostMWHE - ActLostMW
+            'Change label color based on pos or neg
+            If REChart_Data.LostMWHE - ActLostMW > 0 Then
+                lblMWdiff.ForeColor = Color.Green
+            Else
+                lblMWdiff.ForeColor = Color.Red
+            End If
+
+
 
         Catch ex As Exception
             MsgBox(ex.Message + " - Occured in Private Sub btnOverlay_Click")

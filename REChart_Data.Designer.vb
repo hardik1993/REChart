@@ -34,6 +34,11 @@ Partial Class REChart_Data
         Me.txtHoursForAction = New System.Windows.Forms.TextBox()
         Me.lblHoursforAction = New System.Windows.Forms.Label()
         Me.dgvStatepoints = New System.Windows.Forms.DataGridView()
+        Me.DateTime = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.HoursForAction = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.HoursFromStart = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Power = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Description = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txtDescription = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.bthRefresh = New System.Windows.Forms.Button()
@@ -53,11 +58,6 @@ Partial Class REChart_Data
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblMWE = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblLostMWE = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.DateTime = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.HoursForAction = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.HoursFromStart = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Power = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Description = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgvStatepoints, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpAddStatePoints.SuspendLayout()
         Me.grpInitialConditions.SuspendLayout()
@@ -173,6 +173,37 @@ Partial Class REChart_Data
         Me.dgvStatepoints.Size = New System.Drawing.Size(772, 415)
         Me.dgvStatepoints.TabIndex = 20
         Me.dgvStatepoints.TabStop = False
+        '
+        'DateTime
+        '
+        Me.DateTime.HeaderText = "Date/Time"
+        Me.DateTime.Name = "DateTime"
+        Me.DateTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'HoursForAction
+        '
+        Me.HoursForAction.HeaderText = "Hours For Action"
+        Me.HoursForAction.Name = "HoursForAction"
+        Me.HoursForAction.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'HoursFromStart
+        '
+        Me.HoursFromStart.HeaderText = "Hours From Start"
+        Me.HoursFromStart.Name = "HoursFromStart"
+        Me.HoursFromStart.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Power
+        '
+        Me.Power.HeaderText = "Power"
+        Me.Power.Name = "Power"
+        Me.Power.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Description
+        '
+        Me.Description.HeaderText = "Description"
+        Me.Description.Name = "Description"
+        Me.Description.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Description.Width = 325
         '
         'txtDescription
         '
@@ -396,39 +427,8 @@ Partial Class REChart_Data
         Me.lblLostMWE.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblLostMWE.Name = "lblLostMWE"
         Me.lblLostMWE.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.lblLostMWE.Size = New System.Drawing.Size(89, 17)
-        Me.lblLostMWE.Text = "Lost MWHrE:"
-        '
-        'DateTime
-        '
-        Me.DateTime.HeaderText = "Date/Time"
-        Me.DateTime.Name = "DateTime"
-        Me.DateTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'HoursForAction
-        '
-        Me.HoursForAction.HeaderText = "Hours For Action"
-        Me.HoursForAction.Name = "HoursForAction"
-        Me.HoursForAction.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'HoursFromStart
-        '
-        Me.HoursFromStart.HeaderText = "Hours From Start"
-        Me.HoursFromStart.Name = "HoursFromStart"
-        Me.HoursFromStart.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Power
-        '
-        Me.Power.HeaderText = "Power"
-        Me.Power.Name = "Power"
-        Me.Power.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Description
-        '
-        Me.Description.HeaderText = "Description"
-        Me.Description.Name = "Description"
-        Me.Description.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Description.Width = 325
+        Me.lblLostMWE.Size = New System.Drawing.Size(74, 17)
+        Me.lblLostMWE.Text = "Lost MWe:"
         '
         'REChart_Data
         '

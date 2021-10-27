@@ -40,6 +40,8 @@ Partial Class REChart_Graph
         Me.lblPredictedLostMWs = New System.Windows.Forms.Label()
         Me.lblActualLostMWs = New System.Windows.Forms.Label()
         Me.cbMoreRPAs = New System.Windows.Forms.CheckBox()
+        Me.lblMWdiff = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'BtnExport
@@ -212,11 +214,33 @@ Partial Class REChart_Graph
         Me.cbMoreRPAs.Text = "More" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "RPA's"
         Me.cbMoreRPAs.UseVisualStyleBackColor = True
         '
+        'lblMWdiff
+        '
+        Me.lblMWdiff.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMWdiff.Location = New System.Drawing.Point(1053, 606)
+        Me.lblMWdiff.Name = "lblMWdiff"
+        Me.lblMWdiff.Size = New System.Drawing.Size(69, 13)
+        Me.lblMWdiff.TabIndex = 38
+        Me.lblMWdiff.Text = "0"
+        Me.lblMWdiff.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label6
+        '
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(1053, 560)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(69, 46)
+        Me.Label6.TabIndex = 37
+        Me.Label6.Text = "Difference from Predicted:"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'REChart_Graph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1123, 796)
+        Me.Controls.Add(Me.lblMWdiff)
+        Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.cbMoreRPAs)
         Me.Controls.Add(Me.lblActualLostMWs)
         Me.Controls.Add(Me.lblPredictedLostMWs)
@@ -258,4 +282,6 @@ Partial Class REChart_Graph
     Friend WithEvents lblPredictedLostMWs As Label
     Friend WithEvents lblActualLostMWs As Label
     Friend WithEvents cbMoreRPAs As CheckBox
+    Friend WithEvents lblMWdiff As Label
+    Friend WithEvents Label6 As Label
 End Class
