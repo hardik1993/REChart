@@ -14,14 +14,17 @@ Public Class REChart_Graph
     Public lastPoint As OxyPlot.DataPoint
     Public thisPoint As OxyPlot.DataPoint
     Public newPoint As OxyPlot.DataPoint
-    Public LabelsHidden As Boolean
 
     'global objects for the Plotview, Plot Model, and data series
     Public MySeries As New LineSeries
     Public MyActualPowerSeries As New LineSeries
     Public MyModel As New PlotModel
+    'This is the list of annotations for the various state points, descriptions and to/from date-times. 
     Public AnnotationsList As New List(Of OxyPlot.Annotations.TextAnnotation)
     Public AnnotationTextArray As String()
+    'This is the list of Note type annotations, such as Approval Block, Reduced Power level note, Draft, etc. 
+    Public NoteAnnotationsList As New List(Of OxyPlot.Annotations.TextAnnotation)
+    Dim REName As String = ""
 
     'global vars for the hourly data
     Dim HourlyDateTime As Date()
@@ -43,18 +46,6 @@ Public Class REChart_Graph
 
     Private Sub ButtonExport_Click(sender As Object, e As EventArgs) Handles BtnExport.Click
         'Exports the graph as a PNG file. 
-
-        ' if labels were hidden, then the background color needs to be tweaked to ensure white boxes dont appear on the PNG file.
-        If LabelsHidden = True Then
-            ' Hide all of the annotation labels by changiung the color and background to match the background grey/white color. 
-            For i = 0 To AnnotationsList.Count - 1
-                AnnotationsList(i).Background = OxyColor.FromRgb(255, 255, 255)
-                AnnotationsList(i).Stroke = OxyColor.FromRgb(255, 255, 255)
-                AnnotationsList(i).TextColor = OxyColor.FromRgb(255, 255, 255)
-                AnnotationsList(i).Layer = AnnotationLayer.BelowAxes
-            Next
-            MyModel.InvalidatePlot(True)
-        End If
 
         'create a save file dialoge
         Dim MyFileDialog As SaveFileDialog = New SaveFileDialog()
@@ -78,11 +69,14 @@ Public Class REChart_Graph
                 Exit Sub
             End If
 
+            BtnExport.Text = "(Working)"
+            BtnExport.Refresh()
+
             'Export
             Dim fs As FileStream = File.Create(FileNameString)
             'Dim pdfExp = New PdfExporter With {.Width = PlotView1.Width, .Height = PlotView1.Height}
             'Dim svgExp = New SvgExporter With {.Width = PlotView1.Width, .Height = PlotView1.Height}
-            Dim pngExp = New OxyPlot.WindowsForms.PngExporter With {.Width = PlotView1.Width, .Height = PlotView1.Height, .Background = OxyColors.White}
+            Dim pngExp = New OxyPlot.WindowsForms.PngExporter With {.Width = PlotView1.Width, .Height = PlotView1.Height, .Background = OxyColors.White, .Resolution = 10000}
             Dim modPlot As OxyPlot.Model = PlotView1.Model
             pngExp.Export(modPlot, fs)
             'close the file stream, and dispose the object
@@ -136,6 +130,9 @@ Public Class REChart_Graph
             ex.Quit()
             ex = Nothing
 
+            BtnExport.Text = "Export"
+            BtnExport.Refresh()
+
             'Open .png and .xlsx for user to view
             System.Diagnostics.Process.Start(FileNameString)
             System.Diagnostics.Process.Start(wbFileName)
@@ -143,6 +140,8 @@ Public Class REChart_Graph
             Exit Try
         Catch ex As Exception
             MsgBox(ex.Message & " occured in Sub ButtonExport_Click in REChart_Graph.vb " & vbNewLine & "Ensure directory path is valid and admin rights are not required.", MsgBoxStyle.Critical, "FATALITY")
+            BtnExport.Text = "Export"
+            BtnExport.Refresh()
             Exit Try
         End Try
 
@@ -192,6 +191,7 @@ Public Class REChart_Graph
         MyModel.TitleFont = "Consolas"
         MyModel.TitleFontSize = 24
         MyModel.TitleFontWeight = FontWeights.Bold
+        MyModel.Background = OxyColors.White
 
         'set up line series
         MySeries.Title = "Load Profile"
@@ -282,6 +282,63 @@ Public Class REChart_Graph
             AddHandler AnnotationsList(i).MouseUp, AddressOf AnnotationMouseUp
         Next
 
+        'add blank annotations/event handlers for Draft, Approval Block, and Reduced Power Level Note
+        ' List in order
+        ' 0 - Aproval Block
+        ' 1 - Reduced Power Level Note
+        ' 2 - DRAFT Note
+
+        ' 0- Approval Block
+        NoteAnnotationsList.Add(New OxyPlot.Annotations.TextAnnotation)
+        NoteAnnotationsList(0).Text = ""
+        NoteAnnotationsList(0).Tag = 0
+        NoteAnnotationsList(0).FontSize = 10
+        NoteAnnotationsList(0).Font = "Consolas"
+        NoteAnnotationsList(0).Background = OxyColors.White
+        NoteAnnotationsList(0).Stroke = OxyColors.White
+        NoteAnnotationsList(0).TextColor = OxyColors.White
+        NoteAnnotationsList(0).Layer = AnnotationLayer.BelowAxes
+        NoteAnnotationsList(0).TextPosition = New OxyPlot.DataPoint(xAxis.Maximum, yAxis.Minimum + 0.5)
+        MyModel.Annotations.Add(NoteAnnotationsList(0))
+        ' Event handlers 
+        AddHandler NoteAnnotationsList(0).MouseDown, AddressOf NoteAnnotationMouseDown
+        AddHandler NoteAnnotationsList(0).MouseMove, AddressOf NoteAnnotationMouseMove
+        AddHandler NoteAnnotationsList(0).MouseUp, AddressOf NoteAnnotationMouseUp
+
+        ' 1- Reduced Power Level Note
+        NoteAnnotationsList.Add(New OxyPlot.Annotations.TextAnnotation)
+        NoteAnnotationsList(1).Text = ""
+        NoteAnnotationsList(1).Tag = 0
+        NoteAnnotationsList(1).FontSize = 10
+        NoteAnnotationsList(1).Font = "Consolas"
+        NoteAnnotationsList(1).Background = OxyColors.White
+        NoteAnnotationsList(1).Stroke = OxyColors.White
+        NoteAnnotationsList(1).TextColor = OxyColors.White
+        NoteAnnotationsList(1).Layer = AnnotationLayer.BelowAxes
+        NoteAnnotationsList(1).TextPosition = New OxyPlot.DataPoint(xAxis.Maximum, yAxis.Minimum)
+        MyModel.Annotations.Add(NoteAnnotationsList(1))
+        ' Event handlers 
+        AddHandler NoteAnnotationsList(1).MouseDown, AddressOf NoteAnnotationMouseDown
+        AddHandler NoteAnnotationsList(1).MouseMove, AddressOf NoteAnnotationMouseMove
+        AddHandler NoteAnnotationsList(1).MouseUp, AddressOf NoteAnnotationMouseUp
+
+        ' 2- DRAFT Note
+        NoteAnnotationsList.Add(New OxyPlot.Annotations.TextAnnotation)
+        NoteAnnotationsList(2).Text = ""
+        NoteAnnotationsList(2).Tag = 0
+        NoteAnnotationsList(2).FontSize = 10
+        NoteAnnotationsList(2).Font = "Consolas"
+        NoteAnnotationsList(2).Background = OxyColors.White
+        NoteAnnotationsList(2).Stroke = OxyColors.White
+        NoteAnnotationsList(2).TextColor = OxyColors.White
+        NoteAnnotationsList(2).Layer = AnnotationLayer.BelowAxes
+        NoteAnnotationsList(2).TextPosition = New OxyPlot.DataPoint(xAxis.Maximum, yAxis.Minimum)
+        MyModel.Annotations.Add(NoteAnnotationsList(2))
+        ' Event handlers 
+        AddHandler NoteAnnotationsList(2).MouseDown, AddressOf NoteAnnotationMouseDown
+        AddHandler NoteAnnotationsList(2).MouseMove, AddressOf NoteAnnotationMouseMove
+        AddHandler NoteAnnotationsList(2).MouseUp, AddressOf NoteAnnotationMouseUp
+
         'loop through array, and add points to data series
         MySeries.MarkerType = MarkerType.Circle
         For i = 0 To REChart_Data.PowerArray.Length - 1
@@ -335,14 +392,10 @@ Public Class REChart_Graph
             Next
         End If
 
-        'set eh flag to labels not hidden
-        LabelsHidden = False
-
         'add series to the data model, and bind the model to the plotview. 
         MyModel.Series.Add(MySeries)
         Me.PlotView1.Model = MyModel
     End Sub
-
 
     Private Sub AnnotationMouseDown(sender As Object, e As OxyPlot.OxyMouseDownEventArgs)
         'this event occurs when the mouse button is first pressed down on a annotation. 
@@ -421,6 +474,89 @@ Public Class REChart_Graph
 
         'unselect the annotation when mouse button is released. 
         AnnotationsList(MyIndex).Unselect()
+
+        're-draw the plot, to render the new position. and flag the event as handled. 
+        MyModel.InvalidatePlot(True)
+        e.Handled = True
+    End Sub
+
+    Private Sub NoteAnnotationMouseDown(sender As Object, e As OxyPlot.OxyMouseDownEventArgs)
+        'this event occurs when the mouse button is first pressed down on a NOTE annotation. 
+
+        'have to cast the event sender object to a local TextAnnotation Object to work with. 
+        Dim MyAnnotation As OxyPlot.Annotations.TextAnnotation
+        MyAnnotation = CType(sender, OxyPlot.Annotations.TextAnnotation)
+
+        'get the index of the event sending text annotation, to that we know what index in the 
+        ' Global list Of text annotations to modify. 
+        Dim MyIndex As Integer = MyAnnotation.Tag
+
+        'if left click, then go into drag/drop functionality 
+        If e.ChangedButton = OxyMouseButton.Left Then
+            'select the annotation. 
+            NoteAnnotationsList(MyIndex).Select()
+
+            'update the current position variable and flag the event as complete. 
+            lastPoint = NoteAnnotationsList(MyIndex).InverseTransform(e.Position)
+            MyModel.InvalidatePlot(False)
+            e.Handled = True
+
+        ElseIf e.ChangedButton = OxyMouseButton.Right Then
+
+            'if not already selected, then select annotation.
+            If NoteAnnotationsList(MyIndex).IsSelected = False Then
+                NoteAnnotationsList(MyIndex).Select()
+            Else
+                NoteAnnotationsList(MyIndex).Unselect()
+            End If
+
+            MyModel.InvalidatePlot(True)
+            e.Handled = True
+        End If
+
+    End Sub
+
+    Private Sub NoteAnnotationMouseMove(sender As Object, e As OxyPlot.OxyMouseEventArgs)
+        ' this event occurs after the mouse down event when the mouse is moved/dragged on a NOTE annotation. 
+
+        'have to cast the event sender object to a local TextAnnotation Object to work with. 
+        Dim MyAnnotation As OxyPlot.Annotations.TextAnnotation
+        MyAnnotation = CType(sender, OxyPlot.Annotations.TextAnnotation)
+
+        'get the index of the event sending text annotation, to that we know what index in the 
+        ' Global list Of text annotations to modify. 
+        Dim MyIndex As Integer = MyAnnotation.Tag
+
+        'get the new position and calculate the delta. 
+        thisPoint = NoteAnnotationsList(MyIndex).InverseTransform(e.Position)
+        Dim dx As Double = thisPoint.X - lastPoint.X
+        Dim dy As Double = thisPoint.Y - lastPoint.Y
+
+        'calculate the new point based on the delta, and set the new position. 
+        newPoint = New OxyPlot.DataPoint(NoteAnnotationsList(MyIndex).TextPosition.X + dx, NoteAnnotationsList(MyIndex).TextPosition.Y + dy)
+        NoteAnnotationsList(MyIndex).TextPosition = newPoint
+
+        'update the current point for calculation of delta in thre next iteration.
+        lastPoint = thisPoint
+
+        're-draw the plot, to render the new position. and flag the event as handled. 
+        MyModel.InvalidatePlot(True)
+        e.Handled = True
+    End Sub
+
+    Private Sub NoteAnnotationMouseUp(sender As Object, e As OxyPlot.OxyMouseEventArgs)
+        'this event occurs when the mouse button is released on a NOTE annotation. 
+
+        'have to cast the event sender object to a local TextAnnotation Object to work with. 
+        Dim MyAnnotation As OxyPlot.Annotations.TextAnnotation
+        MyAnnotation = CType(sender, OxyPlot.Annotations.TextAnnotation)
+
+        'get the index of the event sending text annotation, to that we know what index in the 
+        ' Global list Of text annotations to modify. 
+        Dim MyIndex As Integer = MyAnnotation.Tag
+
+        'unselect the annotation when mouse button is released. 
+        NoteAnnotationsList(MyIndex).Unselect()
 
         're-draw the plot, to render the new position. and flag the event as handled. 
         MyModel.InvalidatePlot(True)
@@ -768,48 +904,78 @@ Interpolate_Error:
         End Try
     End Sub
 
-    Private Sub btnHideLabels_Click(sender As Object, e As EventArgs) Handles btnHideLabels.Click
-        ' Hide all of the annotation labels by changing the color and background to match the background grey color. 
-        For i = 0 To AnnotationsList.Count - 1
-            AnnotationsList(i).Background = OxyColor.FromRgb(240, 240, 240)
-            AnnotationsList(i).Stroke = OxyColor.FromRgb(240, 240, 240)
-            AnnotationsList(i).TextColor = OxyColor.FromRgb(240, 240, 240)
-            AnnotationsList(i).Layer = AnnotationLayer.BelowAxes
-        Next
+    Private Sub cbApprovalBlock_Click(sender As Object, e As EventArgs) Handles cbApprovalBlock.Click
+        'Handles the adding and hiding of the approval block. 
+        If cbApprovalBlock.Checked = True Then
+            'If a RE Name has not been entered, then prompt for one. 
+            If REName = "" Then
+                REName = InputBox("Please enter the name you wish to display under RE In the Approval Block", "Enter RE Name", "Example: H. Patel")
+            End If
+            ' create the approval block text 
+            NoteAnnotationsList(0).Text = "Reactor Engineering: " + REName + vbNewLine + " " + vbNewLine + "Work Request #: ___________" +
+                vbNewLine + " " + vbNewLine + "- Activities Planned & Scheduled" + vbNewLine + "- Resources Reviewed" + vbNewLine +
+                "- Marketing Notified" + vbNewLine + "- Risk Evaluated" + vbNewLine + "Manager - Work Mgmt: ___________" +
+                vbNewLine + " " + vbNewLine + "Reactivity Manipulations Reviewed:" + vbNewLine + "Manager - Nuclear Ops: ___________" +
+                vbNewLine + " " + vbNewLine + "Approval to Perform:" + vbNewLine + "Plant Manager-Nuclear: ___________"
+            ' change the text and border color to black. Background color to white, and place above axis.
+            NoteAnnotationsList(0).Stroke = OxyColors.Black
+            NoteAnnotationsList(0).TextColor = OxyColors.Black
+            NoteAnnotationsList(0).Background = OxyColors.White
+            NoteAnnotationsList(0).Layer = AnnotationLayer.AboveSeries
+
+        End If
+
+        If cbApprovalBlock.Checked = False Then
+            ' Change the text to blank, and change colors to match background to "hide". 
+            NoteAnnotationsList(0).Text = ""
+            NoteAnnotationsList(0).Background = OxyColors.White
+            NoteAnnotationsList(0).Stroke = OxyColors.White
+            NoteAnnotationsList(0).TextColor = OxyColors.White
+            NoteAnnotationsList(0).Layer = AnnotationLayer.BelowAxes
+        End If
+
         MyModel.InvalidatePlot(True)
-
-        'set the flag that labels are hidden
-        LabelsHidden = True
-
     End Sub
 
-    Private Sub btnShowLabels_Click(sender As Object, e As EventArgs) Handles btnShowLabels.Click
-        ' Show all the annotation labels by changing the text color to black, and background color to green/yellow. 
-        For i = 0 To AnnotationsList.Count - 1
-            If (REChart_Data.rbUnit1.Checked = True) Then
-                AnnotationsList(i).Background = OxyColors.RoyalBlue
-            End If
-            If (REChart_Data.rbUnit2.Checked = True) Then
-                AnnotationsList(i).Background = OxyColors.Green
-            End If
+    Private Sub cbLabels_Click(sender As Object, e As EventArgs) Handles cbLabels.Click
+        'this sub handles the hiding and showing of the annotation labels. 
 
-            'if its an empty annotation, then let it remain hidden
-            If AnnotationsList(i).Text = "" Then
-                AnnotationsList(i).Background = OxyColor.FromRgb(240, 240, 240)
-                AnnotationsList(i).Stroke = OxyColor.FromRgb(240, 240, 240)
-                AnnotationsList(i).TextColor = OxyColor.FromRgb(240, 240, 240)
-                AnnotationsList(i).Layer = AnnotationLayer.BelowAxes
-            Else
-                'else unhide it.
-                AnnotationsList(i).Stroke = OxyColors.Black
+        If cbLabels.Checked = True Then
+            ' Show all the annotation labels by changing the text color to black, and background color to green/yellow. 
+            For i = 0 To AnnotationsList.Count - 1
+                If (REChart_Data.rbUnit1.Checked = True) Then
+                    AnnotationsList(i).Background = OxyColors.RoyalBlue
+                End If
+                If (REChart_Data.rbUnit2.Checked = True) Then
+                    AnnotationsList(i).Background = OxyColors.Green
+                End If
+
+                'if its an empty annotation, then let it remain hidden
+                If AnnotationsList(i).Text = "" Then
+                    AnnotationsList(i).Background = OxyColors.White
+                    AnnotationsList(i).Stroke = OxyColors.White
+                    AnnotationsList(i).TextColor = OxyColors.White
+                    AnnotationsList(i).Layer = AnnotationLayer.BelowAxes
+                Else
+                    'else unhide it.
+                    AnnotationsList(i).Stroke = OxyColors.Black
+                    AnnotationsList(i).TextColor = OxyColors.White
+                    AnnotationsList(i).Layer = AnnotationLayer.AboveSeries
+                End If
+            Next
+        End If
+
+        If cbLabels.Checked = False Then
+            ' Hide all of the annotation labels by changing the color and background to match the background grey color. 
+            For i = 0 To AnnotationsList.Count - 1
+                AnnotationsList(i).Background = OxyColors.White
+                AnnotationsList(i).Stroke = OxyColors.White
                 AnnotationsList(i).TextColor = OxyColors.White
-                AnnotationsList(i).Layer = AnnotationLayer.AboveSeries
-            End If
-        Next
-        MyModel.InvalidatePlot(True)
+                AnnotationsList(i).Layer = AnnotationLayer.BelowAxes
+            Next
+        End If
 
-        'set the flag that labels are not hidden
-        LabelsHidden = False
+        MyModel.InvalidatePlot(True)
 
     End Sub
 End Class

@@ -29,8 +29,8 @@ Partial Class REChart_Graph
         Me.btnFontSizeUp = New System.Windows.Forms.Button()
         Me.btnFontSizeDown = New System.Windows.Forms.Button()
         Me.btnOverlay = New System.Windows.Forms.Button()
-        Me.btnHideLabels = New System.Windows.Forms.Button()
-        Me.btnShowLabels = New System.Windows.Forms.Button()
+        Me.cbLabels = New System.Windows.Forms.CheckBox()
+        Me.cbApprovalBlock = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'BtnExport
@@ -84,38 +84,42 @@ Partial Class REChart_Graph
         '
         'btnOverlay
         '
-        Me.btnOverlay.Location = New System.Drawing.Point(1056, 38)
+        Me.btnOverlay.Location = New System.Drawing.Point(1056, 37)
         Me.btnOverlay.Name = "btnOverlay"
         Me.btnOverlay.Size = New System.Drawing.Size(63, 28)
         Me.btnOverlay.TabIndex = 25
         Me.btnOverlay.Text = "Overlay"
         Me.btnOverlay.UseVisualStyleBackColor = True
         '
-        'btnHideLabels
+        'cbLabels
         '
-        Me.btnHideLabels.Location = New System.Drawing.Point(1056, 216)
-        Me.btnHideLabels.Name = "btnHideLabels"
-        Me.btnHideLabels.Size = New System.Drawing.Size(63, 45)
-        Me.btnHideLabels.TabIndex = 26
-        Me.btnHideLabels.Text = "Hide Labels"
-        Me.btnHideLabels.UseVisualStyleBackColor = True
+        Me.cbLabels.AutoSize = True
+        Me.cbLabels.Checked = True
+        Me.cbLabels.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.cbLabels.Location = New System.Drawing.Point(1056, 219)
+        Me.cbLabels.Name = "cbLabels"
+        Me.cbLabels.Size = New System.Drawing.Size(57, 17)
+        Me.cbLabels.TabIndex = 26
+        Me.cbLabels.Text = "Labels"
+        Me.cbLabels.UseVisualStyleBackColor = True
         '
-        'btnShowLabels
+        'cbApprovalBlock
         '
-        Me.btnShowLabels.Location = New System.Drawing.Point(1056, 267)
-        Me.btnShowLabels.Name = "btnShowLabels"
-        Me.btnShowLabels.Size = New System.Drawing.Size(63, 45)
-        Me.btnShowLabels.TabIndex = 27
-        Me.btnShowLabels.Text = "Show Labels"
-        Me.btnShowLabels.UseVisualStyleBackColor = True
+        Me.cbApprovalBlock.AutoSize = True
+        Me.cbApprovalBlock.Location = New System.Drawing.Point(1056, 242)
+        Me.cbApprovalBlock.Name = "cbApprovalBlock"
+        Me.cbApprovalBlock.Size = New System.Drawing.Size(71, 30)
+        Me.cbApprovalBlock.TabIndex = 27
+        Me.cbApprovalBlock.Text = "Approval " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Block"
+        Me.cbApprovalBlock.UseVisualStyleBackColor = True
         '
         'REChart_Graph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1121, 796)
-        Me.Controls.Add(Me.btnShowLabels)
-        Me.Controls.Add(Me.btnHideLabels)
+        Me.ClientSize = New System.Drawing.Size(1143, 796)
+        Me.Controls.Add(Me.cbApprovalBlock)
+        Me.Controls.Add(Me.cbLabels)
         Me.Controls.Add(Me.btnOverlay)
         Me.Controls.Add(Me.btnFontSizeDown)
         Me.Controls.Add(Me.btnFontSizeUp)
@@ -135,6 +139,6 @@ Partial Class REChart_Graph
     Friend WithEvents btnFontSizeUp As Button
     Friend WithEvents btnFontSizeDown As Button
     Friend WithEvents btnOverlay As Button
-    Friend WithEvents btnHideLabels As Button
-    Friend WithEvents btnShowLabels As Button
+    Friend WithEvents cbLabels As CheckBox
+    Friend WithEvents cbApprovalBlock As CheckBox
 End Class
