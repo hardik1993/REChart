@@ -58,7 +58,7 @@ Partial Class REChart_Data
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblMWE = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblLostMWE = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.btnHelp = New System.Windows.Forms.Button()
+        Me.btn_Help = New System.Windows.Forms.Button()
         CType(Me.dgvStatepoints, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpAddStatePoints.SuspendLayout()
         Me.grpInitialConditions.SuspendLayout()
@@ -431,43 +431,26 @@ Partial Class REChart_Data
         Me.lblLostMWE.Size = New System.Drawing.Size(89, 17)
         Me.lblLostMWE.Text = "Lost MWHrE:"
         '
-        'DateTime
+        'btn_Help
         '
-        Me.DateTime.HeaderText = "Date/Time"
-        Me.DateTime.Name = "DateTime"
-        Me.DateTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'HoursForAction
-        '
-        Me.HoursForAction.HeaderText = "Hours For Action"
-        Me.HoursForAction.Name = "HoursForAction"
-        Me.HoursForAction.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'HoursFromStart
-        '
-        Me.HoursFromStart.HeaderText = "Hours From Start"
-        Me.HoursFromStart.Name = "HoursFromStart"
-        Me.HoursFromStart.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Power
-        '
-        Me.Power.HeaderText = "Power"
-        Me.Power.Name = "Power"
-        Me.Power.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Description
-        '
-        Me.Description.HeaderText = "Description"
-        Me.Description.Name = "Description"
-        Me.Description.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Description.Width = 325
+        Me.btn_Help.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.btn_Help.FlatAppearance.BorderSize = 4
+        Me.btn_Help.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.btn_Help.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_Help.Location = New System.Drawing.Point(739, 5)
+        Me.btn_Help.Name = "btn_Help"
+        Me.btn_Help.Size = New System.Drawing.Size(43, 31)
+        Me.btn_Help.TabIndex = 100
+        Me.btn_Help.TabStop = False
+        Me.btn_Help.Text = "Help"
+        Me.btn_Help.UseVisualStyleBackColor = True
         '
         'REChart_Data
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(788, 585)
-        Me.Controls.Add(Me.btnHelp)
+        Me.Controls.Add(Me.btn_Help)
         Me.Controls.Add(Me.lblAuthor)
         Me.Controls.Add(Me.btnLoadData)
         Me.Controls.Add(Me.btnSaveData)
@@ -528,5 +511,5 @@ Partial Class REChart_Data
     Friend WithEvents HoursFromStart As DataGridViewTextBoxColumn
     Friend WithEvents Power As DataGridViewTextBoxColumn
     Friend WithEvents Description As DataGridViewTextBoxColumn
-    Friend WithEvents btnHelp As Button
+    Friend WithEvents btn_Help As Button
 End Class

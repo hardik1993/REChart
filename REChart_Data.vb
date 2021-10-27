@@ -347,7 +347,7 @@ Public Class REChart_Data
         End If
     End Sub
 
-    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+    Private Sub btn_Help_Click(sender As Object, e As EventArgs) Handles btn_Help.Click
         REChart_Help.Show()
     End Sub
 End Class
