@@ -8,6 +8,7 @@ Public Class REChart_Data
     Public PowerArray As Double()
     Public DescArray As String()
     Public FullPowerMWE As Double = 1300
+    Public LostMWHE As Double
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' form load event.
@@ -91,7 +92,8 @@ Public Class REChart_Data
             End If
         Next
 
-        lblMWE.Text = result
+        LostMWHE = Math.Round(result, 1)
+        lblMWE.Text = Math.Round(result, 1)
 
     End Sub
 

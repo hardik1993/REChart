@@ -412,16 +412,18 @@ Partial Class REChart_Data
         '
         'lblMWE
         '
+        Me.lblMWE.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblMWE.Name = "lblMWE"
-        Me.lblMWE.Size = New System.Drawing.Size(13, 17)
+        Me.lblMWE.Size = New System.Drawing.Size(15, 17)
         Me.lblMWE.Text = "0"
         '
         'lblLostMWE
         '
+        Me.lblLostMWE.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblLostMWE.Name = "lblLostMWE"
         Me.lblLostMWE.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.lblLostMWE.Size = New System.Drawing.Size(76, 17)
-        Me.lblLostMWE.Text = "Lost MWHre:"
+        Me.lblLostMWE.Size = New System.Drawing.Size(89, 17)
+        Me.lblLostMWE.Text = "Lost MWHrE:"
         '
         'REChart_Data
         '

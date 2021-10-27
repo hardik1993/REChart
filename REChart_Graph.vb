@@ -30,15 +30,19 @@ Public Class REChart_Graph
     Dim HourlyDateTime As Date()
     Dim HourlyPowerArray As Double()
 
-    'PI Object global vars
+
+    'PI Object global vars 
+    ' Pi Server host name
     Dim PIServerName As String = "DL2550T"
     Dim MyPISDK As PISDK.PISDK
     Dim MyApplicationObject As PISDKDlg.ApplicationObject
     Dim MyServer As PISDK.Server
     Dim MyPoints As PISDK.PIPoints
     Dim MyPoint As PISDK.PIPoint
-    Dim MyValues As PISDK.PIValues
+    'Global vars For minutely data For PI data overlay. 
     Dim MyTimeStampArray As Object()
+    Dim MyValues As PISDK.PIValues
+
 
     Private Sub REChart_Graph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Call GenerateLoadProfile()
@@ -315,7 +319,7 @@ Public Class REChart_Graph
         NoteAnnotationsList(1).Stroke = OxyColors.White
         NoteAnnotationsList(1).TextColor = OxyColors.White
         NoteAnnotationsList(1).Layer = AnnotationLayer.BelowAxes
-        NoteAnnotationsList(1).TextPosition = New OxyPlot.DataPoint(xAxis.Maximum, yAxis.Minimum)
+        NoteAnnotationsList(1).TextPosition = New OxyPlot.DataPoint(xAxis.Maximum, yAxis.Minimum + 14)
         MyModel.Annotations.Add(NoteAnnotationsList(1))
         ' Event handlers 
         AddHandler NoteAnnotationsList(1).MouseDown, AddressOf NoteAnnotationMouseDown
@@ -395,6 +399,10 @@ Public Class REChart_Graph
         'add series to the data model, and bind the model to the plotview. 
         MyModel.Series.Add(MySeries)
         Me.PlotView1.Model = MyModel
+
+        'Update Predicted Lost MW's
+        lblPredictedLostMWs.Text = REChart_Data.LostMWHE.ToString
+
     End Sub
 
     Private Sub AnnotationMouseDown(sender As Object, e As OxyPlot.OxyMouseDownEventArgs)
@@ -1002,6 +1010,23 @@ Interpolate_Error:
     End Sub
 
     Private Sub cbReducedPower_Click(sender As Object, e As EventArgs) Handles cbReducedPower.Click
+        ' This Handles the adding and hiding of the Reduced Power Level note block.
+        If cbReducedPower.Checked = True Then
+            NoteAnnotationsList(1).Text = "Note: At reduced power, Power Levels" + vbNewLine + "are +/- 2% RTP - Unless otherwise noted."
+            NoteAnnotationsList(1).TextColor = OxyColors.Black
+            NoteAnnotationsList(1).StrokeThickness = 3
+            NoteAnnotationsList(1).Stroke = OxyColor.FromRgb(204, 204, 0)
+            NoteAnnotationsList(1).Background = OxyColors.White
+        End If
 
+        If cbReducedPower.Checked = False Then
+            ' Change the text to blank, and change colors to match background to "hide". 
+            NoteAnnotationsList(1).Text = ""
+            NoteAnnotationsList(1).Background = OxyColors.White
+            NoteAnnotationsList(1).Stroke = OxyColors.White
+            NoteAnnotationsList(1).TextColor = OxyColors.White
+            NoteAnnotationsList(1).Layer = AnnotationLayer.BelowAxes
+        End If
+        MyModel.InvalidatePlot(True)
     End Sub
 End Class
