@@ -326,7 +326,7 @@ Public Class REChart_Graph
         NoteAnnotationsList.Add(New OxyPlot.Annotations.TextAnnotation)
         NoteAnnotationsList(2).Text = ""
         NoteAnnotationsList(2).Tag = 2
-        NoteAnnotationsList(2).FontSize = 25
+        NoteAnnotationsList(2).FontSize = 30
         NoteAnnotationsList(2).Font = "Consolas"
         NoteAnnotationsList(2).Background = OxyColors.White
         NoteAnnotationsList(2).Stroke = OxyColors.White
