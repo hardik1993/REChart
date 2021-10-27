@@ -31,6 +31,8 @@ Partial Class REChart_Graph
         Me.btnOverlay = New System.Windows.Forms.Button()
         Me.cbLabels = New System.Windows.Forms.CheckBox()
         Me.cbApprovalBlock = New System.Windows.Forms.CheckBox()
+        Me.cbDraft = New System.Windows.Forms.CheckBox()
+        Me.cbReducedPower = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'BtnExport
@@ -113,11 +115,33 @@ Partial Class REChart_Graph
         Me.cbApprovalBlock.Text = "Approval " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Block"
         Me.cbApprovalBlock.UseVisualStyleBackColor = True
         '
+        'cbDraft
+        '
+        Me.cbDraft.AutoSize = True
+        Me.cbDraft.Location = New System.Drawing.Point(1056, 278)
+        Me.cbDraft.Name = "cbDraft"
+        Me.cbDraft.Size = New System.Drawing.Size(62, 17)
+        Me.cbDraft.TabIndex = 28
+        Me.cbDraft.Text = "DRAFT"
+        Me.cbDraft.UseVisualStyleBackColor = True
+        '
+        'cbReducedPower
+        '
+        Me.cbReducedPower.AutoSize = True
+        Me.cbReducedPower.Location = New System.Drawing.Point(1056, 301)
+        Me.cbReducedPower.Name = "cbReducedPower"
+        Me.cbReducedPower.Size = New System.Drawing.Size(70, 30)
+        Me.cbReducedPower.TabIndex = 29
+        Me.cbReducedPower.Text = "Reduced" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Power" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.cbReducedPower.UseVisualStyleBackColor = True
+        '
         'REChart_Graph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1143, 796)
+        Me.ClientSize = New System.Drawing.Size(1123, 796)
+        Me.Controls.Add(Me.cbReducedPower)
+        Me.Controls.Add(Me.cbDraft)
         Me.Controls.Add(Me.cbApprovalBlock)
         Me.Controls.Add(Me.cbLabels)
         Me.Controls.Add(Me.btnOverlay)
@@ -141,4 +165,6 @@ Partial Class REChart_Graph
     Friend WithEvents btnOverlay As Button
     Friend WithEvents cbLabels As CheckBox
     Friend WithEvents cbApprovalBlock As CheckBox
+    Friend WithEvents cbDraft As CheckBox
+    Friend WithEvents cbReducedPower As CheckBox
 End Class

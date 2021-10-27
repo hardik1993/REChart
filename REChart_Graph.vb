@@ -308,7 +308,7 @@ Public Class REChart_Graph
         ' 1- Reduced Power Level Note
         NoteAnnotationsList.Add(New OxyPlot.Annotations.TextAnnotation)
         NoteAnnotationsList(1).Text = ""
-        NoteAnnotationsList(1).Tag = 0
+        NoteAnnotationsList(1).Tag = 1
         NoteAnnotationsList(1).FontSize = 10
         NoteAnnotationsList(1).Font = "Consolas"
         NoteAnnotationsList(1).Background = OxyColors.White
@@ -325,14 +325,14 @@ Public Class REChart_Graph
         ' 2- DRAFT Note
         NoteAnnotationsList.Add(New OxyPlot.Annotations.TextAnnotation)
         NoteAnnotationsList(2).Text = ""
-        NoteAnnotationsList(2).Tag = 0
-        NoteAnnotationsList(2).FontSize = 10
+        NoteAnnotationsList(2).Tag = 2
+        NoteAnnotationsList(2).FontSize = 25
         NoteAnnotationsList(2).Font = "Consolas"
         NoteAnnotationsList(2).Background = OxyColors.White
         NoteAnnotationsList(2).Stroke = OxyColors.White
         NoteAnnotationsList(2).TextColor = OxyColors.White
         NoteAnnotationsList(2).Layer = AnnotationLayer.BelowAxes
-        NoteAnnotationsList(2).TextPosition = New OxyPlot.DataPoint(xAxis.Maximum, yAxis.Minimum)
+        NoteAnnotationsList(2).TextPosition = New OxyPlot.DataPoint(xAxis.Maximum, yAxis.Minimum + 14)
         MyModel.Annotations.Add(NoteAnnotationsList(2))
         ' Event handlers 
         AddHandler NoteAnnotationsList(2).MouseDown, AddressOf NoteAnnotationMouseDown
@@ -976,6 +976,32 @@ Interpolate_Error:
         End If
 
         MyModel.InvalidatePlot(True)
+
+    End Sub
+
+    Private Sub cbDraft_Click(sender As Object, e As EventArgs) Handles cbDraft.Click
+        ' This Handles the adding and hiding of the DRAFT block.
+        If cbDraft.Checked = True Then
+            'create the draft block text, and setup colors. 
+            NoteAnnotationsList(2).Text = "DRAFT"
+            NoteAnnotationsList(2).FontWeight = FontWeights.Bold
+            NoteAnnotationsList(2).TextColor = OxyColors.Red
+            NoteAnnotationsList(2).Stroke = OxyColors.White
+            NoteAnnotationsList(2).Background = OxyColors.White
+        End If
+
+        If cbDraft.Checked = False Then
+            ' Change the text to blank, and change colors to match background to "hide". 
+            NoteAnnotationsList(2).Text = ""
+            NoteAnnotationsList(2).Background = OxyColors.White
+            NoteAnnotationsList(2).Stroke = OxyColors.White
+            NoteAnnotationsList(2).TextColor = OxyColors.White
+            NoteAnnotationsList(2).Layer = AnnotationLayer.BelowAxes
+        End If
+        MyModel.InvalidatePlot(True)
+    End Sub
+
+    Private Sub cbReducedPower_Click(sender As Object, e As EventArgs) Handles cbReducedPower.Click
 
     End Sub
 End Class
