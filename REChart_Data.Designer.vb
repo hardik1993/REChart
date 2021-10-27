@@ -428,8 +428,8 @@ Partial Class REChart_Data
         Me.lblLostMWE.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblLostMWE.Name = "lblLostMWE"
         Me.lblLostMWE.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.lblLostMWE.Size = New System.Drawing.Size(89, 17)
-        Me.lblLostMWE.Text = "Lost MWHrE:"
+        Me.lblLostMWE.Size = New System.Drawing.Size(74, 17)
+        Me.lblLostMWE.Text = "Lost MWe:"
         '
         'btn_Help
         '
