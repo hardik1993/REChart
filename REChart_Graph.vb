@@ -291,6 +291,7 @@ Public Class REChart_Graph
         ' 0 - Aproval Block
         ' 1 - Reduced Power Level Note
         ' 2 - DRAFT Note
+        ' 3 - More RPAs Note
 
         ' 0- Approval Block
         NoteAnnotationsList.Add(New OxyPlot.Annotations.TextAnnotation)
@@ -342,6 +343,23 @@ Public Class REChart_Graph
         AddHandler NoteAnnotationsList(2).MouseDown, AddressOf NoteAnnotationMouseDown
         AddHandler NoteAnnotationsList(2).MouseMove, AddressOf NoteAnnotationMouseMove
         AddHandler NoteAnnotationsList(2).MouseUp, AddressOf NoteAnnotationMouseUp
+
+        ' 3- More RPAs Note
+        NoteAnnotationsList.Add(New OxyPlot.Annotations.TextAnnotation)
+        NoteAnnotationsList(3).Text = ""
+        NoteAnnotationsList(3).Tag = 3
+        NoteAnnotationsList(3).FontSize = 10
+        NoteAnnotationsList(3).Font = "Consolas"
+        NoteAnnotationsList(3).Background = OxyColors.White
+        NoteAnnotationsList(3).Stroke = OxyColors.White
+        NoteAnnotationsList(3).TextColor = OxyColors.White
+        NoteAnnotationsList(3).Layer = AnnotationLayer.BelowAxes
+        NoteAnnotationsList(3).TextPosition = New OxyPlot.DataPoint(xAxis.Maximum, yAxis.Minimum + 15)
+        MyModel.Annotations.Add(NoteAnnotationsList(3))
+        ' Event handlers 
+        AddHandler NoteAnnotationsList(3).MouseDown, AddressOf NoteAnnotationMouseDown
+        AddHandler NoteAnnotationsList(3).MouseMove, AddressOf NoteAnnotationMouseMove
+        AddHandler NoteAnnotationsList(3).MouseUp, AddressOf NoteAnnotationMouseUp
 
         'loop through array, and add points to data series
         MySeries.MarkerType = MarkerType.Circle
@@ -1012,6 +1030,7 @@ Interpolate_Error:
     Private Sub cbReducedPower_Click(sender As Object, e As EventArgs) Handles cbReducedPower.Click
         ' This Handles the adding and hiding of the Reduced Power Level note block.
         If cbReducedPower.Checked = True Then
+            ' add the text, and set up the colors, and borders 
             NoteAnnotationsList(1).Text = "Note: At reduced power, Power Levels" + vbNewLine + "are +/- 2% RTP - Unless otherwise noted."
             NoteAnnotationsList(1).TextColor = OxyColors.Black
             NoteAnnotationsList(1).StrokeThickness = 3
@@ -1026,6 +1045,32 @@ Interpolate_Error:
             NoteAnnotationsList(1).Stroke = OxyColors.White
             NoteAnnotationsList(1).TextColor = OxyColors.White
             NoteAnnotationsList(1).Layer = AnnotationLayer.BelowAxes
+        End If
+        MyModel.InvalidatePlot(True)
+    End Sub
+
+    Private Sub cbMoreRPAs_Click(sender As Object, e As EventArgs) Handles cbMoreRPAs.Click
+        ' This Handles the adding and hiding of the More RPA's note block.
+        If cbMoreRPAs.Checked = True Then
+            ' add the text, and set up the colors, and borders 
+            NoteAnnotationsList(3).Text =
+                "Note: More Rod Pattern Adjustments (including" + vbNewLine +
+                "as low as 60%) will be needed to establish" + vbNewLine +
+                "the final Rod Pattern. The Load Profile will" + vbNewLine +
+                "be updated as new data becomes available."
+            NoteAnnotationsList(3).TextColor = OxyColors.Black
+            NoteAnnotationsList(3).StrokeThickness = 3
+            NoteAnnotationsList(3).Stroke = OxyColor.FromRgb(204, 204, 0)
+            NoteAnnotationsList(3).Background = OxyColors.White
+        End If
+
+        If cbMoreRPAs.Checked = False Then
+            ' Change the text to blank, and change colors to match background to "hide". 
+            NoteAnnotationsList(3).Text = ""
+            NoteAnnotationsList(3).Background = OxyColors.White
+            NoteAnnotationsList(3).Stroke = OxyColors.White
+            NoteAnnotationsList(3).TextColor = OxyColors.White
+            NoteAnnotationsList(3).Layer = AnnotationLayer.BelowAxes
         End If
         MyModel.InvalidatePlot(True)
     End Sub
