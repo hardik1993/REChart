@@ -7,6 +7,7 @@ Imports OxyPlot.PdfExporter
 Imports System
 Imports System.IO
 Imports Excel = Microsoft.Office.Interop.Excel
+Imports System.ComponentModel
 
 Public Class REChart_Graph
 

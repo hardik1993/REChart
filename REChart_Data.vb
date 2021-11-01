@@ -207,6 +207,10 @@ Public Class REChart_Data
     End Sub
 
     Private Sub btnSaveData_Click(sender As Object, e As EventArgs) Handles btnSaveData.Click
+        Call Save()
+    End Sub
+
+    Private Sub Save()
         'This routine will, prompt the user to select a location, and name the file, 
         ' and  save the current data in the form in a text file. 
 
@@ -395,5 +399,31 @@ Public Class REChart_Data
 
     Private Sub btn_Help_Click(sender As Object, e As EventArgs) Handles btn_Help.Click
         REChart_Help.Show()
+    End Sub
+
+    Private Sub REChart_Data_Closing(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles Me.Closing
+        Dim dir As New IO.DirectoryInfo("C:\Users\E204727")
+        If dir.Exists Then
+            Dim result As DialogResult = MsgBox("DEAN!! YOU CLICKED THE EXIT BUTTON AND MIGHT NOT HAVE SAVED!!! WOULD YOU LIKE TO SAVE NOW?!?!?!", MsgBoxStyle.YesNo, "DEAN!@!!!!!WR@!@#!@#!@$")
+            If result = DialogResult.Yes Then
+                Call Save()
+            ElseIf result = DialogResult.No Then
+
+                Dim result_two As DialogResult = MsgBox("DEAN!! ARE YOU SURE?!?!?!", MsgBoxStyle.YesNo, "DEAN!@!!!!!WR@!@#!@!$@%@!%!#!@$")
+                If result_two = DialogResult.Yes Then
+                    Exit Sub
+                ElseIf result_two = DialogResult.No Then
+                    Call Save()
+                End If
+
+            End If
+        Else
+            Dim result As DialogResult = MsgBox("Would you like to save?", MsgBoxStyle.YesNo, "Save?")
+            If result = DialogResult.Yes Then
+                Call Save()
+            ElseIf result = DialogResult.No Then
+                Exit Sub
+            End If
+        End If
     End Sub
 End Class
