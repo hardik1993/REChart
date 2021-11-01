@@ -55,7 +55,7 @@ Public Class REChart_Graph
         End If
 
         If REChart_Data.cbStartUpLP.Checked = True Then
-
+            'stuff
         End If
 
     End Sub
@@ -166,7 +166,7 @@ Public Class REChart_Graph
     Private Sub GenerateLoadProfile()
         ' This sub takes data from the Data Entry form from the global arrays, and generates the Load Profile. 
         ' Sets up the oxyplot controls, axis, data model, binds the data, generates the annotations, etc. 
-
+        ' This is the NON-Startup routine. X axis is in Date/Time. 
         Try
             'set up x axis as a date/time axis
             Dim MinDateTime As Date
@@ -436,6 +436,269 @@ Public Class REChart_Graph
 
         Catch ex As Exception
             MsgBox(ex.Message + " Occured in Private Sub GenerateLoadProfile() in REChart_Graph.vb")
+        End Try
+
+    End Sub
+
+    Private Sub GenerateLoadProfile_StartUp()
+        ' This sub takes data from the Data Entry form from the global arrays, and generates the Load Profile. 
+        ' Sets up the oxyplot controls, axis, data model, binds the data, generates the annotations, etc. 
+        ' This is the Startup routine. X axis is in hours from breaker closure. 
+        Try
+            'set up x axis as a hours linear axis. Setup max and min values to x axis
+            Dim xAxis As New LinearAxis()
+            xAxis.Position = AxisPosition.Bottom
+            xAxis.Minimum = 0
+            xAxis.Maximum = REChart_Data.HoursArray(REChart_Data.HoursArray.Length - 1)
+            xAxis.MajorGridlineStyle = LineStyle.Dash
+            xAxis.Title = "Hours After Breaker Closure"
+            xAxis.TitleFontWeight = FontWeights.Bold
+
+            'setup y axis, and set max and mins 
+            Dim yAxis As New LinearAxis
+            yAxis.Position = AxisPosition.Left
+            yAxis.Maximum = MaxValue(REChart_Data.PowerArray) + 4.5
+            yAxis.Minimum = MinValue(REChart_Data.PowerArray) - 4.5
+            yAxis.MajorGridlineStyle = LineStyle.Solid
+            yAxis.Title = "Power Level (% CTP)"
+            yAxis.TitleFontWeight = FontWeights.Bold
+
+            'set up plot model, Create a Title, based on the entry from the data form. 
+            Dim strTitle As String = REChart_Data.txtManuverTitle.Text + " " +
+            REChart_Data.DateTimeArray(0).ToString("MM/dd/yy") + " - " +
+            REChart_Data.DateTimeArray(REChart_Data.DateTimeArray.Length - 1).ToString("MM/dd/yy")
+            MyModel.Title = strTitle
+            MyModel.TitleFont = "Consolas"
+            MyModel.TitleFontSize = 24
+            MyModel.TitleFontWeight = FontWeights.Bold
+            MyModel.Background = OxyColors.White
+
+            'set up line series
+            MySeries.Title = "Load Profile"
+
+            'add x and y axis to the data model
+            MyModel.Axes.Add(xAxis)
+            MyModel.Axes.Add(yAxis)
+
+            ' Have to -2 because redim keeps the initial 1 element, and we are trashing the first "START". 
+            ' Skip the first annotation Label "START". This is the default label on the load profile for the starting point.
+            ' and does not need to be labeled on the load profile.  
+            ReDim AnnotationTextArray(REChart_Data.DescArray.Length - 2)
+
+            'first step is to form array of annotation descriptions. This will be the date/time range for 
+            ' action appended with the actual description of the step from desc array. Also some logic 
+            ' in there to Not include the mm/dd twice if the date has not changed. 
+            Dim tempstr As String
+            For i As Integer = 1 To AnnotationTextArray.Length
+                'if the date has not changed then scrap the second MM/dd
+                If REChart_Data.DateTimeArray(i - 1).ToString("MM/dd") = REChart_Data.DateTimeArray(i).ToString("MM/dd") Then
+                    tempstr = REChart_Data.DateTimeArray(i - 1).ToString("MM/dd HH:mm") + " - " +
+                    REChart_Data.DateTimeArray(i).ToString("HH:mm")
+                    'else keep the second MM/dd
+                Else
+                    tempstr = REChart_Data.DateTimeArray(i - 1).ToString("MM/dd HH:mm") + " - " +
+                    REChart_Data.DateTimeArray(i).ToString("MM/dd HH:mm")
+                End If
+
+                'Handle condition If there is an empty desc block and the previous block was NOT empty
+                ' then need from/to date time from begening And end of consecutive empty blocks. 
+                ' This Is handling the condition when a combined desc block Is used. Or REChart_Data.DescArray(i) = ""
+                If i < AnnotationTextArray.Length Then ' this covers the boundry condition of i + 1 
+                    If REChart_Data.DescArray(i + 1) = "" And REChart_Data.DescArray(i - 1) <> "" And REChart_Data.DescArray(i) <> "" Then
+                        ' this is the "From" Date/Time for this annotation
+                        Dim FromDateTime As String = REChart_Data.DateTimeArray(i - 1).ToString("MM/dd HH:mm")
+                        'now need to find "TO" date time for this annotation. This is found by finding the last consecutive enpty desc block. 
+                        Dim counter As Integer = i + 1
+                        While REChart_Data.DescArray(counter) = ""
+                            counter = counter + 1
+                        End While
+                        'found the TO date, set a var to it.
+                        Dim ToDateTime As String = REChart_Data.DateTimeArray(counter - 1).ToString("MM/dd HH:mm")
+                        AnnotationTextArray(i - 1) = Center2Lines(REChart_Data.DescArray(i), FromDateTime + " - " + ToDateTime)
+
+                        'the condition where empty place holder is needed. 
+                    ElseIf REChart_Data.DescArray(i) = "" Then
+                        AnnotationTextArray(i - 1) = ""
+
+                        ' the normal condition
+                    Else
+                        AnnotationTextArray(i - 1) = Center2Lines(REChart_Data.DescArray(i), tempstr)
+                    End If
+
+                ElseIf i = AnnotationTextArray.Length Then ' handles the last desc block 
+                    AnnotationTextArray(i - 1) = Center2Lines(REChart_Data.DescArray(i), tempstr)
+                End If
+
+            Next
+
+            Dim CurrentPoint As OxyPlot.DataPoint
+            Dim NextPoint As OxyPlot.DataPoint
+            'setup annotations. Add annotations to the a list. 
+            'set the descriptions from DescArray, and the date/time range for action. 
+            'set the locations at the mid point of the line for the action.
+            For i = 0 To AnnotationTextArray.Length - 1
+                AnnotationsList.Add(New OxyPlot.Annotations.TextAnnotation)
+                AnnotationsList(i).Text = AnnotationTextArray(i)
+
+                'set font to monospaced font and default size 12
+                AnnotationsList(i).FontSize = 12
+                AnnotationsList(i).Font = "Consolas"
+
+                'set previous point and current point, calculate the mid point, and set the location of the annotation as the midpoint.
+                CurrentPoint = New OxyPlot.DataPoint(REChart_Data.DateTimeArray(i).ToOADate, REChart_Data.PowerArray(i))
+                NextPoint = New OxyPlot.DataPoint(REChart_Data.DateTimeArray(i + 1).ToOADate, REChart_Data.PowerArray(i + 1))
+                AnnotationsList(i).TextPosition = CalculateMidPointOfLine(CurrentPoint, NextPoint)
+
+                'setting tag value to the index of the annotation in the list. so that it can be 
+                ' checked later, to find out which annotation was clicked in the event handler. 
+                AnnotationsList(i).Tag = i
+
+                'add annotation to the data model. 
+                MyModel.Annotations.Add(AnnotationsList(i))
+
+                'add event handlers for mouse down, move and up events, to enable draging the annotation in real time. 
+                AddHandler AnnotationsList(i).MouseDown, AddressOf AnnotationMouseDown
+                AddHandler AnnotationsList(i).MouseMove, AddressOf AnnotationMouseMove
+                AddHandler AnnotationsList(i).MouseUp, AddressOf AnnotationMouseUp
+            Next
+
+            'add blank annotations/event handlers for Draft, Approval Block, and Reduced Power Level Note
+            ' List in order
+            ' 0 - Aproval Block
+            ' 1 - Reduced Power Level Note
+            ' 2 - DRAFT Note
+            ' 3 - More RPAs Note
+
+            ' 0- Approval Block
+            NoteAnnotationsList.Add(New OxyPlot.Annotations.TextAnnotation)
+            NoteAnnotationsList(0).Text = ""
+            NoteAnnotationsList(0).Tag = 0
+            NoteAnnotationsList(0).FontSize = 10
+            NoteAnnotationsList(0).Font = "Consolas"
+            NoteAnnotationsList(0).Background = OxyColors.White
+            NoteAnnotationsList(0).Stroke = OxyColors.White
+            NoteAnnotationsList(0).TextColor = OxyColors.White
+            NoteAnnotationsList(0).Layer = AnnotationLayer.BelowAxes
+            NoteAnnotationsList(0).TextPosition = New OxyPlot.DataPoint(xAxis.Maximum, yAxis.Minimum + 0.5)
+            MyModel.Annotations.Add(NoteAnnotationsList(0))
+            ' Event handlers 
+            AddHandler NoteAnnotationsList(0).MouseDown, AddressOf NoteAnnotationMouseDown
+            AddHandler NoteAnnotationsList(0).MouseMove, AddressOf NoteAnnotationMouseMove
+            AddHandler NoteAnnotationsList(0).MouseUp, AddressOf NoteAnnotationMouseUp
+
+            ' 1- Reduced Power Level Note
+            NoteAnnotationsList.Add(New OxyPlot.Annotations.TextAnnotation)
+            NoteAnnotationsList(1).Text = ""
+            NoteAnnotationsList(1).Tag = 1
+            NoteAnnotationsList(1).FontSize = 10
+            NoteAnnotationsList(1).Font = "Consolas"
+            NoteAnnotationsList(1).Background = OxyColors.White
+            NoteAnnotationsList(1).Stroke = OxyColors.White
+            NoteAnnotationsList(1).TextColor = OxyColors.White
+            NoteAnnotationsList(1).Layer = AnnotationLayer.BelowAxes
+            NoteAnnotationsList(1).TextPosition = New OxyPlot.DataPoint(xAxis.Maximum, yAxis.Minimum + 14)
+            MyModel.Annotations.Add(NoteAnnotationsList(1))
+            ' Event handlers 
+            AddHandler NoteAnnotationsList(1).MouseDown, AddressOf NoteAnnotationMouseDown
+            AddHandler NoteAnnotationsList(1).MouseMove, AddressOf NoteAnnotationMouseMove
+            AddHandler NoteAnnotationsList(1).MouseUp, AddressOf NoteAnnotationMouseUp
+
+            ' 2- DRAFT Note
+            NoteAnnotationsList.Add(New OxyPlot.Annotations.TextAnnotation)
+            NoteAnnotationsList(2).Text = ""
+            NoteAnnotationsList(2).Tag = 2
+            NoteAnnotationsList(2).FontSize = 30
+            NoteAnnotationsList(2).Font = "Consolas"
+            NoteAnnotationsList(2).Background = OxyColors.White
+            NoteAnnotationsList(2).Stroke = OxyColors.White
+            NoteAnnotationsList(2).TextColor = OxyColors.White
+            NoteAnnotationsList(2).Layer = AnnotationLayer.BelowAxes
+            NoteAnnotationsList(2).TextPosition = New OxyPlot.DataPoint(xAxis.Maximum, yAxis.Minimum + 14)
+            MyModel.Annotations.Add(NoteAnnotationsList(2))
+            ' Event handlers 
+            AddHandler NoteAnnotationsList(2).MouseDown, AddressOf NoteAnnotationMouseDown
+            AddHandler NoteAnnotationsList(2).MouseMove, AddressOf NoteAnnotationMouseMove
+            AddHandler NoteAnnotationsList(2).MouseUp, AddressOf NoteAnnotationMouseUp
+
+            ' 3- More RPAs Note
+            NoteAnnotationsList.Add(New OxyPlot.Annotations.TextAnnotation)
+            NoteAnnotationsList(3).Text = ""
+            NoteAnnotationsList(3).Tag = 3
+            NoteAnnotationsList(3).FontSize = 10
+            NoteAnnotationsList(3).Font = "Consolas"
+            NoteAnnotationsList(3).Background = OxyColors.White
+            NoteAnnotationsList(3).Stroke = OxyColors.White
+            NoteAnnotationsList(3).TextColor = OxyColors.White
+            NoteAnnotationsList(3).Layer = AnnotationLayer.BelowAxes
+            NoteAnnotationsList(3).TextPosition = New OxyPlot.DataPoint(xAxis.Maximum, yAxis.Minimum + 15)
+            MyModel.Annotations.Add(NoteAnnotationsList(3))
+            ' Event handlers 
+            AddHandler NoteAnnotationsList(3).MouseDown, AddressOf NoteAnnotationMouseDown
+            AddHandler NoteAnnotationsList(3).MouseMove, AddressOf NoteAnnotationMouseMove
+            AddHandler NoteAnnotationsList(3).MouseUp, AddressOf NoteAnnotationMouseUp
+
+            'loop through array, and add points to data series
+            MySeries.MarkerType = MarkerType.Circle
+            For i = 0 To REChart_Data.PowerArray.Length - 1
+                MySeries.Points.Add(New OxyPlot.DataPoint(DateTimeAxis.ToDouble(REChart_Data.DateTimeArray(i)), REChart_Data.PowerArray(i)))
+            Next
+
+            'don't draw legend since there is only one series. 
+            MySeries.RenderInLegend = False
+
+            'Do unit specific stuff 
+            'Set the colors based on Unit. Unit 1 = blue, unit 2 = green.
+            ' append "Unit x Cycle xx" + newline in the title based on selection. 
+            If (REChart_Data.rbUnit1.Checked = True) Then
+                MySeries.Color = OxyColors.RoyalBlue
+                MySeries.StrokeThickness = 4
+                MySeries.MarkerSize = 4
+                MyModel.TitleColor = OxyColors.RoyalBlue
+                MyModel.Title = Center2Lines("Unit 1 Cycle " + REChart_Data.txtCycle.Text, strTitle)
+                For i As Integer = 0 To AnnotationsList.Count - 1
+                    AnnotationsList(i).Background = OxyColors.RoyalBlue
+                    AnnotationsList(i).TextColor = OxyColors.White
+                    AnnotationsList(i).FontWeight = FontWeights.Bold
+                    'if annotation text is empty or "" then hode the annotation
+                    If AnnotationsList(i).Text = "" Or AnnotationsList(i).Text = " " Then
+                        AnnotationsList(i).Layer = AnnotationLayer.BelowSeries
+                        AnnotationsList(i).Layer = AnnotationLayer.BelowAxes
+                        AnnotationsList(i).Background = OxyColors.White
+                        AnnotationsList(i).Stroke = OxyColors.White
+                    End If
+                Next
+            End If
+
+            'Unit 2 stuff
+            If (REChart_Data.rbUnit2.Checked = True) Then
+                MySeries.Color = OxyColors.Green
+                MySeries.StrokeThickness = 4
+                MySeries.MarkerSize = 5
+                MyModel.TitleColor = OxyColors.Green
+                MyModel.Title = Center2Lines("Unit 2 Cycle " + REChart_Data.txtCycle.Text, strTitle)
+                For i As Integer = 0 To AnnotationsList.Count - 1
+                    AnnotationsList(i).Background = OxyColors.Green
+                    AnnotationsList(i).TextColor = OxyColors.White
+                    AnnotationsList(i).FontWeight = FontWeights.Bold
+                    'if annotation text is empty or "" then hode the annotation
+                    If AnnotationsList(i).Text = "" Or AnnotationsList(i).Text = " " Then
+                        AnnotationsList(i).Layer = AnnotationLayer.BelowSeries
+                        AnnotationsList(i).Layer = AnnotationLayer.BelowAxes
+                        AnnotationsList(i).Background = OxyColors.White
+                        AnnotationsList(i).Stroke = OxyColors.White
+                    End If
+                Next
+            End If
+
+            'add series to the data model, and bind the model to the plotview. 
+            MyModel.Series.Add(MySeries)
+            Me.PlotView1.Model = MyModel
+
+            'Update Predicted Lost MW's
+            lblPredictedLostMWs.Text = REChart_Data.LostMWHE.ToString
+
+        Catch ex As Exception
+            MsgBox(ex.Message + " Occured in Private Sub GenerateLoadProfile_StartUp() in REChart_Graph.vb")
         End Try
 
     End Sub

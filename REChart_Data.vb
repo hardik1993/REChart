@@ -5,6 +5,7 @@ Public Class REChart_Data
     'global vars
     Dim StartDateTimeSet As Boolean
     Public DateTimeArray As Date()
+    Public HoursArray As Double()
     Public PowerArray As Double()
     Public DescArray As String()
     Public FullPowerMWE As Double = 1300
@@ -168,6 +169,9 @@ Public Class REChart_Data
 
     Private Sub btnGenerateLP_Click(sender As Object, e As EventArgs) Handles btnGenerateLP.Click
         Try
+            ' refresh data before doing anything. 
+            Call ReCalculateTimes()
+
             'Validation Checks 
             'check to make sure a unit is selected. 
             If rbUnit1.Checked = False And rbUnit2.Checked = False Then
@@ -184,11 +188,14 @@ Public Class REChart_Data
 
             'for some reason the redim makes the array 1+row count. So i have to -1 in the redim statement. 
             ReDim DateTimeArray(dgvStatepoints.RowCount - 1)
+            ReDim HoursArray(dgvStatepoints.RowCount - 1)
             ReDim PowerArray(dgvStatepoints.RowCount - 1)
             ReDim DescArray(dgvStatepoints.RowCount - 1)
 
+            'populate the global arrays for use in the graph form.
             For i = 0 To dgvStatepoints.RowCount - 1
                 PowerArray(i) = dgvStatepoints.Rows(i).Cells(3).Value
+                HoursArray(i) = dgvStatepoints.Rows(i).Cells(2).Value
                 DateTimeArray(i) = dgvStatepoints.Rows(i).Cells(0).Value
                 DescArray(i) = dgvStatepoints.Rows(i).Cells(4).Value
             Next
