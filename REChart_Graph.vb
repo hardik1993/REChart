@@ -166,7 +166,7 @@ Public Class REChart_Graph
     Private Sub GenerateLoadProfile()
         ' This sub takes data from the Data Entry form from the global arrays, and generates the Load Profile. 
         ' Sets up the oxyplot controls, axis, data model, binds the data, generates the annotations, etc. 
-        ' This is the NON-Startup routine. X axis is in Date/Time. 
+        ' This is the NON-Startup LP routine. X axis is in Date/Time. 
         Try
             'set up x axis as a date/time axis
             Dim MinDateTime As Date
@@ -211,7 +211,7 @@ Public Class REChart_Graph
             MyModel.Background = OxyColors.White
 
             'set up line series
-            MySeries.Title = "Load Profile"
+            MySeries.Title = "Predicted Load Profile"
 
             'add x and y axis to the data model
             MyModel.Axes.Add(xAxis)
@@ -443,7 +443,7 @@ Public Class REChart_Graph
     Private Sub GenerateLoadProfile_StartUp()
         ' This sub takes data from the Data Entry form from the global arrays, and generates the Load Profile. 
         ' Sets up the oxyplot controls, axis, data model, binds the data, generates the annotations, etc. 
-        ' This is the Startup routine. X axis is in hours from breaker closure. 
+        ' This is the Startup LP routine. X axis is in hours from breaker closure. 
         Try
             'set up x axis as a hours linear axis. Setup max and min values to x axis
             Dim xAxis As New LinearAxis()
@@ -464,9 +464,7 @@ Public Class REChart_Graph
             yAxis.TitleFontWeight = FontWeights.Bold
 
             'set up plot model, Create a Title, based on the entry from the data form. 
-            Dim strTitle As String = REChart_Data.txtManuverTitle.Text + " " +
-            REChart_Data.DateTimeArray(0).ToString("MM/dd/yy") + " - " +
-            REChart_Data.DateTimeArray(REChart_Data.DateTimeArray.Length - 1).ToString("MM/dd/yy")
+            Dim strTitle As String = REChart_Data.txtManuverTitle.Text
             MyModel.Title = strTitle
             MyModel.TitleFont = "Consolas"
             MyModel.TitleFontSize = 24
@@ -474,7 +472,7 @@ Public Class REChart_Graph
             MyModel.Background = OxyColors.White
 
             'set up line series
-            MySeries.Title = "Load Profile"
+            MySeries.Title = "Predicted Load Profile"
 
             'add x and y axis to the data model
             MyModel.Axes.Add(xAxis)
@@ -485,36 +483,14 @@ Public Class REChart_Graph
             ' and does not need to be labeled on the load profile.  
             ReDim AnnotationTextArray(REChart_Data.DescArray.Length - 2)
 
-            'first step is to form array of annotation descriptions. This will be the date/time range for 
-            ' action appended with the actual description of the step from desc array. Also some logic 
-            ' in there to Not include the mm/dd twice if the date has not changed. 
+            'first step is to form array of annotation descriptions.  
             Dim tempstr As String
             For i As Integer = 1 To AnnotationTextArray.Length
-                'if the date has not changed then scrap the second MM/dd
-                If REChart_Data.DateTimeArray(i - 1).ToString("MM/dd") = REChart_Data.DateTimeArray(i).ToString("MM/dd") Then
-                    tempstr = REChart_Data.DateTimeArray(i - 1).ToString("MM/dd HH:mm") + " - " +
-                    REChart_Data.DateTimeArray(i).ToString("HH:mm")
-                    'else keep the second MM/dd
-                Else
-                    tempstr = REChart_Data.DateTimeArray(i - 1).ToString("MM/dd HH:mm") + " - " +
-                    REChart_Data.DateTimeArray(i).ToString("MM/dd HH:mm")
-                End If
-
                 'Handle condition If there is an empty desc block and the previous block was NOT empty
-                ' then need from/to date time from begening And end of consecutive empty blocks. 
                 ' This Is handling the condition when a combined desc block Is used. Or REChart_Data.DescArray(i) = ""
                 If i < AnnotationTextArray.Length Then ' this covers the boundry condition of i + 1 
                     If REChart_Data.DescArray(i + 1) = "" And REChart_Data.DescArray(i - 1) <> "" And REChart_Data.DescArray(i) <> "" Then
-                        ' this is the "From" Date/Time for this annotation
-                        Dim FromDateTime As String = REChart_Data.DateTimeArray(i - 1).ToString("MM/dd HH:mm")
-                        'now need to find "TO" date time for this annotation. This is found by finding the last consecutive enpty desc block. 
-                        Dim counter As Integer = i + 1
-                        While REChart_Data.DescArray(counter) = ""
-                            counter = counter + 1
-                        End While
-                        'found the TO date, set a var to it.
-                        Dim ToDateTime As String = REChart_Data.DateTimeArray(counter - 1).ToString("MM/dd HH:mm")
-                        AnnotationTextArray(i - 1) = Center2Lines(REChart_Data.DescArray(i), FromDateTime + " - " + ToDateTime)
+                        AnnotationTextArray(i - 1) = REChart_Data.DescArray(i)
 
                         'the condition where empty place holder is needed. 
                     ElseIf REChart_Data.DescArray(i) = "" Then
