@@ -25,27 +25,7 @@ Partial Class REChart_Help
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(REChart_Help))
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.grpInitialConditions = New System.Windows.Forms.GroupBox()
-        Me.rbUnit2 = New System.Windows.Forms.RadioButton()
-        Me.txtCycle = New System.Windows.Forms.TextBox()
-        Me.rbUnit1 = New System.Windows.Forms.RadioButton()
-        Me.lblTitleOfManuver = New System.Windows.Forms.Label()
-        Me.txtManuverTitle = New System.Windows.Forms.TextBox()
-        Me.txtInitialPower = New System.Windows.Forms.TextBox()
-        Me.lblInitialPower = New System.Windows.Forms.Label()
-        Me.dtpStartTime = New System.Windows.Forms.DateTimePicker()
-        Me.dtpStartDate = New System.Windows.Forms.DateTimePicker()
-        Me.lblStartDateTime = New System.Windows.Forms.Label()
-        Me.lblCycle = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.grpAddStatePoints = New System.Windows.Forms.GroupBox()
-        Me.txtDescription = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.txtHoursForAction = New System.Windows.Forms.TextBox()
-        Me.lblHoursforAction = New System.Windows.Forms.Label()
-        Me.txtStatePointPower = New System.Windows.Forms.TextBox()
-        Me.lblStatePointPower = New System.Windows.Forms.Label()
-        Me.btnAddStatePoint = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.btnGenerateLP = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -73,6 +53,29 @@ Partial Class REChart_Help
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
+        Me.grpInitialConditions = New System.Windows.Forms.GroupBox()
+        Me.rbUnit2 = New System.Windows.Forms.RadioButton()
+        Me.txtCycle = New System.Windows.Forms.TextBox()
+        Me.rbUnit1 = New System.Windows.Forms.RadioButton()
+        Me.txtManuverTitle = New System.Windows.Forms.TextBox()
+        Me.txtInitialPower = New System.Windows.Forms.TextBox()
+        Me.dtpStartTime = New System.Windows.Forms.DateTimePicker()
+        Me.dtpStartDate = New System.Windows.Forms.DateTimePicker()
+        Me.lblTitleOfManuver = New System.Windows.Forms.Label()
+        Me.lblInitialPower = New System.Windows.Forms.Label()
+        Me.lblStartDateTime = New System.Windows.Forms.Label()
+        Me.lblCycle = New System.Windows.Forms.Label()
+        Me.cbStartUpLP = New System.Windows.Forms.CheckBox()
+        Me.grpAddStatePoints = New System.Windows.Forms.GroupBox()
+        Me.txtDescription = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.txtHoursForAction = New System.Windows.Forms.TextBox()
+        Me.lblHoursforAction = New System.Windows.Forms.Label()
+        Me.txtStatePointPower = New System.Windows.Forms.TextBox()
+        Me.lblStatePointPower = New System.Windows.Forms.Label()
+        Me.btnAddStatePoint = New System.Windows.Forms.Button()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
         Me.grpInitialConditions.SuspendLayout()
         Me.grpAddStatePoints.SuspendLayout()
         Me.SuspendLayout()
@@ -98,243 +101,21 @@ Partial Class REChart_Help
         Me.Label1.Text = "RE-Chart is a tool designed to generate load profiles, hourly data for marketing," &
     " and the ovlay comparison with PI data. "
         '
-        'grpInitialConditions
-        '
-        Me.grpInitialConditions.BackColor = System.Drawing.SystemColors.ScrollBar
-        Me.grpInitialConditions.Controls.Add(Me.rbUnit2)
-        Me.grpInitialConditions.Controls.Add(Me.txtCycle)
-        Me.grpInitialConditions.Controls.Add(Me.rbUnit1)
-        Me.grpInitialConditions.Controls.Add(Me.lblTitleOfManuver)
-        Me.grpInitialConditions.Controls.Add(Me.txtManuverTitle)
-        Me.grpInitialConditions.Controls.Add(Me.txtInitialPower)
-        Me.grpInitialConditions.Controls.Add(Me.lblInitialPower)
-        Me.grpInitialConditions.Controls.Add(Me.dtpStartTime)
-        Me.grpInitialConditions.Controls.Add(Me.dtpStartDate)
-        Me.grpInitialConditions.Controls.Add(Me.lblStartDateTime)
-        Me.grpInitialConditions.Controls.Add(Me.lblCycle)
-        Me.grpInitialConditions.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, CType(((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic) _
-                Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpInitialConditions.Location = New System.Drawing.Point(13, 72)
-        Me.grpInitialConditions.Name = "grpInitialConditions"
-        Me.grpInitialConditions.Size = New System.Drawing.Size(269, 93)
-        Me.grpInitialConditions.TabIndex = 100
-        Me.grpInitialConditions.TabStop = False
-        Me.grpInitialConditions.Text = "Initial Conditions"
-        '
-        'rbUnit2
-        '
-        Me.rbUnit2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbUnit2.Location = New System.Drawing.Point(216, 67)
-        Me.rbUnit2.Name = "rbUnit2"
-        Me.rbUnit2.Size = New System.Drawing.Size(45, 19)
-        Me.rbUnit2.TabIndex = 7
-        Me.rbUnit2.TabStop = True
-        Me.rbUnit2.Text = "U2"
-        Me.rbUnit2.UseVisualStyleBackColor = True
-        '
-        'txtCycle
-        '
-        Me.txtCycle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCycle.Location = New System.Drawing.Point(151, 67)
-        Me.txtCycle.MaxLength = 2
-        Me.txtCycle.Name = "txtCycle"
-        Me.txtCycle.Size = New System.Drawing.Size(27, 20)
-        Me.txtCycle.TabIndex = 5
-        Me.txtCycle.Text = "xx"
-        '
-        'rbUnit1
-        '
-        Me.rbUnit1.AutoSize = True
-        Me.rbUnit1.Checked = True
-        Me.rbUnit1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbUnit1.Location = New System.Drawing.Point(180, 68)
-        Me.rbUnit1.Name = "rbUnit1"
-        Me.rbUnit1.Size = New System.Drawing.Size(39, 17)
-        Me.rbUnit1.TabIndex = 6
-        Me.rbUnit1.TabStop = True
-        Me.rbUnit1.Text = "U1"
-        Me.rbUnit1.UseVisualStyleBackColor = True
-        '
-        'lblTitleOfManuver
-        '
-        Me.lblTitleOfManuver.AutoSize = True
-        Me.lblTitleOfManuver.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTitleOfManuver.Location = New System.Drawing.Point(2, 46)
-        Me.lblTitleOfManuver.Name = "lblTitleOfManuver"
-        Me.lblTitleOfManuver.Size = New System.Drawing.Size(75, 13)
-        Me.lblTitleOfManuver.TabIndex = 96
-        Me.lblTitleOfManuver.Text = "Manuver Title:"
-        '
-        'txtManuverTitle
-        '
-        Me.txtManuverTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtManuverTitle.Location = New System.Drawing.Point(77, 43)
-        Me.txtManuverTitle.Name = "txtManuverTitle"
-        Me.txtManuverTitle.Size = New System.Drawing.Size(171, 20)
-        Me.txtManuverTitle.TabIndex = 3
-        Me.txtManuverTitle.Text = "Example: A1/A2 Sequence Exchange"
-        '
-        'txtInitialPower
-        '
-        Me.txtInitialPower.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtInitialPower.Location = New System.Drawing.Point(77, 67)
-        Me.txtInitialPower.Name = "txtInitialPower"
-        Me.txtInitialPower.Size = New System.Drawing.Size(43, 20)
-        Me.txtInitialPower.TabIndex = 4
-        Me.txtInitialPower.Text = "100"
-        '
-        'lblInitialPower
-        '
-        Me.lblInitialPower.AutoSize = True
-        Me.lblInitialPower.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblInitialPower.Location = New System.Drawing.Point(14, 71)
-        Me.lblInitialPower.Name = "lblInitialPower"
-        Me.lblInitialPower.Size = New System.Drawing.Size(65, 13)
-        Me.lblInitialPower.TabIndex = 95
-        Me.lblInitialPower.Text = "Start Power:"
-        '
-        'dtpStartTime
-        '
-        Me.dtpStartTime.CustomFormat = "HH:mm"
-        Me.dtpStartTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpStartTime.Location = New System.Drawing.Point(178, 18)
-        Me.dtpStartTime.Name = "dtpStartTime"
-        Me.dtpStartTime.Size = New System.Drawing.Size(70, 20)
-        Me.dtpStartTime.TabIndex = 2
-        Me.dtpStartTime.Value = New Date(2021, 9, 20, 0, 0, 0, 0)
-        '
-        'dtpStartDate
-        '
-        Me.dtpStartDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpStartDate.Location = New System.Drawing.Point(78, 18)
-        Me.dtpStartDate.Name = "dtpStartDate"
-        Me.dtpStartDate.Size = New System.Drawing.Size(96, 20)
-        Me.dtpStartDate.TabIndex = 1
-        '
-        'lblStartDateTime
-        '
-        Me.lblStartDateTime.AutoSize = True
-        Me.lblStartDateTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblStartDateTime.Location = New System.Drawing.Point(-2, 21)
-        Me.lblStartDateTime.Name = "lblStartDateTime"
-        Me.lblStartDateTime.Size = New System.Drawing.Size(81, 13)
-        Me.lblStartDateTime.TabIndex = 97
-        Me.lblStartDateTime.Text = "Start DateTime:"
-        '
-        'lblCycle
-        '
-        Me.lblCycle.AutoSize = True
-        Me.lblCycle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCycle.Location = New System.Drawing.Point(117, 70)
-        Me.lblCycle.Name = "lblCycle"
-        Me.lblCycle.Size = New System.Drawing.Size(36, 13)
-        Me.lblCycle.TabIndex = 94
-        Me.lblCycle.Text = "Cycle:"
-        '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(299, 72)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(492, 128)
+        Me.Label2.Size = New System.Drawing.Size(505, 112)
         Me.Label2.TabIndex = 101
         Me.Label2.Text = resources.GetString("Label2.Text")
-        '
-        'grpAddStatePoints
-        '
-        Me.grpAddStatePoints.BackColor = System.Drawing.SystemColors.ScrollBar
-        Me.grpAddStatePoints.Controls.Add(Me.txtDescription)
-        Me.grpAddStatePoints.Controls.Add(Me.Label3)
-        Me.grpAddStatePoints.Controls.Add(Me.txtHoursForAction)
-        Me.grpAddStatePoints.Controls.Add(Me.lblHoursforAction)
-        Me.grpAddStatePoints.Controls.Add(Me.txtStatePointPower)
-        Me.grpAddStatePoints.Controls.Add(Me.lblStatePointPower)
-        Me.grpAddStatePoints.Controls.Add(Me.btnAddStatePoint)
-        Me.grpAddStatePoints.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, CType(((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic) _
-                Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpAddStatePoints.Location = New System.Drawing.Point(14, 216)
-        Me.grpAddStatePoints.Name = "grpAddStatePoints"
-        Me.grpAddStatePoints.Size = New System.Drawing.Size(268, 60)
-        Me.grpAddStatePoints.TabIndex = 102
-        Me.grpAddStatePoints.TabStop = False
-        Me.grpAddStatePoints.Text = "Add State Points"
-        '
-        'txtDescription
-        '
-        Me.txtDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescription.Location = New System.Drawing.Point(130, 34)
-        Me.txtDescription.Name = "txtDescription"
-        Me.txtDescription.Size = New System.Drawing.Size(57, 20)
-        Me.txtDescription.TabIndex = 10
-        Me.txtDescription.Text = " "
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(127, 18)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(60, 13)
-        Me.Label3.TabIndex = 91
-        Me.Label3.Text = "Description"
-        '
-        'txtHoursForAction
-        '
-        Me.txtHoursForAction.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtHoursForAction.Location = New System.Drawing.Point(44, 34)
-        Me.txtHoursForAction.Name = "txtHoursForAction"
-        Me.txtHoursForAction.Size = New System.Drawing.Size(80, 20)
-        Me.txtHoursForAction.TabIndex = 9
-        Me.txtHoursForAction.Text = "0"
-        '
-        'lblHoursforAction
-        '
-        Me.lblHoursforAction.AutoSize = True
-        Me.lblHoursforAction.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHoursforAction.Location = New System.Drawing.Point(41, 18)
-        Me.lblHoursforAction.Name = "lblHoursforAction"
-        Me.lblHoursforAction.Size = New System.Drawing.Size(83, 13)
-        Me.lblHoursforAction.TabIndex = 92
-        Me.lblHoursforAction.Text = "Hours for Action"
-        '
-        'txtStatePointPower
-        '
-        Me.txtStatePointPower.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtStatePointPower.Location = New System.Drawing.Point(3, 34)
-        Me.txtStatePointPower.Name = "txtStatePointPower"
-        Me.txtStatePointPower.Size = New System.Drawing.Size(38, 20)
-        Me.txtStatePointPower.TabIndex = 8
-        Me.txtStatePointPower.Text = "100"
-        '
-        'lblStatePointPower
-        '
-        Me.lblStatePointPower.AutoSize = True
-        Me.lblStatePointPower.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblStatePointPower.Location = New System.Drawing.Point(4, 18)
-        Me.lblStatePointPower.Name = "lblStatePointPower"
-        Me.lblStatePointPower.Size = New System.Drawing.Size(37, 13)
-        Me.lblStatePointPower.TabIndex = 93
-        Me.lblStatePointPower.Text = "Power"
-        '
-        'btnAddStatePoint
-        '
-        Me.btnAddStatePoint.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.btnAddStatePoint.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddStatePoint.Location = New System.Drawing.Point(193, 13)
-        Me.btnAddStatePoint.Name = "btnAddStatePoint"
-        Me.btnAddStatePoint.Size = New System.Drawing.Size(66, 41)
-        Me.btnAddStatePoint.TabIndex = 11
-        Me.btnAddStatePoint.Text = "Add State Point"
-        Me.btnAddStatePoint.UseVisualStyleBackColor = True
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(297, 187)
+        Me.Label4.Location = New System.Drawing.Point(300, 194)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(510, 144)
         Me.Label4.TabIndex = 103
@@ -346,9 +127,9 @@ Partial Class REChart_Help
         Me.btnGenerateLP.FlatAppearance.BorderSize = 4
         Me.btnGenerateLP.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.btnGenerateLP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGenerateLP.Location = New System.Drawing.Point(17, 365)
+        Me.btnGenerateLP.Location = New System.Drawing.Point(17, 378)
         Me.btnGenerateLP.Name = "btnGenerateLP"
-        Me.btnGenerateLP.Size = New System.Drawing.Size(121, 31)
+        Me.btnGenerateLP.Size = New System.Drawing.Size(121, 27)
         Me.btnGenerateLP.TabIndex = 104
         Me.btnGenerateLP.TabStop = False
         Me.btnGenerateLP.Text = "Generate Load Profile"
@@ -358,7 +139,7 @@ Partial Class REChart_Help
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(141, 372)
+        Me.Label5.Location = New System.Drawing.Point(141, 383)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(599, 16)
         Me.Label5.TabIndex = 105
@@ -371,9 +152,9 @@ Partial Class REChart_Help
         Me.btnSaveData.FlatAppearance.BorderSize = 4
         Me.btnSaveData.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.btnSaveData.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSaveData.Location = New System.Drawing.Point(17, 398)
+        Me.btnSaveData.Location = New System.Drawing.Point(17, 407)
         Me.btnSaveData.Name = "btnSaveData"
-        Me.btnSaveData.Size = New System.Drawing.Size(121, 31)
+        Me.btnSaveData.Size = New System.Drawing.Size(121, 27)
         Me.btnSaveData.TabIndex = 106
         Me.btnSaveData.TabStop = False
         Me.btnSaveData.Text = "Save Data"
@@ -383,7 +164,7 @@ Partial Class REChart_Help
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(140, 405)
+        Me.Label6.Location = New System.Drawing.Point(140, 412)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(687, 16)
         Me.Label6.TabIndex = 107
@@ -396,9 +177,9 @@ Partial Class REChart_Help
         Me.btnLoadData.FlatAppearance.BorderSize = 4
         Me.btnLoadData.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.btnLoadData.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLoadData.Location = New System.Drawing.Point(17, 431)
+        Me.btnLoadData.Location = New System.Drawing.Point(17, 436)
         Me.btnLoadData.Name = "btnLoadData"
-        Me.btnLoadData.Size = New System.Drawing.Size(121, 31)
+        Me.btnLoadData.Size = New System.Drawing.Size(121, 27)
         Me.btnLoadData.TabIndex = 108
         Me.btnLoadData.TabStop = False
         Me.btnLoadData.Text = "Load Data"
@@ -408,7 +189,7 @@ Partial Class REChart_Help
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(141, 438)
+        Me.Label7.Location = New System.Drawing.Point(141, 441)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(493, 16)
         Me.Label7.TabIndex = 109
@@ -421,9 +202,9 @@ Partial Class REChart_Help
         Me.bthRefresh.FlatAppearance.BorderSize = 4
         Me.bthRefresh.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.bthRefresh.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bthRefresh.Location = New System.Drawing.Point(18, 464)
+        Me.bthRefresh.Location = New System.Drawing.Point(18, 465)
         Me.bthRefresh.Name = "bthRefresh"
-        Me.bthRefresh.Size = New System.Drawing.Size(121, 31)
+        Me.bthRefresh.Size = New System.Drawing.Size(121, 27)
         Me.bthRefresh.TabIndex = 110
         Me.bthRefresh.TabStop = False
         Me.bthRefresh.Text = "Refresh"
@@ -433,7 +214,7 @@ Partial Class REChart_Help
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(141, 471)
+        Me.Label8.Location = New System.Drawing.Point(141, 470)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(684, 16)
         Me.Label8.TabIndex = 111
@@ -443,10 +224,10 @@ Partial Class REChart_Help
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(10, 326)
+        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(4, 324)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(1034, 32)
+        Me.Label9.Size = New System.Drawing.Size(813, 45)
         Me.Label9.TabIndex = 112
         Me.Label9.Text = resources.GetString("Label9.Text")
         '
@@ -472,7 +253,7 @@ Partial Class REChart_Help
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(5, 487)
+        Me.Label10.Location = New System.Drawing.Point(5, 486)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(816, 16)
         Me.Label10.TabIndex = 115
@@ -621,11 +402,268 @@ Partial Class REChart_Help
         Me.Label18.TabIndex = 129
         Me.Label18.Text = "-Toggles displaying the DRAFT Block"
         '
+        'grpInitialConditions
+        '
+        Me.grpInitialConditions.BackColor = System.Drawing.SystemColors.ScrollBar
+        Me.grpInitialConditions.Controls.Add(Me.rbUnit2)
+        Me.grpInitialConditions.Controls.Add(Me.txtCycle)
+        Me.grpInitialConditions.Controls.Add(Me.rbUnit1)
+        Me.grpInitialConditions.Controls.Add(Me.txtManuverTitle)
+        Me.grpInitialConditions.Controls.Add(Me.txtInitialPower)
+        Me.grpInitialConditions.Controls.Add(Me.dtpStartTime)
+        Me.grpInitialConditions.Controls.Add(Me.dtpStartDate)
+        Me.grpInitialConditions.Controls.Add(Me.lblTitleOfManuver)
+        Me.grpInitialConditions.Controls.Add(Me.lblInitialPower)
+        Me.grpInitialConditions.Controls.Add(Me.lblStartDateTime)
+        Me.grpInitialConditions.Controls.Add(Me.lblCycle)
+        Me.grpInitialConditions.Controls.Add(Me.cbStartUpLP)
+        Me.grpInitialConditions.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, CType(((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic) _
+                Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grpInitialConditions.Location = New System.Drawing.Point(4, 65)
+        Me.grpInitialConditions.Name = "grpInitialConditions"
+        Me.grpInitialConditions.Size = New System.Drawing.Size(296, 121)
+        Me.grpInitialConditions.TabIndex = 130
+        Me.grpInitialConditions.TabStop = False
+        Me.grpInitialConditions.Text = "Initial Conditions"
+        '
+        'rbUnit2
+        '
+        Me.rbUnit2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbUnit2.Location = New System.Drawing.Point(190, 99)
+        Me.rbUnit2.Name = "rbUnit2"
+        Me.rbUnit2.Size = New System.Drawing.Size(45, 19)
+        Me.rbUnit2.TabIndex = 7
+        Me.rbUnit2.TabStop = True
+        Me.rbUnit2.Text = "U2"
+        Me.rbUnit2.UseVisualStyleBackColor = True
+        '
+        'txtCycle
+        '
+        Me.txtCycle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCycle.Location = New System.Drawing.Point(107, 98)
+        Me.txtCycle.MaxLength = 2
+        Me.txtCycle.Name = "txtCycle"
+        Me.txtCycle.Size = New System.Drawing.Size(27, 22)
+        Me.txtCycle.TabIndex = 5
+        Me.txtCycle.Text = "xx"
+        '
+        'rbUnit1
+        '
+        Me.rbUnit1.AutoSize = True
+        Me.rbUnit1.Checked = True
+        Me.rbUnit1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbUnit1.Location = New System.Drawing.Point(141, 99)
+        Me.rbUnit1.Name = "rbUnit1"
+        Me.rbUnit1.Size = New System.Drawing.Size(43, 20)
+        Me.rbUnit1.TabIndex = 6
+        Me.rbUnit1.TabStop = True
+        Me.rbUnit1.Text = "U1"
+        Me.rbUnit1.UseVisualStyleBackColor = True
+        '
+        'txtManuverTitle
+        '
+        Me.txtManuverTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtManuverTitle.Location = New System.Drawing.Point(107, 43)
+        Me.txtManuverTitle.Name = "txtManuverTitle"
+        Me.txtManuverTitle.Size = New System.Drawing.Size(183, 22)
+        Me.txtManuverTitle.TabIndex = 3
+        Me.txtManuverTitle.Text = "Example: A1/A2 Sequence Exchange"
+        '
+        'txtInitialPower
+        '
+        Me.txtInitialPower.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtInitialPower.Location = New System.Drawing.Point(107, 71)
+        Me.txtInitialPower.Name = "txtInitialPower"
+        Me.txtInitialPower.Size = New System.Drawing.Size(43, 22)
+        Me.txtInitialPower.TabIndex = 4
+        Me.txtInitialPower.Text = "100"
+        '
+        'dtpStartTime
+        '
+        Me.dtpStartTime.CustomFormat = "HH:mm"
+        Me.dtpStartTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpStartTime.Location = New System.Drawing.Point(209, 18)
+        Me.dtpStartTime.Name = "dtpStartTime"
+        Me.dtpStartTime.Size = New System.Drawing.Size(78, 22)
+        Me.dtpStartTime.TabIndex = 2
+        Me.dtpStartTime.Value = New Date(2021, 9, 20, 0, 0, 0, 0)
+        '
+        'dtpStartDate
+        '
+        Me.dtpStartDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpStartDate.Location = New System.Drawing.Point(107, 18)
+        Me.dtpStartDate.Name = "dtpStartDate"
+        Me.dtpStartDate.Size = New System.Drawing.Size(96, 22)
+        Me.dtpStartDate.TabIndex = 1
+        '
+        'lblTitleOfManuver
+        '
+        Me.lblTitleOfManuver.AutoSize = True
+        Me.lblTitleOfManuver.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTitleOfManuver.Location = New System.Drawing.Point(9, 45)
+        Me.lblTitleOfManuver.Name = "lblTitleOfManuver"
+        Me.lblTitleOfManuver.Size = New System.Drawing.Size(100, 18)
+        Me.lblTitleOfManuver.TabIndex = 96
+        Me.lblTitleOfManuver.Text = "Manuver Title:"
+        '
+        'lblInitialPower
+        '
+        Me.lblInitialPower.AutoSize = True
+        Me.lblInitialPower.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblInitialPower.Location = New System.Drawing.Point(19, 73)
+        Me.lblInitialPower.Name = "lblInitialPower"
+        Me.lblInitialPower.Size = New System.Drawing.Size(90, 18)
+        Me.lblInitialPower.TabIndex = 95
+        Me.lblInitialPower.Text = "Start Power:"
+        '
+        'lblStartDateTime
+        '
+        Me.lblStartDateTime.AutoSize = True
+        Me.lblStartDateTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblStartDateTime.Location = New System.Drawing.Point(-2, 21)
+        Me.lblStartDateTime.Name = "lblStartDateTime"
+        Me.lblStartDateTime.Size = New System.Drawing.Size(111, 18)
+        Me.lblStartDateTime.TabIndex = 97
+        Me.lblStartDateTime.Text = "Start DateTime:"
+        '
+        'lblCycle
+        '
+        Me.lblCycle.AutoSize = True
+        Me.lblCycle.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCycle.Location = New System.Drawing.Point(22, 99)
+        Me.lblCycle.Name = "lblCycle"
+        Me.lblCycle.Size = New System.Drawing.Size(87, 18)
+        Me.lblCycle.TabIndex = 94
+        Me.lblCycle.Text = "Cycle / Unit:"
+        '
+        'cbStartUpLP
+        '
+        Me.cbStartUpLP.AutoSize = True
+        Me.cbStartUpLP.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbStartUpLP.Location = New System.Drawing.Point(153, 66)
+        Me.cbStartUpLP.Name = "cbStartUpLP"
+        Me.cbStartUpLP.Size = New System.Drawing.Size(146, 34)
+        Me.cbStartUpLP.TabIndex = 98
+        Me.cbStartUpLP.Text = "Start-Up LP? (Hours " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "from Breaker Closure)"
+        Me.cbStartUpLP.UseVisualStyleBackColor = True
+        '
+        'grpAddStatePoints
+        '
+        Me.grpAddStatePoints.BackColor = System.Drawing.SystemColors.ScrollBar
+        Me.grpAddStatePoints.Controls.Add(Me.txtDescription)
+        Me.grpAddStatePoints.Controls.Add(Me.Label3)
+        Me.grpAddStatePoints.Controls.Add(Me.txtHoursForAction)
+        Me.grpAddStatePoints.Controls.Add(Me.lblHoursforAction)
+        Me.grpAddStatePoints.Controls.Add(Me.txtStatePointPower)
+        Me.grpAddStatePoints.Controls.Add(Me.lblStatePointPower)
+        Me.grpAddStatePoints.Controls.Add(Me.btnAddStatePoint)
+        Me.grpAddStatePoints.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, CType(((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic) _
+                Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grpAddStatePoints.Location = New System.Drawing.Point(5, 195)
+        Me.grpAddStatePoints.Name = "grpAddStatePoints"
+        Me.grpAddStatePoints.Size = New System.Drawing.Size(295, 128)
+        Me.grpAddStatePoints.TabIndex = 131
+        Me.grpAddStatePoints.TabStop = False
+        Me.grpAddStatePoints.Text = "Add State Points"
+        '
+        'txtDescription
+        '
+        Me.txtDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDescription.Location = New System.Drawing.Point(176, 41)
+        Me.txtDescription.Name = "txtDescription"
+        Me.txtDescription.Size = New System.Drawing.Size(92, 22)
+        Me.txtDescription.TabIndex = 10
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(185, 21)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(83, 18)
+        Me.Label3.TabIndex = 91
+        Me.Label3.Text = "Description"
+        '
+        'txtHoursForAction
+        '
+        Me.txtHoursForAction.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtHoursForAction.Location = New System.Drawing.Point(90, 41)
+        Me.txtHoursForAction.Name = "txtHoursForAction"
+        Me.txtHoursForAction.Size = New System.Drawing.Size(80, 22)
+        Me.txtHoursForAction.TabIndex = 9
+        Me.txtHoursForAction.Text = "0"
+        '
+        'lblHoursforAction
+        '
+        Me.lblHoursforAction.AutoSize = True
+        Me.lblHoursforAction.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHoursforAction.Location = New System.Drawing.Point(71, 21)
+        Me.lblHoursforAction.Name = "lblHoursforAction"
+        Me.lblHoursforAction.Size = New System.Drawing.Size(116, 18)
+        Me.lblHoursforAction.TabIndex = 92
+        Me.lblHoursforAction.Text = "Hours for Action"
+        '
+        'txtStatePointPower
+        '
+        Me.txtStatePointPower.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtStatePointPower.Location = New System.Drawing.Point(4, 41)
+        Me.txtStatePointPower.Name = "txtStatePointPower"
+        Me.txtStatePointPower.Size = New System.Drawing.Size(80, 22)
+        Me.txtStatePointPower.TabIndex = 8
+        Me.txtStatePointPower.Text = "100"
+        '
+        'lblStatePointPower
+        '
+        Me.lblStatePointPower.AutoSize = True
+        Me.lblStatePointPower.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblStatePointPower.Location = New System.Drawing.Point(4, 21)
+        Me.lblStatePointPower.Name = "lblStatePointPower"
+        Me.lblStatePointPower.Size = New System.Drawing.Size(51, 18)
+        Me.lblStatePointPower.TabIndex = 93
+        Me.lblStatePointPower.Text = "Power"
+        '
+        'btnAddStatePoint
+        '
+        Me.btnAddStatePoint.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.btnAddStatePoint.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAddStatePoint.Location = New System.Drawing.Point(104, 67)
+        Me.btnAddStatePoint.Name = "btnAddStatePoint"
+        Me.btnAddStatePoint.Size = New System.Drawing.Size(66, 55)
+        Me.btnAddStatePoint.TabIndex = 11
+        Me.btnAddStatePoint.Text = "Add State Point"
+        Me.btnAddStatePoint.UseVisualStyleBackColor = True
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.Location = New System.Drawing.Point(5, 359)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(816, 16)
+        Me.Label19.TabIndex = 132
+        Me.Label19.Text = "_________________________________________________________________________________" &
+    "____________________"
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.Location = New System.Drawing.Point(1, 175)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(816, 16)
+        Me.Label20.TabIndex = 133
+        Me.Label20.Text = "_________________________________________________________________________________" &
+    "____________________"
+        '
         'REChart_Help
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(823, 679)
+        Me.Controls.Add(Me.grpAddStatePoints)
+        Me.Controls.Add(Me.grpInitialConditions)
         Me.Controls.Add(Me.Label18)
         Me.Controls.Add(Me.Label17)
         Me.Controls.Add(Me.Label16)
@@ -651,13 +689,13 @@ Partial Class REChart_Help
         Me.Controls.Add(Me.btnSaveData)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.btnGenerateLP)
-        Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.grpAddStatePoints)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.grpInitialConditions)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.lblTitle)
         Me.Controls.Add(Me.Label10)
+        Me.Controls.Add(Me.Label19)
+        Me.Controls.Add(Me.Label20)
+        Me.Controls.Add(Me.Label4)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "REChart_Help"
         Me.Text = "RE-Chart Help Form"
@@ -672,27 +710,7 @@ Partial Class REChart_Help
 
     Friend WithEvents lblTitle As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents grpInitialConditions As GroupBox
-    Friend WithEvents rbUnit2 As RadioButton
-    Friend WithEvents txtCycle As TextBox
-    Friend WithEvents rbUnit1 As RadioButton
-    Friend WithEvents lblTitleOfManuver As Label
-    Friend WithEvents txtManuverTitle As TextBox
-    Friend WithEvents txtInitialPower As TextBox
-    Friend WithEvents lblInitialPower As Label
-    Friend WithEvents dtpStartTime As DateTimePicker
-    Friend WithEvents dtpStartDate As DateTimePicker
-    Friend WithEvents lblStartDateTime As Label
-    Friend WithEvents lblCycle As Label
     Friend WithEvents Label2 As Label
-    Friend WithEvents grpAddStatePoints As GroupBox
-    Friend WithEvents txtDescription As TextBox
-    Friend WithEvents Label3 As Label
-    Friend WithEvents txtHoursForAction As TextBox
-    Friend WithEvents lblHoursforAction As Label
-    Friend WithEvents txtStatePointPower As TextBox
-    Friend WithEvents lblStatePointPower As Label
-    Friend WithEvents btnAddStatePoint As Button
     Friend WithEvents Label4 As Label
     Friend WithEvents btnGenerateLP As Button
     Friend WithEvents Label5 As Label
@@ -720,4 +738,27 @@ Partial Class REChart_Help
     Friend WithEvents Label16 As Label
     Friend WithEvents Label17 As Label
     Friend WithEvents Label18 As Label
+    Friend WithEvents grpInitialConditions As GroupBox
+    Friend WithEvents rbUnit2 As RadioButton
+    Friend WithEvents txtCycle As TextBox
+    Friend WithEvents rbUnit1 As RadioButton
+    Friend WithEvents txtManuverTitle As TextBox
+    Friend WithEvents txtInitialPower As TextBox
+    Friend WithEvents dtpStartTime As DateTimePicker
+    Friend WithEvents dtpStartDate As DateTimePicker
+    Friend WithEvents lblTitleOfManuver As Label
+    Friend WithEvents lblInitialPower As Label
+    Friend WithEvents lblStartDateTime As Label
+    Friend WithEvents lblCycle As Label
+    Friend WithEvents cbStartUpLP As CheckBox
+    Friend WithEvents grpAddStatePoints As GroupBox
+    Friend WithEvents txtDescription As TextBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents txtHoursForAction As TextBox
+    Friend WithEvents lblHoursforAction As Label
+    Friend WithEvents txtStatePointPower As TextBox
+    Friend WithEvents lblStatePointPower As Label
+    Friend WithEvents btnAddStatePoint As Button
+    Friend WithEvents Label19 As Label
+    Friend WithEvents Label20 As Label
 End Class

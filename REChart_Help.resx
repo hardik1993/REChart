@@ -124,9 +124,7 @@ Manuver Title - This will be the title printed on the plot.
 Start Power - This will be the power level of the first state point. 
 Cycle - This is the cycle number that will be printed on the plot title. 
 Unit - The Plot color scheme will be selected based on unit. U1 = Blue, U2 = Green.
-
-
-</value>
+Start-Up LP - Selecting this box will change the units on the LP from Date/Time to Hrs.</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Step 2 - Start Adding State points. 
@@ -141,8 +139,9 @@ annotation to/from times will be adjusted appropriately. Press enter in this box
 </value>
   </data>
   <data name="Label9.Text" xml:space="preserve">
-    <value>Note: Once state points are added, you can double click on the text in any part of the table to edit. 
-Press Enter once the edit is complete, and press Refresh to force update all the data. You can also insert statepoints in the middle by selecting a row </value>
+    <value>Note: Once state points are added, you can double click on the text in any part of the table to edit. Press Enter once the edit is 
+complete, and press Refresh to force update all the data. You can also insert statepoints in the middle of the data grid by 
+selecting an entire row prior to clicking Add State Point. </value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

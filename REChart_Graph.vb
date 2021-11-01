@@ -48,8 +48,16 @@ Public Class REChart_Graph
 
 
     Private Sub REChart_Graph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Call GenerateLoadProfile()
-        Me.lblPredictedLostMWs.Text = REChart_Data.LostMWHE
+        ' if its not a startup LP then 
+        If REChart_Data.cbStartUpLP.Checked = False Then
+            Call GenerateLoadProfile()
+            Me.lblPredictedLostMWs.Text = REChart_Data.LostMWHE
+        End If
+
+        If REChart_Data.cbStartUpLP.Checked = True Then
+
+        End If
+
     End Sub
 
     Private Sub ButtonExport_Click(sender As Object, e As EventArgs) Handles BtnExport.Click
