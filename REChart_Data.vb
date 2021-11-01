@@ -245,6 +245,8 @@ Public Class REChart_Data
             file.WriteLine(txtCycle.Text)
             If rbUnit1.Checked = True Then file.WriteLine("Unit 1")
             If rbUnit2.Checked = True Then file.WriteLine("Unit 2")
+            If cbStartUpLP.Checked = True Then file.WriteLine("SU") Else file.WriteLine("NORM")
+
             file.WriteLine(" ")
             'data gridview statepoints 
             file.WriteLine("Statepoints (Date/Time, Hours for action, Hours from Start, Power, and Description): ")
@@ -317,6 +319,11 @@ Public Class REChart_Data
                 rbUnit1.Checked = True
             Else
                 rbUnit2.Checked = True
+            End If
+            If file.ReadLine = "SU" Then
+                cbStartUpLP.Checked = True
+            Else
+                cbStartUpLP.Checked = False
             End If
 
             'skip more garbage
