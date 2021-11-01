@@ -112,7 +112,6 @@ Partial Class REChart_Help
         Me.grpInitialConditions.Controls.Add(Me.dtpStartDate)
         Me.grpInitialConditions.Controls.Add(Me.lblStartDateTime)
         Me.grpInitialConditions.Controls.Add(Me.lblCycle)
-        Me.grpInitialConditions.Enabled = False
         Me.grpInitialConditions.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, CType(((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic) _
                 Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpInitialConditions.Location = New System.Drawing.Point(13, 72)
@@ -124,7 +123,6 @@ Partial Class REChart_Help
         '
         'rbUnit2
         '
-        Me.rbUnit2.Enabled = False
         Me.rbUnit2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbUnit2.Location = New System.Drawing.Point(216, 67)
         Me.rbUnit2.Name = "rbUnit2"
@@ -136,7 +134,6 @@ Partial Class REChart_Help
         '
         'txtCycle
         '
-        Me.txtCycle.Enabled = False
         Me.txtCycle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCycle.Location = New System.Drawing.Point(151, 67)
         Me.txtCycle.MaxLength = 2
@@ -149,7 +146,6 @@ Partial Class REChart_Help
         '
         Me.rbUnit1.AutoSize = True
         Me.rbUnit1.Checked = True
-        Me.rbUnit1.Enabled = False
         Me.rbUnit1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbUnit1.Location = New System.Drawing.Point(180, 68)
         Me.rbUnit1.Name = "rbUnit1"
@@ -171,7 +167,6 @@ Partial Class REChart_Help
         '
         'txtManuverTitle
         '
-        Me.txtManuverTitle.Enabled = False
         Me.txtManuverTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtManuverTitle.Location = New System.Drawing.Point(77, 43)
         Me.txtManuverTitle.Name = "txtManuverTitle"
@@ -181,7 +176,6 @@ Partial Class REChart_Help
         '
         'txtInitialPower
         '
-        Me.txtInitialPower.Enabled = False
         Me.txtInitialPower.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtInitialPower.Location = New System.Drawing.Point(77, 67)
         Me.txtInitialPower.Name = "txtInitialPower"
@@ -202,7 +196,6 @@ Partial Class REChart_Help
         'dtpStartTime
         '
         Me.dtpStartTime.CustomFormat = "HH:mm"
-        Me.dtpStartTime.Enabled = False
         Me.dtpStartTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpStartTime.Location = New System.Drawing.Point(178, 18)
@@ -213,7 +206,6 @@ Partial Class REChart_Help
         '
         'dtpStartDate
         '
-        Me.dtpStartDate.Enabled = False
         Me.dtpStartDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpStartDate.Location = New System.Drawing.Point(78, 18)
@@ -261,7 +253,6 @@ Partial Class REChart_Help
         Me.grpAddStatePoints.Controls.Add(Me.txtStatePointPower)
         Me.grpAddStatePoints.Controls.Add(Me.lblStatePointPower)
         Me.grpAddStatePoints.Controls.Add(Me.btnAddStatePoint)
-        Me.grpAddStatePoints.Enabled = False
         Me.grpAddStatePoints.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, CType(((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic) _
                 Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpAddStatePoints.Location = New System.Drawing.Point(14, 216)
@@ -273,7 +264,6 @@ Partial Class REChart_Help
         '
         'txtDescription
         '
-        Me.txtDescription.Enabled = False
         Me.txtDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtDescription.Location = New System.Drawing.Point(130, 34)
         Me.txtDescription.Name = "txtDescription"
@@ -293,7 +283,6 @@ Partial Class REChart_Help
         '
         'txtHoursForAction
         '
-        Me.txtHoursForAction.Enabled = False
         Me.txtHoursForAction.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtHoursForAction.Location = New System.Drawing.Point(44, 34)
         Me.txtHoursForAction.Name = "txtHoursForAction"
@@ -313,7 +302,6 @@ Partial Class REChart_Help
         '
         'txtStatePointPower
         '
-        Me.txtStatePointPower.Enabled = False
         Me.txtStatePointPower.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtStatePointPower.Location = New System.Drawing.Point(3, 34)
         Me.txtStatePointPower.Name = "txtStatePointPower"
@@ -333,7 +321,6 @@ Partial Class REChart_Help
         '
         'btnAddStatePoint
         '
-        Me.btnAddStatePoint.Enabled = False
         Me.btnAddStatePoint.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.btnAddStatePoint.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAddStatePoint.Location = New System.Drawing.Point(193, 13)
@@ -355,7 +342,6 @@ Partial Class REChart_Help
         '
         'btnGenerateLP
         '
-        Me.btnGenerateLP.Enabled = False
         Me.btnGenerateLP.FlatAppearance.BorderColor = System.Drawing.Color.Black
         Me.btnGenerateLP.FlatAppearance.BorderSize = 4
         Me.btnGenerateLP.FlatStyle = System.Windows.Forms.FlatStyle.System
@@ -381,7 +367,6 @@ Partial Class REChart_Help
         '
         'btnSaveData
         '
-        Me.btnSaveData.Enabled = False
         Me.btnSaveData.FlatAppearance.BorderColor = System.Drawing.Color.Black
         Me.btnSaveData.FlatAppearance.BorderSize = 4
         Me.btnSaveData.FlatStyle = System.Windows.Forms.FlatStyle.System
@@ -407,7 +392,6 @@ Partial Class REChart_Help
         '
         'btnLoadData
         '
-        Me.btnLoadData.Enabled = False
         Me.btnLoadData.FlatAppearance.BorderColor = System.Drawing.Color.Black
         Me.btnLoadData.FlatAppearance.BorderSize = 4
         Me.btnLoadData.FlatStyle = System.Windows.Forms.FlatStyle.System
@@ -433,7 +417,6 @@ Partial Class REChart_Help
         '
         'bthRefresh
         '
-        Me.bthRefresh.Enabled = False
         Me.bthRefresh.FlatAppearance.BorderColor = System.Drawing.Color.Black
         Me.bthRefresh.FlatAppearance.BorderSize = 4
         Me.bthRefresh.FlatStyle = System.Windows.Forms.FlatStyle.System
@@ -463,15 +446,12 @@ Partial Class REChart_Help
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.Location = New System.Drawing.Point(10, 326)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(681, 32)
+        Me.Label9.Size = New System.Drawing.Size(1034, 32)
         Me.Label9.TabIndex = 112
-        Me.Label9.Text = "Note: Once state points are added, you can double click on the text in any part o" &
-    "f the table to edit. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Press Enter once the edit is complete, and press Refresh " &
-    "to force update all the data."
+        Me.Label9.Text = resources.GetString("Label9.Text")
         '
         'btnOverlay
         '
-        Me.btnOverlay.Enabled = False
         Me.btnOverlay.Location = New System.Drawing.Point(17, 535)
         Me.btnOverlay.Name = "btnOverlay"
         Me.btnOverlay.Size = New System.Drawing.Size(63, 28)
@@ -481,7 +461,6 @@ Partial Class REChart_Help
         '
         'BtnExport
         '
-        Me.BtnExport.Enabled = False
         Me.BtnExport.Location = New System.Drawing.Point(17, 507)
         Me.BtnExport.Name = "BtnExport"
         Me.BtnExport.Size = New System.Drawing.Size(63, 28)
@@ -492,7 +471,6 @@ Partial Class REChart_Help
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Enabled = False
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.Location = New System.Drawing.Point(5, 487)
         Me.Label10.Name = "Label10"
@@ -525,7 +503,6 @@ Partial Class REChart_Help
         '
         'btnFontSizeUp
         '
-        Me.btnFontSizeUp.Enabled = False
         Me.btnFontSizeUp.Location = New System.Drawing.Point(17, 564)
         Me.btnFontSizeUp.Name = "btnFontSizeUp"
         Me.btnFontSizeUp.Size = New System.Drawing.Size(63, 45)
@@ -547,7 +524,6 @@ Partial Class REChart_Help
         'cbMoreRPAs
         '
         Me.cbMoreRPAs.AutoSize = True
-        Me.cbMoreRPAs.Enabled = False
         Me.cbMoreRPAs.Location = New System.Drawing.Point(365, 645)
         Me.cbMoreRPAs.Name = "cbMoreRPAs"
         Me.cbMoreRPAs.Size = New System.Drawing.Size(55, 30)
@@ -558,7 +534,6 @@ Partial Class REChart_Help
         'cbReducedPower
         '
         Me.cbReducedPower.AutoSize = True
-        Me.cbReducedPower.Enabled = False
         Me.cbReducedPower.Location = New System.Drawing.Point(365, 617)
         Me.cbReducedPower.Name = "cbReducedPower"
         Me.cbReducedPower.Size = New System.Drawing.Size(70, 30)
@@ -569,7 +544,6 @@ Partial Class REChart_Help
         'cbDraft
         '
         Me.cbDraft.AutoSize = True
-        Me.cbDraft.Enabled = False
         Me.cbDraft.Location = New System.Drawing.Point(366, 598)
         Me.cbDraft.Name = "cbDraft"
         Me.cbDraft.Size = New System.Drawing.Size(62, 17)
@@ -580,7 +554,6 @@ Partial Class REChart_Help
         'cbApprovalBlock
         '
         Me.cbApprovalBlock.AutoSize = True
-        Me.cbApprovalBlock.Enabled = False
         Me.cbApprovalBlock.Location = New System.Drawing.Point(22, 641)
         Me.cbApprovalBlock.Name = "cbApprovalBlock"
         Me.cbApprovalBlock.Size = New System.Drawing.Size(71, 30)
@@ -591,7 +564,6 @@ Partial Class REChart_Help
         'cbLabels
         '
         Me.cbLabels.AutoSize = True
-        Me.cbLabels.Enabled = False
         Me.cbLabels.Location = New System.Drawing.Point(22, 621)
         Me.cbLabels.Name = "cbLabels"
         Me.cbLabels.Size = New System.Drawing.Size(57, 17)

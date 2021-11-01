@@ -213,7 +213,6 @@ Partial Class REChart_Data
         Me.txtDescription.Name = "txtDescription"
         Me.txtDescription.Size = New System.Drawing.Size(261, 20)
         Me.txtDescription.TabIndex = 10
-        Me.txtDescription.Text = " "
         '
         'Label1
         '

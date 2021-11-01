@@ -110,21 +110,53 @@ Public Class REChart_Data
             Dim newDateTime As Date
             Dim newHoursFromStart As Double
 
-            'populate parameters from previous row.
-            i = dgvStatepoints.RowCount - 1
-            lastDateTime = dgvStatepoints.Rows(i).Cells(0).Value
-            curHoursForAction = dgvStatepoints.Rows(i).Cells(1).Value
-            lastHoursFromStart = dgvStatepoints.Rows(i).Cells(2).Value
+            'check if a row is selected. If it is, then add row above the selected 
+            'check if you sily user selected more than one row for some dumb reason.... Dean Proofing...
+            If dgvStatepoints.SelectedRows.Count > 1 Then
+                MsgBox("You can't have multiple rows selected. If you are trying to insert a statepoint in the middle, Please select only 1 row.", MsgBoxStyle.Exclamation)
+                Exit Sub
+            End If
+            ' if one row is selected, insert state point above selected row
+            If dgvStatepoints.SelectedRows.Count = 1 Then
+                'check if you sily user selected the first statepoint.... Dean Proofing...
+                If dgvStatepoints.SelectedRows(0).Index = 0 Then
+                    MsgBox("You can't insert a new statepoint before the First point. Please select a different row to insert a statepoint above.", MsgBoxStyle.Exclamation)
+                    Exit Sub
+                End If
+                'populate parameters from above selected row.
+                i = dgvStatepoints.SelectedRows(0).Index - 1
+                lastDateTime = dgvStatepoints.Rows(i).Cells(0).Value
+                curHoursForAction = dgvStatepoints.Rows(i).Cells(1).Value
+                lastHoursFromStart = dgvStatepoints.Rows(i).Cells(2).Value
 
-            newDateTime = lastDateTime.AddHours(Convert.ToDouble(txtHoursForAction.Text))
-            newHoursFromStart = lastHoursFromStart + Convert.ToDouble(txtHoursForAction.Text)
+                newDateTime = lastDateTime.AddHours(Convert.ToDouble(txtHoursForAction.Text))
+                newHoursFromStart = lastHoursFromStart + Convert.ToDouble(txtHoursForAction.Text)
 
-            'add new row based on form inputs. add the hours for action to cur date/time to get new date/time and 
-            dgvStatepoints.Rows.Add(New String() {newDateTime.ToString("MM/dd/yyyy HH:mm"), txtHoursForAction.Text, newHoursFromStart.ToString, txtStatePointPower.Text, txtDescription.Text})
+                'add new row based on form inputs. add the hours for action to cur date/time to get new date/time and 
+                dgvStatepoints.Rows.Insert(i + 1, New String() {newDateTime.ToString("MM/dd/yyyy HH:mm"), txtHoursForAction.Text, newHoursFromStart.ToString, txtStatePointPower.Text, txtDescription.Text})
+            End If
+
+            'if no row is selected, add the new statepoint at the bottom of the data grid.
+            If dgvStatepoints.SelectedRows.Count = 0 Then
+                'populate parameters from previous row.
+                i = dgvStatepoints.RowCount - 1
+                lastDateTime = dgvStatepoints.Rows(i).Cells(0).Value
+                curHoursForAction = dgvStatepoints.Rows(i).Cells(1).Value
+                lastHoursFromStart = dgvStatepoints.Rows(i).Cells(2).Value
+
+                newDateTime = lastDateTime.AddHours(Convert.ToDouble(txtHoursForAction.Text))
+                newHoursFromStart = lastHoursFromStart + Convert.ToDouble(txtHoursForAction.Text)
+
+                'add new row based on form inputs. add the hours for action to cur date/time to get new date/time and 
+                dgvStatepoints.Rows.Add(New String() {newDateTime.ToString("MM/dd/yyyy HH:mm"), txtHoursForAction.Text, newHoursFromStart.ToString, txtStatePointPower.Text, txtDescription.Text})
+            End If
+
+            'call recalculate times to refresh the data. 
             Call ReCalculateTimes()
 
             'Set focus back to reoccuring input
             txtStatePointPower.Focus()
+
         Catch ex As Exception
             MsgBox(ex.Message & " occured in Private Sub btnAddStatePoint_Click in REChart_Data.vb", MsgBoxStyle.Critical, "FATALITY")
         End Try
