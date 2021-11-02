@@ -429,7 +429,7 @@ Public Class REChart_Data
                 Dim result As DialogResult = MsgBox("DEAN!! YOU CLICKED THE EXIT BUTTON AND MIGHT NOT HAVE SAVED!!! WOULD YOU LIKE TO SAVE NOW?!?!?!", MsgBoxStyle.YesNo, "DEAN!@!!!!!WR@!@#!@#!@$")
                 If result = DialogResult.Yes Then
                     Call Save()
-                ElseIf result = DialogResult.No Then ThenFi
+                ElseIf result = DialogResult.No Then
                     Dim result_two As DialogResult = MsgBox("DEAN!! ARE YOU SURE?!?!?!", MsgBoxStyle.YesNo, "DEAN!@!!!!!WR@!@#!@!$@%@!%!#!@$")
                     If result_two = DialogResult.Yes Then
                         Exit Sub
