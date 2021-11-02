@@ -28,6 +28,8 @@ Public Class REChart_Data
     Private Sub txtInitialPower_TextChanged(sender As Object, e As EventArgs) Handles txtInitialPower.TextChanged
         If (dgvStatepoints.RowCount >= 1) Then
             dgvStatepoints.Rows(0).SetValues(New String() {dtpStartDate.Value.ToShortDateString + " " + dtpStartTime.Value.ToString("HH:mm"), "0", "0", txtInitialPower.Text, "START"})
+            'reset the file saved flag. Since there were changes made since last save. 
+            FileSaved = False
             Call ReCalculateTimes()
         End If
     End Sub
@@ -35,6 +37,8 @@ Public Class REChart_Data
     Private Sub dtpStartDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpStartDate.ValueChanged
         If (dgvStatepoints.RowCount >= 1) Then
             dgvStatepoints.Rows(0).SetValues(New String() {dtpStartDate.Value.ToShortDateString + " " + dtpStartTime.Value.ToString("HH:mm"), "0", "0", txtInitialPower.Text, "START"})
+            'reset the file saved flag. Since there were changes made since last save. 
+            FileSaved = False
             Call ReCalculateTimes()
         End If
     End Sub
@@ -42,12 +46,16 @@ Public Class REChart_Data
     Private Sub dtpStartTime_ValueChanged(sender As Object, e As EventArgs) Handles dtpStartTime.ValueChanged
         If (dgvStatepoints.RowCount >= 1) Then
             dgvStatepoints.Rows(0).SetValues(New String() {dtpStartDate.Value.ToShortDateString + " " + dtpStartTime.Value.ToString("HH:mm"), "0", "0", txtInitialPower.Text, "START"})
+            'reset the file saved flag. Since there were changes made since last save. 
+            FileSaved = False
             Call ReCalculateTimes()
         End If
     End Sub
 
     Private Sub dgvStatepoints_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvStatepoints.CellContentDoubleClick
         dgvStatepoints.EditMode = DataGridViewEditMode.EditOnEnter
+        'reset the file saved flag. Since there were changes made since last save. 
+        FileSaved = False
         Call ReCalculateTimes()
     End Sub
 
@@ -99,9 +107,6 @@ Public Class REChart_Data
 
             LostMWHE = Math.Round(result, 1)
             lblMWE.Text = Math.Round(result, 1)
-
-            'reset the file saved flag. Since there were changes made since last save. 
-            FileSaved = False
 
         Catch ex As Exception
             MsgBox(ex.Message & " occured in Private Sub ReCalculateTimes in REChart_Data.vb", MsgBoxStyle.Critical, "FATALITY")
@@ -159,6 +164,9 @@ Public Class REChart_Data
                 'add new row based on form inputs. add the hours for action to cur date/time to get new date/time and 
                 dgvStatepoints.Rows.Add(New String() {newDateTime.ToString("MM/dd/yyyy HH:mm"), txtHoursForAction.Text, newHoursFromStart.ToString, txtStatePointPower.Text, txtDescription.Text})
             End If
+
+            'reset the file saved flag. Since there were changes made since last save. 
+            FileSaved = False
 
             'call recalculate times to refresh the data. 
             Call ReCalculateTimes()

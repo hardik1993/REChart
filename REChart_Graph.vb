@@ -56,7 +56,7 @@ Public Class REChart_Graph
         End If
 
         If REChart_Data.cbStartUpLP.Checked = True Then
-            'stuff
+            GenerateLoadProfile_StartUp()
         End If
 
     End Sub
@@ -485,7 +485,6 @@ Public Class REChart_Graph
             ReDim AnnotationTextArray(REChart_Data.DescArray.Length - 2)
 
             'first step is to form array of annotation descriptions.  
-            Dim tempstr As String
             For i As Integer = 1 To AnnotationTextArray.Length
                 'Handle condition If there is an empty desc block and the previous block was NOT empty
                 ' This Is handling the condition when a combined desc block Is used. Or REChart_Data.DescArray(i) = ""
@@ -493,17 +492,15 @@ Public Class REChart_Graph
                     If REChart_Data.DescArray(i + 1) = "" And REChart_Data.DescArray(i - 1) <> "" And REChart_Data.DescArray(i) <> "" Then
                         AnnotationTextArray(i - 1) = REChart_Data.DescArray(i)
 
-                        'the condition where empty place holder is needed. 
-                    ElseIf REChart_Data.DescArray(i) = "" Then
+                    ElseIf REChart_Data.DescArray(i) = "" Then 'the condition where empty place holder is needed. 
                         AnnotationTextArray(i - 1) = ""
 
-                        ' the normal condition
-                    Else
-                        AnnotationTextArray(i - 1) = Center2Lines(REChart_Data.DescArray(i), tempstr)
+                    Else ' the normal condition
+                        AnnotationTextArray(i - 1) = REChart_Data.DescArray(i)
                     End If
 
                 ElseIf i = AnnotationTextArray.Length Then ' handles the last desc block 
-                    AnnotationTextArray(i - 1) = Center2Lines(REChart_Data.DescArray(i), tempstr)
+                    AnnotationTextArray(i - 1) = REChart_Data.DescArray(i)
                 End If
 
             Next
@@ -617,7 +614,7 @@ Public Class REChart_Graph
             'loop through array, and add points to data series
             MySeries.MarkerType = MarkerType.Circle
             For i = 0 To REChart_Data.PowerArray.Length - 1
-                MySeries.Points.Add(New OxyPlot.DataPoint(DateTimeAxis.ToDouble(REChart_Data.DateTimeArray(i)), REChart_Data.PowerArray(i)))
+                MySeries.Points.Add(New OxyPlot.DataPoint(REChart_Data.HoursArray(i), REChart_Data.PowerArray(i)))
             Next
 
             'don't draw legend since there is only one series. 
