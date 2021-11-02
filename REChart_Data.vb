@@ -10,6 +10,7 @@ Public Class REChart_Data
     Public DescArray As String()
     Public FullPowerMWE As Double = 1300
     Public LostMWHE As Double
+    Public FileSaved As Boolean
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' form load event.
@@ -18,6 +19,9 @@ Public Class REChart_Data
         'Focus on first input field
         dtpStartDate.Focus()
         dtpStartDate.Select()
+
+        'reset the file saved flag
+        FileSaved = False
 
     End Sub
 
@@ -95,6 +99,10 @@ Public Class REChart_Data
 
             LostMWHE = Math.Round(result, 1)
             lblMWE.Text = Math.Round(result, 1)
+
+            'reset the file saved flag. Since there were changes made since last save. 
+            FileSaved = False
+
         Catch ex As Exception
             MsgBox(ex.Message & " occured in Private Sub ReCalculateTimes in REChart_Data.vb", MsgBoxStyle.Critical, "FATALITY")
         End Try
@@ -276,6 +284,9 @@ Public Class REChart_Data
             'close the file
             file.Close()
 
+            'set the file saved flag, since file was just saved. 
+            FileSaved = True
+
             MsgBox("File Saved Successfully!", MsgBoxStyle.Information)
             Exit Try
         Catch ex As Exception
@@ -370,6 +381,9 @@ Public Class REChart_Data
             're calculate rows to re-adjust the hours and date/time stamps. 
             Call ReCalculateTimes()
 
+            'set the file saved flag, since a file has just been loaded. 
+            FileSaved = True
+
             MsgBox("File Loaded Successfully!", MsgBoxStyle.Information)
 
             Exit Try
@@ -402,28 +416,43 @@ Public Class REChart_Data
     End Sub
 
     Private Sub REChart_Data_Closing(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles Me.Closing
-        Dim dir As New IO.DirectoryInfo("C:\Users\E204727")
-        If dir.Exists Then
-            Dim result As DialogResult = MsgBox("DEAN!! YOU CLICKED THE EXIT BUTTON AND MIGHT NOT HAVE SAVED!!! WOULD YOU LIKE TO SAVE NOW?!?!?!", MsgBoxStyle.YesNo, "DEAN!@!!!!!WR@!@#!@#!@$")
-            If result = DialogResult.Yes Then
-                Call Save()
-            ElseIf result = DialogResult.No Then
-
-                Dim result_two As DialogResult = MsgBox("DEAN!! ARE YOU SURE?!?!?!", MsgBoxStyle.YesNo, "DEAN!@!!!!!WR@!@#!@!$@%@!%!#!@$")
-                If result_two = DialogResult.Yes Then
-                    Exit Sub
-                ElseIf result_two = DialogResult.No Then
+        ' this sub checks whether you have saved the file yet or not. If file has already been saved, then just continue closing the form. 
+        ' if file has not been saved, then prompt the user to save. 
+        ' If you are dean, then you get real "SPECIAL" treatment. 
+        'dean proofing to the extreme. If unsaved, prompt user to save the file. 
+        Try
+            Dim strUserName As String
+            strUserName = Environment.UserName 'get the username to check if you are dean
+            ' if dean is the jerk running this, warn him. 
+            ' if file not saved and you are dean
+            If (strUserName = "E204727" Or strUserName = "e204727") And FileSaved = False Then
+                Dim result As DialogResult = MsgBox("DEAN!! YOU CLICKED THE EXIT BUTTON AND MIGHT NOT HAVE SAVED!!! WOULD YOU LIKE TO SAVE NOW?!?!?!", MsgBoxStyle.YesNo, "DEAN!@!!!!!WR@!@#!@#!@$")
+                If result = DialogResult.Yes Then
                     Call Save()
+                ElseIf result = DialogResult.No Then ThenFi
+                    Dim result_two As DialogResult = MsgBox("DEAN!! ARE YOU SURE?!?!?!", MsgBoxStyle.YesNo, "DEAN!@!!!!!WR@!@#!@!$@%@!%!#!@$")
+                    If result_two = DialogResult.Yes Then
+                        Exit Sub
+                    ElseIf result_two = DialogResult.No Then
+                        Call Save()
+                    End If
                 End If
 
-            End If
-        Else
-            Dim result As DialogResult = MsgBox("Would you like to save?", MsgBoxStyle.YesNo, "Save?")
-            If result = DialogResult.Yes Then
-                Call Save()
-            ElseIf result = DialogResult.No Then
+                ' if file not saved for everyone else
+            ElseIf FileSaved = False Then
+                Dim result As DialogResult = MsgBox("Would you like to save?", MsgBoxStyle.YesNo, "Save?")
+                If result = DialogResult.Yes Then
+                    Call Save()
+                ElseIf result = DialogResult.No Then
+                    Exit Sub
+                End If
+            Else
+                'file was just saved, exit. 
                 Exit Sub
             End If
-        End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message & " occured in Sub REChart_Data_Closing in REChart_Data.vb" & vbNewLine & "Ensure file is valid.", MsgBoxStyle.Critical, "FATALITY")
+        End Try
     End Sub
 End Class
