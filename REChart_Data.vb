@@ -426,6 +426,7 @@ Public Class REChart_Data
             ' if dean is the jerk running this, warn him. 
             ' if file not saved and you are dean
             If (strUserName = "E204727" Or strUserName = "e204727") And FileSaved = False Then
+                Beep()
                 Dim result As DialogResult = MsgBox("DEAN!! YOU CLICKED THE EXIT BUTTON AND MIGHT NOT HAVE SAVED!!! WOULD YOU LIKE TO SAVE NOW?!?!?!", MsgBoxStyle.YesNo, "DEAN!@!!!!!WR@!@#!@#!@$")
                 If result = DialogResult.Yes Then
                     Call Save()
@@ -440,6 +441,7 @@ Public Class REChart_Data
 
                 ' if file not saved for everyone else
             ElseIf FileSaved = False Then
+                Beep()
                 Dim result As DialogResult = MsgBox("Would you like to save?", MsgBoxStyle.YesNo, "Save?")
                 If result = DialogResult.Yes Then
                     Call Save()
