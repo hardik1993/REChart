@@ -272,7 +272,7 @@ Public Class REChart_Graph
             Dim CurrentPoint As OxyPlot.DataPoint
             Dim NextPoint As OxyPlot.DataPoint
             'setup annotations. Add annotations to the a list. 
-            'set the descriptions from DescArray, and the date/time range for action. 
+            'set the descriptions from AnnotationTextArray, and the date/time range for action. 
             'set the locations at the mid point of the line for the action.
             For i = 0 To AnnotationTextArray.Length - 1
                 AnnotationsList.Add(New OxyPlot.Annotations.TextAnnotation)
@@ -508,7 +508,7 @@ Public Class REChart_Graph
             Dim CurrentPoint As OxyPlot.DataPoint
             Dim NextPoint As OxyPlot.DataPoint
             'setup annotations. Add annotations to the a list. 
-            'set the descriptions from DescArray, and the date/time range for action. 
+            'setup the text annotations to fill from AnnotationTextArray
             'set the locations at the mid point of the line for the action.
             For i = 0 To AnnotationTextArray.Length - 1
                 AnnotationsList.Add(New OxyPlot.Annotations.TextAnnotation)
@@ -519,8 +519,8 @@ Public Class REChart_Graph
                 AnnotationsList(i).Font = "Consolas"
 
                 'set previous point and current point, calculate the mid point, and set the location of the annotation as the midpoint.
-                CurrentPoint = New OxyPlot.DataPoint(REChart_Data.DateTimeArray(i).ToOADate, REChart_Data.PowerArray(i))
-                NextPoint = New OxyPlot.DataPoint(REChart_Data.DateTimeArray(i + 1).ToOADate, REChart_Data.PowerArray(i + 1))
+                CurrentPoint = New OxyPlot.DataPoint(REChart_Data.HoursArray(i), REChart_Data.PowerArray(i))
+                NextPoint = New OxyPlot.DataPoint(REChart_Data.HoursArray(i + 1), REChart_Data.PowerArray(i + 1))
                 AnnotationsList(i).TextPosition = CalculateMidPointOfLine(CurrentPoint, NextPoint)
 
                 'setting tag value to the index of the annotation in the list. so that it can be 

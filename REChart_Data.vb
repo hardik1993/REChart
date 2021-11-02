@@ -23,6 +23,10 @@ Public Class REChart_Data
         'reset the file saved flag
         FileSaved = False
 
+        'hide the loading label
+        lblLoading.Visible = False
+        lblLoading.Refresh()
+
     End Sub
 
     Private Sub txtInitialPower_TextChanged(sender As Object, e As EventArgs) Handles txtInitialPower.TextChanged
@@ -62,6 +66,11 @@ Public Class REChart_Data
     Private Sub ReCalculateTimes()
         'This Sub will re-calculate times based on the starting times, and hours for action. 
         Try
+
+            'show the loading label
+            lblLoading.Visible = True
+            lblLoading.Refresh()
+
             Dim newDateTime As Date
             Dim curDateTime As Date
             Dim newHoursFromStart As Double
@@ -108,7 +117,14 @@ Public Class REChart_Data
             LostMWHE = Math.Round(result, 1)
             lblMWE.Text = Math.Round(result, 1)
 
+            'hide the loading label
+            lblLoading.Visible = False
+            lblLoading.Refresh()
+
         Catch ex As Exception
+            'hide the loading label
+            lblLoading.Visible = False
+            lblLoading.Refresh()
             MsgBox(ex.Message & " occured in Private Sub ReCalculateTimes in REChart_Data.vb", MsgBoxStyle.Critical, "FATALITY")
         End Try
     End Sub
@@ -185,6 +201,11 @@ Public Class REChart_Data
 
     Private Sub btnGenerateLP_Click(sender As Object, e As EventArgs) Handles btnGenerateLP.Click
         Try
+
+            'show the loading label
+            lblLoading.Visible = True
+            lblLoading.Refresh()
+
             ' refresh data before doing anything. 
             Call ReCalculateTimes()
 
@@ -201,7 +222,6 @@ Public Class REChart_Data
                 Exit Sub
             End If
 
-
             'for some reason the redim makes the array 1+row count. So i have to -1 in the redim statement. 
             ReDim DateTimeArray(dgvStatepoints.RowCount - 1)
             ReDim HoursArray(dgvStatepoints.RowCount - 1)
@@ -216,8 +236,17 @@ Public Class REChart_Data
                 DescArray(i) = dgvStatepoints.Rows(i).Cells(4).Value
             Next
 
+            'hide the loading label
+            lblLoading.Visible = False
+            lblLoading.Refresh()
+
+            'show the re-chart graph form
             REChart_Graph.Show()
+
         Catch ex As Exception
+            'hide the loading label
+            lblLoading.Visible = False
+            lblLoading.Refresh()
             MsgBox(ex.Message & " occured in Private Sub btnGenerateLP_Click in REChart_Data.vb", MsgBoxStyle.Critical, "FATALITY")
         End Try
     End Sub
@@ -251,12 +280,15 @@ Public Class REChart_Data
                 Exit Sub
             End If
 
+            'show the loading label
+            lblLoading.Visible = True
+            lblLoading.Refresh()
+
             'check if the user is stupid enough to include extention even tho i told them not to... 
             ' If extention of *.REChart Is included Then move on, if it is not then add it to the file path. 
             If Strings.Right(FileNameString, 8) <> ".REChart" Then
                 FileNameString = FileNameString + ".REChart"
             End If
-
 
             'create a file writer object. and start writing to the file 
             Dim file As System.IO.StreamWriter
@@ -295,9 +327,16 @@ Public Class REChart_Data
             'set the file saved flag, since file was just saved. 
             FileSaved = True
 
+            'hide the loading label
+            lblLoading.Visible = False
+            lblLoading.Refresh()
+
             MsgBox("File Saved Successfully!", MsgBoxStyle.Information)
             Exit Try
         Catch ex As Exception
+            'hide the loading label
+            lblLoading.Visible = False
+            lblLoading.Refresh()
             MsgBox(ex.Message & " occured in Sub btnSaveData_Click in REChart_Data.vb" & vbNewLine & "Ensure directory path is valid and admin rights are not required.", MsgBoxStyle.Critical, "FATALITY")
         End Try
     End Sub
@@ -327,6 +366,10 @@ Public Class REChart_Data
                 MsgBox("Please select a file to load the data from")
                 Exit Sub
             End If
+
+            'show the loading label
+            lblLoading.Visible = True
+            lblLoading.Refresh()
 
             'create a file stream reader object and read file
             Dim file As System.IO.StreamReader
@@ -392,11 +435,18 @@ Public Class REChart_Data
             'set the file saved flag, since a file has just been loaded. 
             FileSaved = True
 
+            'hide the loading label
+            lblLoading.Visible = False
+            lblLoading.Refresh()
+
             MsgBox("File Loaded Successfully!", MsgBoxStyle.Information)
 
             Exit Try
 
         Catch ex As Exception
+            'hide the loading label
+            lblLoading.Visible = False
+            lblLoading.Refresh()
             MsgBox(ex.Message & " occured in Sub btnLoadData_Click in REChart_Data.vb" & vbNewLine & "Ensure file is valid.", MsgBoxStyle.Critical, "FATALITY")
         End Try
     End Sub
