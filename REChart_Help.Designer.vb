@@ -227,7 +227,7 @@ Partial Class REChart_Help
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.Location = New System.Drawing.Point(4, 324)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(813, 45)
+        Me.Label9.Size = New System.Drawing.Size(782, 45)
         Me.Label9.TabIndex = 112
         Me.Label9.Text = resources.GetString("Label9.Text")
         '

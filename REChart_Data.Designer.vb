@@ -63,6 +63,7 @@ Partial Class REChart_Data
         Me.lblLostMWE = New System.Windows.Forms.ToolStripStatusLabel()
         Me.btn_Help = New System.Windows.Forms.Button()
         Me.lblLoading = New System.Windows.Forms.Label()
+        Me.lblVersion = New System.Windows.Forms.Label()
         CType(Me.dgvStatepoints, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpAddStatePoints.SuspendLayout()
         Me.grpInitialConditions.SuspendLayout()
@@ -491,11 +492,23 @@ Partial Class REChart_Data
         Me.lblLoading.TabIndex = 101
         Me.lblLoading.Text = "--Loading--"
         '
+        'lblVersion
+        '
+        Me.lblVersion.AccessibleRole = System.Windows.Forms.AccessibleRole.SplitButton
+        Me.lblVersion.AutoSize = True
+        Me.lblVersion.Font = New System.Drawing.Font("Tahoma", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblVersion.Location = New System.Drawing.Point(54, 610)
+        Me.lblVersion.Name = "lblVersion"
+        Me.lblVersion.Size = New System.Drawing.Size(46, 11)
+        Me.lblVersion.TabIndex = 102
+        Me.lblVersion.Text = "Version:"
+        '
         'REChart_Data
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(830, 624)
+        Me.Controls.Add(Me.lblVersion)
         Me.Controls.Add(Me.lblLoading)
         Me.Controls.Add(Me.btn_Help)
         Me.Controls.Add(Me.lblAuthor)
@@ -561,4 +574,5 @@ Partial Class REChart_Data
     Friend WithEvents Power As DataGridViewTextBoxColumn
     Friend WithEvents Description As DataGridViewTextBoxColumn
     Friend WithEvents lblLoading As Label
+    Friend WithEvents lblVersion As Label
 End Class

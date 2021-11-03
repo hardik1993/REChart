@@ -139,7 +139,7 @@ annotation to/from times will be adjusted appropriately. Press enter in this box
 </value>
   </data>
   <data name="Label9.Text" xml:space="preserve">
-    <value>Note: Once state points are added, you can double click on the text in any part of the table to edit. Press Enter once the edit is 
+    <value>Note: Once state points are added, you can double click on any cell to edit its contents. Press Enter once the edit is 
 complete, and press Refresh to force update all the data. You can also insert statepoints in the middle of the data grid by 
 selecting an entire row prior to clicking Add State Point. </value>
   </data>

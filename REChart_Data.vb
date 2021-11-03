@@ -1,4 +1,5 @@
 ﻿Imports PISDK
+Imports System.Deployment.Application
 
 Public Class REChart_Data
 
@@ -13,20 +14,31 @@ Public Class REChart_Data
     Public FileSaved As Boolean
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' form load event.
-        dgvStatepoints.Rows.Add(New String() {dtpStartDate.Value.ToShortDateString + " " + "00:00", "0", "0", txtInitialPower.Text, "START"})
+        'This sub handles tthe form load event
+        Try
+            ' form load event.
+            dgvStatepoints.Rows.Add(New String() {dtpStartDate.Value.ToShortDateString + " " + "00:00", "0", "0", txtInitialPower.Text, "START"})
 
-        'Focus on first input field
-        dtpStartDate.Focus()
-        dtpStartDate.Select()
+            'Focus on first input field
+            dtpStartDate.Focus()
+            dtpStartDate.Select()
 
-        'reset the file saved flag
-        FileSaved = False
+            'reset the file saved flag
+            FileSaved = False
 
-        'hide the loading label
-        lblLoading.Visible = False
-        lblLoading.Refresh()
+            'hide the loading label
+            lblLoading.Visible = False
+            lblLoading.Refresh()
 
+            'update the version label. If the application is network deployed, then use the current deployment version. 
+            If ApplicationDeployment.IsNetworkDeployed Then
+                lblVersion.Text = "Version:" + ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString
+            Else ' in dev mode use current version. 
+                lblVersion.Text = "Version:" + "Developer Mode"
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " occured in Private Sub Form1_Load in REChart_Data.vb", MsgBoxStyle.Critical, "FATALITY")
+        End Try
     End Sub
 
     Private Sub txtInitialPower_TextChanged(sender As Object, e As EventArgs) Handles txtInitialPower.TextChanged
@@ -56,7 +68,8 @@ Public Class REChart_Data
         End If
     End Sub
 
-    Private Sub dgvStatepoints_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvStatepoints.CellContentDoubleClick
+    Private Sub dgvStatepoints_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvStatepoints.CellDoubleClick
+        'handles the cell rouble click event to edit contents of cell. 
         dgvStatepoints.EditMode = DataGridViewEditMode.EditOnEnter
         'reset the file saved flag. Since there were changes made since last save. 
         FileSaved = False
@@ -515,4 +528,5 @@ Public Class REChart_Data
             MsgBox(ex.Message & " occured in Sub REChart_Data_Closing in REChart_Data.vb" & vbNewLine & "Ensure file is valid.", MsgBoxStyle.Critical, "FATALITY")
         End Try
     End Sub
+
 End Class
