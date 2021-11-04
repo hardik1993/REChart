@@ -1385,7 +1385,7 @@ Interpolate_Error:
     End Sub
 
     Private Sub cbMoreRPAs_Click(sender As Object, e As EventArgs) Handles cbMoreRPAs.Click
-        ' This Handles the adding and hiding of the More RPA's note block.
+        ' This Handles the adding and hiding of the More RPA's note block..
         Try
             If cbMoreRPAs.Checked = True Then
                 ' add the text, and set up the colors, and borders 
