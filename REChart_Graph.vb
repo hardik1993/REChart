@@ -129,9 +129,9 @@ Public Class REChart_Graph
             ws.Cells(2, 2).value = "Power(%)"
 
             'Loop through all valid entries in hourly arrays and write to appropriate excel cells
-            For x = 2 To HourlyDateTime.Length - 1
-                ws.Cells(x + 1, 1).Value = HourlyDateTime(x)
-                ws.Cells(x + 1, 2).Value = HourlyPowerArray(x)
+            For x = 0 To HourlyDateTime.Length - 1
+                ws.Cells(x + 3, 1).Value = HourlyDateTime(x)
+                ws.Cells(x + 3, 2).Value = HourlyPowerArray(x)
             Next
 
             'Parse a new filename for the .xlsx based on the filename for the .png
@@ -1024,14 +1024,14 @@ Public Class REChart_Graph
             'MsgBox(StartingDateTime.ToString + " " + EndingDateTime.ToString + " " + diff.ToString)
 
             're dim the hourly arrays to appriorate dimension, based on the delta in hours between starting and ending time
-            ReDim HourlyTime(diff - 1)
-            ReDim HourlyPower(diff - 1)
+            ReDim HourlyTime(diff)
+            ReDim HourlyPower(diff)
 
             'Loop through and populate the hourly data arrays. 
             Dim CurrentDateTime As Date = StartingDateTime
             Dim i As Integer = 0
             Dim j As Integer = 0
-            While CurrentDateTime < EndingDateTime
+            While CurrentDateTime <= EndingDateTime
                 HourlyTime(i) = CurrentDateTime ' fill out the hourly date/time array.
 
                 'need to interpolate here to fill out hourlypower(i)... this is going to get real gross. 
