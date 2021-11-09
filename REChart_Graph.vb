@@ -980,6 +980,7 @@ Public Class REChart_Graph
         End Try
     End Sub
 
+
     Private Sub CalculateHourlyData(ByVal DTArray As Date(), ByVal PowArray As Double(), ByRef HourlyTime As Date(), ByRef HourlyPower As Double())
         'This sub will accept an array of date times and power levels as inputs, and will return byref, 
         ' an hourly array Of Date times And power levels, interpolated as nessicary. This is primairly for 
