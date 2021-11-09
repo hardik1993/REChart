@@ -1037,7 +1037,8 @@ Public Class REChart_Graph
                 'need to interpolate here to fill out hourlypower(i)... this is going to get real gross. 
                 j = 0
                 'need the upper and lower values for the supplied date/time in the overall DTarray
-                While CurrentDateTime >= DTArray(j)
+                ' added the And j < DTArray.Length - 1 to the while loop to bound going outside of the array length. 
+                While CurrentDateTime >= DTArray(j) And j < DTArray.Length - 1
                     j = j + 1
                 End While
 
