@@ -76,6 +76,8 @@ Partial Class REChart_Help
         Me.btnAddStatePoint = New System.Windows.Forms.Button()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label20 = New System.Windows.Forms.Label()
+        Me.cbPowerFluctuate = New System.Windows.Forms.CheckBox()
+        Me.Label21 = New System.Windows.Forms.Label()
         Me.grpInitialConditions.SuspendLayout()
         Me.grpAddStatePoints.SuspendLayout()
         Me.SuspendLayout()
@@ -284,9 +286,9 @@ Partial Class REChart_Help
         '
         'btnFontSizeUp
         '
-        Me.btnFontSizeUp.Location = New System.Drawing.Point(17, 564)
+        Me.btnFontSizeUp.Location = New System.Drawing.Point(9, 564)
         Me.btnFontSizeUp.Name = "btnFontSizeUp"
-        Me.btnFontSizeUp.Size = New System.Drawing.Size(63, 45)
+        Me.btnFontSizeUp.Size = New System.Drawing.Size(76, 27)
         Me.btnFontSizeUp.TabIndex = 118
         Me.btnFontSizeUp.Text = "Font Size +/-"
         Me.btnFontSizeUp.UseVisualStyleBackColor = True
@@ -295,7 +297,7 @@ Partial Class REChart_Help
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(83, 575)
+        Me.Label13.Location = New System.Drawing.Point(86, 569)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(487, 16)
         Me.Label13.TabIndex = 119
@@ -305,7 +307,7 @@ Partial Class REChart_Help
         'cbMoreRPAs
         '
         Me.cbMoreRPAs.AutoSize = True
-        Me.cbMoreRPAs.Location = New System.Drawing.Point(365, 645)
+        Me.cbMoreRPAs.Location = New System.Drawing.Point(360, 621)
         Me.cbMoreRPAs.Name = "cbMoreRPAs"
         Me.cbMoreRPAs.Size = New System.Drawing.Size(55, 30)
         Me.cbMoreRPAs.TabIndex = 124
@@ -315,7 +317,7 @@ Partial Class REChart_Help
         'cbReducedPower
         '
         Me.cbReducedPower.AutoSize = True
-        Me.cbReducedPower.Location = New System.Drawing.Point(365, 617)
+        Me.cbReducedPower.Location = New System.Drawing.Point(360, 593)
         Me.cbReducedPower.Name = "cbReducedPower"
         Me.cbReducedPower.Size = New System.Drawing.Size(70, 30)
         Me.cbReducedPower.TabIndex = 123
@@ -325,7 +327,7 @@ Partial Class REChart_Help
         'cbDraft
         '
         Me.cbDraft.AutoSize = True
-        Me.cbDraft.Location = New System.Drawing.Point(366, 598)
+        Me.cbDraft.Location = New System.Drawing.Point(13, 652)
         Me.cbDraft.Name = "cbDraft"
         Me.cbDraft.Size = New System.Drawing.Size(62, 17)
         Me.cbDraft.TabIndex = 122
@@ -335,7 +337,7 @@ Partial Class REChart_Help
         'cbApprovalBlock
         '
         Me.cbApprovalBlock.AutoSize = True
-        Me.cbApprovalBlock.Location = New System.Drawing.Point(22, 641)
+        Me.cbApprovalBlock.Location = New System.Drawing.Point(15, 619)
         Me.cbApprovalBlock.Name = "cbApprovalBlock"
         Me.cbApprovalBlock.Size = New System.Drawing.Size(71, 30)
         Me.cbApprovalBlock.TabIndex = 121
@@ -345,7 +347,7 @@ Partial Class REChart_Help
         'cbLabels
         '
         Me.cbLabels.AutoSize = True
-        Me.cbLabels.Location = New System.Drawing.Point(22, 621)
+        Me.cbLabels.Location = New System.Drawing.Point(15, 599)
         Me.cbLabels.Name = "cbLabels"
         Me.cbLabels.Size = New System.Drawing.Size(57, 17)
         Me.cbLabels.TabIndex = 120
@@ -356,7 +358,7 @@ Partial Class REChart_Help
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(86, 621)
+        Me.Label14.Location = New System.Drawing.Point(79, 599)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(260, 16)
         Me.Label14.TabIndex = 125
@@ -366,7 +368,7 @@ Partial Class REChart_Help
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(85, 647)
+        Me.Label15.Location = New System.Drawing.Point(78, 625)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(244, 16)
         Me.Label15.TabIndex = 126
@@ -376,7 +378,7 @@ Partial Class REChart_Help
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(436, 624)
+        Me.Label16.Location = New System.Drawing.Point(424, 599)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(317, 16)
         Me.Label16.TabIndex = 127
@@ -386,7 +388,7 @@ Partial Class REChart_Help
         '
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(435, 651)
+        Me.Label17.Location = New System.Drawing.Point(423, 627)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(360, 16)
         Me.Label17.TabIndex = 128
@@ -396,7 +398,7 @@ Partial Class REChart_Help
         '
         Me.Label18.AutoSize = True
         Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(438, 597)
+        Me.Label18.Location = New System.Drawing.Point(85, 651)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(235, 16)
         Me.Label18.TabIndex = 129
@@ -657,11 +659,33 @@ Partial Class REChart_Help
         Me.Label20.Text = "_________________________________________________________________________________" &
     "____________________"
         '
+        'cbPowerFluctuate
+        '
+        Me.cbPowerFluctuate.AutoSize = True
+        Me.cbPowerFluctuate.Location = New System.Drawing.Point(360, 649)
+        Me.cbPowerFluctuate.Name = "cbPowerFluctuate"
+        Me.cbPowerFluctuate.Size = New System.Drawing.Size(70, 30)
+        Me.cbPowerFluctuate.TabIndex = 134
+        Me.cbPowerFluctuate.Text = "Power" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Fluctuate"
+        Me.cbPowerFluctuate.UseVisualStyleBackColor = True
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label21.Location = New System.Drawing.Point(424, 656)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(404, 16)
+        Me.Label21.TabIndex = 135
+        Me.Label21.Text = "-Toggles displaying the Power will fluctuate between xx and yy note"
+        '
         'REChart_Help
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(823, 679)
+        Me.ClientSize = New System.Drawing.Size(827, 679)
+        Me.Controls.Add(Me.Label21)
+        Me.Controls.Add(Me.cbPowerFluctuate)
         Me.Controls.Add(Me.grpAddStatePoints)
         Me.Controls.Add(Me.grpInitialConditions)
         Me.Controls.Add(Me.Label18)
@@ -761,4 +785,6 @@ Partial Class REChart_Help
     Friend WithEvents btnAddStatePoint As Button
     Friend WithEvents Label19 As Label
     Friend WithEvents Label20 As Label
+    Friend WithEvents cbPowerFluctuate As CheckBox
+    Friend WithEvents Label21 As Label
 End Class

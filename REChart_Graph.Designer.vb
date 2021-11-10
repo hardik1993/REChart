@@ -42,6 +42,7 @@ Partial Class REChart_Graph
         Me.cbMoreRPAs = New System.Windows.Forms.CheckBox()
         Me.lblMWdiff = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.cbPowerFluctuate = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'BtnExport
@@ -107,7 +108,7 @@ Partial Class REChart_Graph
         Me.cbLabels.AutoSize = True
         Me.cbLabels.Checked = True
         Me.cbLabels.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.cbLabels.Location = New System.Drawing.Point(1056, 266)
+        Me.cbLabels.Location = New System.Drawing.Point(1056, 257)
         Me.cbLabels.Name = "cbLabels"
         Me.cbLabels.Size = New System.Drawing.Size(57, 17)
         Me.cbLabels.TabIndex = 26
@@ -117,7 +118,7 @@ Partial Class REChart_Graph
         'cbApprovalBlock
         '
         Me.cbApprovalBlock.AutoSize = True
-        Me.cbApprovalBlock.Location = New System.Drawing.Point(1056, 289)
+        Me.cbApprovalBlock.Location = New System.Drawing.Point(1056, 280)
         Me.cbApprovalBlock.Name = "cbApprovalBlock"
         Me.cbApprovalBlock.Size = New System.Drawing.Size(71, 30)
         Me.cbApprovalBlock.TabIndex = 27
@@ -127,7 +128,7 @@ Partial Class REChart_Graph
         'cbDraft
         '
         Me.cbDraft.AutoSize = True
-        Me.cbDraft.Location = New System.Drawing.Point(1056, 325)
+        Me.cbDraft.Location = New System.Drawing.Point(1056, 316)
         Me.cbDraft.Name = "cbDraft"
         Me.cbDraft.Size = New System.Drawing.Size(62, 17)
         Me.cbDraft.TabIndex = 28
@@ -137,7 +138,7 @@ Partial Class REChart_Graph
         'cbReducedPower
         '
         Me.cbReducedPower.AutoSize = True
-        Me.cbReducedPower.Location = New System.Drawing.Point(1056, 348)
+        Me.cbReducedPower.Location = New System.Drawing.Point(1056, 335)
         Me.cbReducedPower.Name = "cbReducedPower"
         Me.cbReducedPower.Size = New System.Drawing.Size(70, 30)
         Me.cbReducedPower.TabIndex = 29
@@ -147,7 +148,7 @@ Partial Class REChart_Graph
         'Label1
         '
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(1053, 233)
+        Me.Label1.Location = New System.Drawing.Point(1053, 224)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(69, 30)
         Me.Label1.TabIndex = 30
@@ -157,7 +158,7 @@ Partial Class REChart_Graph
         'Label2
         '
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(1053, 449)
+        Me.Label2.Location = New System.Drawing.Point(1053, 464)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(69, 30)
         Me.Label2.TabIndex = 31
@@ -167,7 +168,7 @@ Partial Class REChart_Graph
         'Label3
         '
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(1053, 479)
+        Me.Label3.Location = New System.Drawing.Point(1053, 494)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(69, 13)
         Me.Label3.TabIndex = 32
@@ -177,7 +178,7 @@ Partial Class REChart_Graph
         'Label4
         '
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(1053, 522)
+        Me.Label4.Location = New System.Drawing.Point(1053, 537)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(69, 13)
         Me.Label4.TabIndex = 33
@@ -187,7 +188,7 @@ Partial Class REChart_Graph
         'lblPredictedLostMWs
         '
         Me.lblPredictedLostMWs.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPredictedLostMWs.Location = New System.Drawing.Point(1053, 496)
+        Me.lblPredictedLostMWs.Location = New System.Drawing.Point(1053, 511)
         Me.lblPredictedLostMWs.Name = "lblPredictedLostMWs"
         Me.lblPredictedLostMWs.Size = New System.Drawing.Size(69, 13)
         Me.lblPredictedLostMWs.TabIndex = 34
@@ -197,7 +198,7 @@ Partial Class REChart_Graph
         'lblActualLostMWs
         '
         Me.lblActualLostMWs.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblActualLostMWs.Location = New System.Drawing.Point(1053, 538)
+        Me.lblActualLostMWs.Location = New System.Drawing.Point(1053, 553)
         Me.lblActualLostMWs.Name = "lblActualLostMWs"
         Me.lblActualLostMWs.Size = New System.Drawing.Size(69, 13)
         Me.lblActualLostMWs.TabIndex = 35
@@ -207,7 +208,7 @@ Partial Class REChart_Graph
         'cbMoreRPAs
         '
         Me.cbMoreRPAs.AutoSize = True
-        Me.cbMoreRPAs.Location = New System.Drawing.Point(1056, 384)
+        Me.cbMoreRPAs.Location = New System.Drawing.Point(1056, 371)
         Me.cbMoreRPAs.Name = "cbMoreRPAs"
         Me.cbMoreRPAs.Size = New System.Drawing.Size(55, 30)
         Me.cbMoreRPAs.TabIndex = 36
@@ -217,7 +218,7 @@ Partial Class REChart_Graph
         'lblMWdiff
         '
         Me.lblMWdiff.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblMWdiff.Location = New System.Drawing.Point(1053, 606)
+        Me.lblMWdiff.Location = New System.Drawing.Point(1053, 621)
         Me.lblMWdiff.Name = "lblMWdiff"
         Me.lblMWdiff.Size = New System.Drawing.Size(69, 13)
         Me.lblMWdiff.TabIndex = 38
@@ -227,18 +228,29 @@ Partial Class REChart_Graph
         'Label6
         '
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(1053, 560)
+        Me.Label6.Location = New System.Drawing.Point(1053, 575)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(69, 46)
         Me.Label6.TabIndex = 37
         Me.Label6.Text = "Difference from Predicted:"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'cbPowerFluctuate
+        '
+        Me.cbPowerFluctuate.AutoSize = True
+        Me.cbPowerFluctuate.Location = New System.Drawing.Point(1056, 407)
+        Me.cbPowerFluctuate.Name = "cbPowerFluctuate"
+        Me.cbPowerFluctuate.Size = New System.Drawing.Size(70, 30)
+        Me.cbPowerFluctuate.TabIndex = 39
+        Me.cbPowerFluctuate.Text = "Power" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Fluctuate"
+        Me.cbPowerFluctuate.UseVisualStyleBackColor = True
+        '
         'REChart_Graph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1123, 796)
+        Me.Controls.Add(Me.cbPowerFluctuate)
         Me.Controls.Add(Me.lblMWdiff)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.cbMoreRPAs)
@@ -284,4 +296,5 @@ Partial Class REChart_Graph
     Friend WithEvents cbMoreRPAs As CheckBox
     Friend WithEvents lblMWdiff As Label
     Friend WithEvents Label6 As Label
+    Friend WithEvents cbPowerFluctuate As CheckBox
 End Class

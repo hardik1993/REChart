@@ -25,7 +25,11 @@ Public Class REChart_Graph
     Public AnnotationTextArray As String()
     'This is the list of Note type annotations, such as Approval Block, Reduced Power level note, Draft, etc. 
     Public NoteAnnotationsList As New List(Of OxyPlot.Annotations.TextAnnotation)
+
+    'globals for prompts for extra note blocks 
     Dim REName As String = ""
+    Dim highPower As String = ""
+    Dim lowPower As String = ""
 
     'global vars for the hourly data
     Dim HourlyDateTime As Date()
@@ -306,6 +310,7 @@ Public Class REChart_Graph
             ' 1 - Reduced Power Level Note
             ' 2 - DRAFT Note
             ' 3 - More RPAs Note
+            ' 4 - Power Fluctuate Note
 
             ' 0- Approval Block
             NoteAnnotationsList.Add(New OxyPlot.Annotations.TextAnnotation)
@@ -374,6 +379,23 @@ Public Class REChart_Graph
             AddHandler NoteAnnotationsList(3).MouseDown, AddressOf NoteAnnotationMouseDown
             AddHandler NoteAnnotationsList(3).MouseMove, AddressOf NoteAnnotationMouseMove
             AddHandler NoteAnnotationsList(3).MouseUp, AddressOf NoteAnnotationMouseUp
+
+            ' 4 - Power Fluctuate Note
+            NoteAnnotationsList.Add(New OxyPlot.Annotations.TextAnnotation)
+            NoteAnnotationsList(4).Text = ""
+            NoteAnnotationsList(4).Tag = 4
+            NoteAnnotationsList(4).FontSize = 10
+            NoteAnnotationsList(4).Font = "Consolas"
+            NoteAnnotationsList(4).Background = OxyColors.White
+            NoteAnnotationsList(4).Stroke = OxyColors.White
+            NoteAnnotationsList(4).TextColor = OxyColors.White
+            NoteAnnotationsList(4).Layer = AnnotationLayer.BelowAxes
+            NoteAnnotationsList(4).TextPosition = New OxyPlot.DataPoint(xAxis.Maximum, yAxis.Minimum + 16)
+            MyModel.Annotations.Add(NoteAnnotationsList(4))
+            ' Event handlers 
+            AddHandler NoteAnnotationsList(4).MouseDown, AddressOf NoteAnnotationMouseDown
+            AddHandler NoteAnnotationsList(4).MouseMove, AddressOf NoteAnnotationMouseMove
+            AddHandler NoteAnnotationsList(4).MouseUp, AddressOf NoteAnnotationMouseUp
 
             'loop through array, and add points to data series
             MySeries.MarkerType = MarkerType.Circle
@@ -542,6 +564,7 @@ Public Class REChart_Graph
             ' 1 - Reduced Power Level Note
             ' 2 - DRAFT Note
             ' 3 - More RPAs Note
+            ' 4 - Power Fluctuate Note
 
             ' 0- Approval Block
             NoteAnnotationsList.Add(New OxyPlot.Annotations.TextAnnotation)
@@ -610,6 +633,23 @@ Public Class REChart_Graph
             AddHandler NoteAnnotationsList(3).MouseDown, AddressOf NoteAnnotationMouseDown
             AddHandler NoteAnnotationsList(3).MouseMove, AddressOf NoteAnnotationMouseMove
             AddHandler NoteAnnotationsList(3).MouseUp, AddressOf NoteAnnotationMouseUp
+
+            ' 4 - Power Fluctuate Note
+            NoteAnnotationsList.Add(New OxyPlot.Annotations.TextAnnotation)
+            NoteAnnotationsList(4).Text = ""
+            NoteAnnotationsList(4).Tag = 4
+            NoteAnnotationsList(4).FontSize = 10
+            NoteAnnotationsList(4).Font = "Consolas"
+            NoteAnnotationsList(4).Background = OxyColors.White
+            NoteAnnotationsList(4).Stroke = OxyColors.White
+            NoteAnnotationsList(4).TextColor = OxyColors.White
+            NoteAnnotationsList(4).Layer = AnnotationLayer.BelowAxes
+            NoteAnnotationsList(4).TextPosition = New OxyPlot.DataPoint(xAxis.Maximum, yAxis.Minimum + 16)
+            MyModel.Annotations.Add(NoteAnnotationsList(4))
+            ' Event handlers 
+            AddHandler NoteAnnotationsList(4).MouseDown, AddressOf NoteAnnotationMouseDown
+            AddHandler NoteAnnotationsList(4).MouseMove, AddressOf NoteAnnotationMouseMove
+            AddHandler NoteAnnotationsList(4).MouseUp, AddressOf NoteAnnotationMouseUp
 
             'loop through array, and add points to data series
             MySeries.MarkerType = MarkerType.Circle
@@ -1413,6 +1453,38 @@ Interpolate_Error:
             MyModel.InvalidatePlot(True)
         Catch ex As Exception
             MsgBox(ex.Message + " - Occured in Private Sub cbMoreRPAs_Click in REChart_Graph.vb")
+        End Try
+    End Sub
+
+    Private Sub cbPowerFluctuate_Click(sender As Object, e As EventArgs) Handles cbPowerFluctuate.Click
+        ' This Handles the adding and hiding of the Power Fluctuate note block.
+        Try
+            If cbPowerFluctuate.Checked = True Then
+                'If a high and low power level has not been entered, then prompt. 
+                If highPower = "" Or lowPower = "" Then
+                    lowPower = InputBox("Please enter the lower power level (do not include %)", "Lower Power Level Entry", "Example: 69")
+                    highPower = InputBox("Please enter the higher power level (do not include %)", "Lower Power Level Entry", "Example: 96")
+                End If
+
+                ' add the text, and set up the colors, and borders 
+                NoteAnnotationsList(4).Text = "Note: Power will fluctuate between " + vbNewLine + lowPower + "% " + "and " + highPower + "% " + "RTP during the Exchange"
+                NoteAnnotationsList(4).TextColor = OxyColors.Black
+                NoteAnnotationsList(4).StrokeThickness = 3
+                NoteAnnotationsList(4).Stroke = OxyColor.FromRgb(204, 204, 0)
+                NoteAnnotationsList(4).Background = OxyColors.White
+            End If
+
+            If cbPowerFluctuate.Checked = False Then
+                ' Change the text to blank, and change colors to match background to "hide". 
+                NoteAnnotationsList(4).Text = ""
+                NoteAnnotationsList(4).Background = OxyColors.White
+                NoteAnnotationsList(4).Stroke = OxyColors.White
+                NoteAnnotationsList(4).TextColor = OxyColors.White
+                NoteAnnotationsList(4).Layer = AnnotationLayer.BelowAxes
+            End If
+            MyModel.InvalidatePlot(True)
+        Catch ex As Exception
+            MsgBox(ex.Message + " - Occured in Private Sub cbPowerFluctuate_Click in REChart_Graph.vb")
         End Try
     End Sub
 End Class
