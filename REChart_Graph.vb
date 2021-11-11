@@ -211,7 +211,23 @@ Public Class REChart_Graph
             REChart_Data.DateTimeArray(REChart_Data.DateTimeArray.Length - 1).ToString("MM/dd/yy")
             MyModel.Title = strTitle
             MyModel.TitleFont = "Consolas"
-            MyModel.TitleFontSize = 24
+
+            ' more dean proofing. If the title is too long, make the title block smaller. 
+            If REChart_Data.txtManuverTitle.Text.Length < 51 Then
+                MyModel.TitleFontSize = 24
+            ElseIf REChart_Data.txtManuverTitle.Text.Length >= 51 And REChart_Data.txtManuverTitle.Text.Length < 61 Then
+                MyModel.TitleFontSize = 21
+            ElseIf REChart_Data.txtManuverTitle.Text.Length >= 61 And REChart_Data.txtManuverTitle.Text.Length < 70 Then
+                MyModel.TitleFontSize = 19
+            ElseIf REChart_Data.txtManuverTitle.Text.Length >= 70 And REChart_Data.txtManuverTitle.Text.Length < 81 Then
+                MyModel.TitleFontSize = 17
+            Else
+                MsgBox("Your Title is too long!!!!", MsgBoxStyle.Critical, "FATALITY")
+                Exit Sub
+            End If
+
+
+
             MyModel.TitleFontWeight = FontWeights.Bold
             MyModel.Background = OxyColors.White
 
