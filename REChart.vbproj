@@ -16,7 +16,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>T:\SSES\Reactor Engineering\PROGRAMS\OPERATIONAL\REChart\</PublishUrl>
+    <PublishUrl>\\corp.talenenergy.com\data\SSES\Reactor Engineering\PROGRAMS\OPERATIONAL\REChart\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -30,7 +30,7 @@
     <ProductName>REChart</ProductName>
     <PublisherName>Hardik Patel</PublisherName>
     <SuiteName>REsuite</SuiteName>
-    <ApplicationRevision>12</ApplicationRevision>
+    <ApplicationRevision>13</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

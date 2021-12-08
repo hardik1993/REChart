@@ -41,30 +41,39 @@ Public Class REChart_Data
         End Try
     End Sub
 
-    Private Sub txtInitialPower_TextChanged(sender As Object, e As EventArgs) Handles txtInitialPower.TextChanged
-        If (dgvStatepoints.RowCount >= 1) Then
-            dgvStatepoints.Rows(0).SetValues(New String() {dtpStartDate.Value.ToShortDateString + " " + dtpStartTime.Value.ToString("HH:mm"), "0", "0", txtInitialPower.Text, "START"})
-            'reset the file saved flag. Since there were changes made since last save. 
-            FileSaved = False
-            Call ReCalculateTimes()
+    Private Sub txtInitialPower_TextChanged(sender As Object, e As KeyEventArgs) Handles txtInitialPower.KeyDown
+        'handles text change and updates the dgv on enter key press.
+        If e.KeyCode = Keys.Enter Then
+            If (dgvStatepoints.RowCount >= 1) Then
+                dgvStatepoints.Rows(0).SetValues(New String() {dtpStartDate.Value.ToShortDateString + " " + dtpStartTime.Value.ToString("HH:mm"), "0", "0", txtInitialPower.Text, "START"})
+                'reset the file saved flag. Since there were changes made since last save. 
+                FileSaved = False
+                Call ReCalculateTimes()
+            End If
         End If
     End Sub
 
-    Private Sub dtpStartDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpStartDate.ValueChanged
-        If (dgvStatepoints.RowCount >= 1) Then
-            dgvStatepoints.Rows(0).SetValues(New String() {dtpStartDate.Value.ToShortDateString + " " + dtpStartTime.Value.ToString("HH:mm"), "0", "0", txtInitialPower.Text, "START"})
-            'reset the file saved flag. Since there were changes made since last save. 
-            FileSaved = False
-            Call ReCalculateTimes()
+    Private Sub dtpStartDate_ValueChanged(sender As Object, e As KeyEventArgs) Handles dtpStartDate.KeyDown
+        'handles text change and updates the dgv on enter key press.
+        If e.KeyCode = Keys.Enter Then
+            If (dgvStatepoints.RowCount >= 1) Then
+                dgvStatepoints.Rows(0).SetValues(New String() {dtpStartDate.Value.ToShortDateString + " " + dtpStartTime.Value.ToString("HH:mm"), "0", "0", txtInitialPower.Text, "START"})
+                'reset the file saved flag. Since there were changes made since last save. 
+                FileSaved = False
+                Call ReCalculateTimes()
+            End If
         End If
     End Sub
 
-    Private Sub dtpStartTime_ValueChanged(sender As Object, e As EventArgs) Handles dtpStartTime.ValueChanged
-        If (dgvStatepoints.RowCount >= 1) Then
-            dgvStatepoints.Rows(0).SetValues(New String() {dtpStartDate.Value.ToShortDateString + " " + dtpStartTime.Value.ToString("HH:mm"), "0", "0", txtInitialPower.Text, "START"})
-            'reset the file saved flag. Since there were changes made since last save. 
-            FileSaved = False
-            Call ReCalculateTimes()
+    Private Sub dtpStartTime_ValueChanged(sender As Object, e As KeyEventArgs) Handles dtpStartTime.KeyDown
+        'handles text change and updates the dgv on enter key press.
+        If e.KeyCode = Keys.Enter Then
+            If (dgvStatepoints.RowCount >= 1) Then
+                dgvStatepoints.Rows(0).SetValues(New String() {dtpStartDate.Value.ToShortDateString + " " + dtpStartTime.Value.ToString("HH:mm"), "0", "0", txtInitialPower.Text, "START"})
+                'reset the file saved flag. Since there were changes made since last save. 
+                FileSaved = False
+                Call ReCalculateTimes()
+            End If
         End If
     End Sub
 
@@ -73,6 +82,10 @@ Public Class REChart_Data
         dgvStatepoints.EditMode = DataGridViewEditMode.EditOnEnter
         'reset the file saved flag. Since there were changes made since last save. 
         FileSaved = False
+    End Sub
+
+    Private Sub dgvStatepoints_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dgvStatepoints.CellEndEdit
+        'refresh the date/times after edit is done. 
         Call ReCalculateTimes()
     End Sub
 
@@ -323,11 +336,38 @@ Public Class REChart_Data
             'data gridview statepoints 
             file.WriteLine("Statepoints (Date/Time, Hours for action, Hours from Start, Power, and Description): ")
             For i = 0 To dgvStatepoints.RowCount - 1
-                file.WriteLine(dgvStatepoints.Rows(i).Cells(0).Value.ToString)
-                file.WriteLine(dgvStatepoints.Rows(i).Cells(1).Value.ToString)
-                file.WriteLine(dgvStatepoints.Rows(i).Cells(2).Value.ToString)
-                file.WriteLine(dgvStatepoints.Rows(i).Cells(3).Value.ToString)
-                file.WriteLine(dgvStatepoints.Rows(i).Cells(4).Value.ToString)
+                'check if the cell contains a nothing object. if it does then write an empty string in the text file.
+                ' if we don't check for nothing, it throws a null refrence exception. 
+                If dgvStatepoints.Rows(i).Cells(0).Value <> Nothing Then
+                    file.WriteLine(dgvStatepoints.Rows(i).Cells(0).Value.ToString)
+                Else
+                    file.WriteLine("")
+                End If
+
+                If dgvStatepoints.Rows(i).Cells(1).Value <> Nothing Then
+                    file.WriteLine(dgvStatepoints.Rows(i).Cells(1).Value.ToString)
+                Else
+                    file.WriteLine("")
+                End If
+
+                If dgvStatepoints.Rows(i).Cells(2).Value <> Nothing Then
+                    file.WriteLine(dgvStatepoints.Rows(i).Cells(2).Value.ToString)
+                Else
+                    file.WriteLine("")
+                End If
+
+                If dgvStatepoints.Rows(i).Cells(3).Value <> Nothing Then
+                    file.WriteLine(dgvStatepoints.Rows(i).Cells(3).Value.ToString)
+                Else
+                    file.WriteLine("")
+                End If
+
+                If dgvStatepoints.Rows(i).Cells(4).Value <> Nothing Then
+                    file.WriteLine(dgvStatepoints.Rows(i).Cells(4).Value.ToString)
+                Else
+                    file.WriteLine("")
+                End If
+
             Next
 
             'end of file footer
@@ -441,6 +481,9 @@ Public Class REChart_Data
 
             'close the file 
             file.Close()
+
+            'fix the format of the first line of the dgv. 
+            dgvStatepoints.Rows(0).SetValues(New String() {dtpStartDate.Value.ToShortDateString + " " + dtpStartTime.Value.ToString("HH:mm"), "0", "0", txtInitialPower.Text, "START"})
 
             're calculate rows to re-adjust the hours and date/time stamps. 
             Call ReCalculateTimes()
