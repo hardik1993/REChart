@@ -124,19 +124,33 @@ Public Class REChart_Graph
 
             'Change the A column width so it doesn't show up at ###################################### gross
             ws.Range("A1").ColumnWidth = 15
-            ws.Range("A1").WrapText = False
-
+            ws.Range("A1").WrapText = True
+            ws.Range("A2").WrapText = True
 
             'add headers to the columns
             ws.Cells(1, 1).value = MyModel.Title
-            ws.Cells(2, 1).value = "Date/Time"
+
+            If REChart_Data.cbStartUpLP.Checked = False Then ws.Cells(2, 1).value = "Date/Time"
+            If REChart_Data.cbStartUpLP.Checked = True Then ws.Cells(2, 1).value = "Hours from Breaker Closure"
+
             ws.Cells(2, 2).value = "Power(%)"
 
+            ' if it is NOT a start up LP, then use horuly D/T stamps with hourly power. 
             'Loop through all valid entries in hourly arrays and write to appropriate excel cells
-            For x = 0 To HourlyDateTime.Length - 1
-                ws.Cells(x + 3, 1).Value = HourlyDateTime(x)
-                ws.Cells(x + 3, 2).Value = HourlyPowerArray(x)
-            Next
+            If REChart_Data.cbStartUpLP.Checked = False Then
+                For x = 0 To HourlyDateTime.Length - 1
+                    ws.Cells(x + 3, 1).Value = HourlyDateTime(x)
+                    ws.Cells(x + 3, 2).Value = HourlyPowerArray(x)
+                Next
+            End If
+
+            'if it is a startup LP then use hours from breaker closure(instead of D/T stamps) with hourly power. 
+            If REChart_Data.cbStartUpLP.Checked = True Then
+                For x = 0 To HourlyDateTime.Length - 1
+                    ws.Cells(x + 3, 1).Value = x
+                    ws.Cells(x + 3, 2).Value = HourlyPowerArray(x)
+                Next
+            End If
 
             'Parse a new filename for the .xlsx based on the filename for the .png
             Dim wbFileName As String
@@ -1483,7 +1497,7 @@ Interpolate_Error:
                 End If
 
                 ' add the text, and set up the colors, and borders 
-                NoteAnnotationsList(4).Text = "Note: Power will fluctuate between " + vbNewLine + lowPower + "% " + "and " + highPower + "% " + "RTP during the Exchange"
+                NoteAnnotationsList(4).Text = "Note: Power will fluctuate between " + vbNewLine + lowPower + "% " + "and " + highPower + "% " + "RTP during the maneuver."
                 NoteAnnotationsList(4).TextColor = OxyColors.Black
                 NoteAnnotationsList(4).StrokeThickness = 3
                 NoteAnnotationsList(4).Stroke = OxyColor.FromRgb(204, 204, 0)

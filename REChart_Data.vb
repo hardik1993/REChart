@@ -41,39 +41,57 @@ Public Class REChart_Data
         End Try
     End Sub
 
-    Private Sub txtInitialPower_TextChanged(sender As Object, e As KeyEventArgs) Handles txtInitialPower.KeyDown
+    Private Sub txtInitialPower_KeyDown(sender As Object, e As KeyEventArgs) Handles txtInitialPower.KeyDown
         'handles text change and updates the dgv on enter key press.
         If e.KeyCode = Keys.Enter Then
             If (dgvStatepoints.RowCount >= 1) Then
-                dgvStatepoints.Rows(0).SetValues(New String() {dtpStartDate.Value.ToShortDateString + " " + dtpStartTime.Value.ToString("HH:mm"), "0", "0", txtInitialPower.Text, "START"})
-                'reset the file saved flag. Since there were changes made since last save. 
-                FileSaved = False
                 Call ReCalculateTimes()
             End If
         End If
     End Sub
 
-    Private Sub dtpStartDate_ValueChanged(sender As Object, e As KeyEventArgs) Handles dtpStartDate.KeyDown
+    Private Sub txtInitialPower_TextChanged(sender As Object, e As EventArgs) Handles txtInitialPower.TextChanged
+        'handles text change and updates the dgv on enter key press.
+        If (dgvStatepoints.RowCount >= 1) Then
+            dgvStatepoints.Rows(0).SetValues(New String() {dtpStartDate.Value.ToShortDateString + " " + dtpStartTime.Value.ToString("HH:mm"), "0", "0", txtInitialPower.Text, "START"})
+            'reset the file saved flag. Since there were changes made since last save. 
+            FileSaved = False
+        End If
+    End Sub
+
+    Private Sub dtpStartDate_KeyDown(sender As Object, e As KeyEventArgs) Handles dtpStartDate.KeyDown
         'handles text change and updates the dgv on enter key press.
         If e.KeyCode = Keys.Enter Then
             If (dgvStatepoints.RowCount >= 1) Then
-                dgvStatepoints.Rows(0).SetValues(New String() {dtpStartDate.Value.ToShortDateString + " " + dtpStartTime.Value.ToString("HH:mm"), "0", "0", txtInitialPower.Text, "START"})
-                'reset the file saved flag. Since there were changes made since last save. 
-                FileSaved = False
                 Call ReCalculateTimes()
             End If
         End If
     End Sub
 
-    Private Sub dtpStartTime_ValueChanged(sender As Object, e As KeyEventArgs) Handles dtpStartTime.KeyDown
+    Private Sub dtpStartDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpStartDate.ValueChanged
+        'handles text change and updates the dgv on enter key press.
+        If (dgvStatepoints.RowCount >= 1) Then
+            dgvStatepoints.Rows(0).SetValues(New String() {dtpStartDate.Value.ToShortDateString + " " + dtpStartTime.Value.ToString("HH:mm"), "0", "0", txtInitialPower.Text, "START"})
+            'reset the file saved flag. Since there were changes made since last save. 
+            FileSaved = False
+        End If
+    End Sub
+
+    Private Sub dtpStartTime_KeyDown(sender As Object, e As KeyEventArgs) Handles dtpStartTime.KeyDown
         'handles text change and updates the dgv on enter key press.
         If e.KeyCode = Keys.Enter Then
             If (dgvStatepoints.RowCount >= 1) Then
-                dgvStatepoints.Rows(0).SetValues(New String() {dtpStartDate.Value.ToShortDateString + " " + dtpStartTime.Value.ToString("HH:mm"), "0", "0", txtInitialPower.Text, "START"})
-                'reset the file saved flag. Since there were changes made since last save. 
-                FileSaved = False
                 Call ReCalculateTimes()
             End If
+        End If
+    End Sub
+
+    Private Sub dtpStartTime_ValueChanged(sender As Object, e As EventArgs) Handles dtpStartTime.ValueChanged
+        'handles text change and updates the dgv on enter key press.
+        If (dgvStatepoints.RowCount >= 1) Then
+            dgvStatepoints.Rows(0).SetValues(New String() {dtpStartDate.Value.ToShortDateString + " " + dtpStartTime.Value.ToString("HH:mm"), "0", "0", txtInitialPower.Text, "START"})
+            'reset the file saved flag. Since there were changes made since last save. 
+            FileSaved = False
         End If
     End Sub
 
@@ -222,6 +240,9 @@ Public Class REChart_Data
     End Sub
 
     Private Sub bthRefresh_Click(sender As Object, e As EventArgs) Handles bthRefresh.Click
+        'update the start block with the mnewest start date/time and power level, and recalculate the rest of the dgv date/times basted on that. 
+        dgvStatepoints.Rows(0).SetValues(New String() {dtpStartDate.Value.ToShortDateString + " " + dtpStartTime.Value.ToString("HH:mm"), "0", "0", txtInitialPower.Text, "START"})
+        dgvStatepoints.Rows(0).SetValues(New String() {dtpStartDate.Value.ToShortDateString + " " + dtpStartTime.Value.ToString("HH:mm"), "0", "0", txtInitialPower.Text, "START"})
         Call ReCalculateTimes()
     End Sub
 
