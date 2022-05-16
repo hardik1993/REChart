@@ -68,6 +68,15 @@ Public Class REChart_Graph
     Private Sub ButtonExport_Click(sender As Object, e As EventArgs) Handles BtnExport.Click
         'Exports the graph as a PNG file. 
 
+        'checks if the approval block was added, if it was not, then prompt the user. 
+        Dim result As DialogResult
+        If cbApprovalBlock.Checked = False Then
+            'prompt user, get result yes or no to continue
+            result = MessageBox.Show("It looks like you don't have an approval block. Do you want to continue exporting?", "Approval Block Missing?", MessageBoxButtons.YesNo)
+            'if user selected no, exit sub
+            If result = DialogResult.No Then Exit Sub
+        End If
+
         'create a save file dialoge
         Dim MyFileDialog As SaveFileDialog = New SaveFileDialog()
         Dim FileNameString As String = " "
