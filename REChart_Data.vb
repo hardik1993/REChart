@@ -104,7 +104,12 @@ Public Class REChart_Data
 
     Private Sub dgvStatepoints_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dgvStatepoints.CellEndEdit
         'refresh the date/times after edit is done. 
-        Call ReCalculateTimes()
+        'do not refresh the date times if the desc. block was changed. This is a waste of time. Desc. is only for display purposes on the load profile. 
+        If e.ColumnIndex <> 4 Then
+            Call ReCalculateTimes()
+        End If
+        'change edit mode to release focus from the edited cell. 
+        dgvStatepoints.EditMode = DataGridViewEditMode.EditProgrammatically
     End Sub
 
     Private Sub ReCalculateTimes()
@@ -266,6 +271,14 @@ Public Class REChart_Data
             'check to make sure a title is intered. 
             If txtManuverTitle.Text = "" Then
                 MsgBox("Please enter a Title", MsgBoxStyle.Exclamation)
+                Exit Sub
+            End If
+
+            'check to make sure that the last desc. block is not empty. 
+            ' this causes issues/bugs in the logic to combine empty desc blocks later in the code. 
+            ' if the last desc. block is empty, yell at the user, and do not proceed, until something is entered. 
+            If dgvStatepoints.Rows(dgvStatepoints.RowCount - 1).Cells(4).Value = "" Then
+                MsgBox("The description of the last statepoint can NOT be empty. Please ensure that there is a description entered for the last statepoint.", MsgBoxStyle.Exclamation)
                 Exit Sub
             End If
 
